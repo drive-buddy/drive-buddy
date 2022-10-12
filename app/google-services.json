@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "75378003394",
+    "project_id": "drivebuddy-1777e",
+    "storage_bucket": "drivebuddy-1777e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75378003394:android:ca04377cd62c43c6915a5b",
+        "android_client_info": {
+          "package_name": "com.example.app2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "75378003394-bur8rvl6v93ctt1j9aqdfdfs2q6imjgs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.app2",
+            "certificate_hash": "b44130c9b25228a96669db154fdd35b563dfbf98"
+          }
+        },
+        {
+          "client_id": "75378003394-6fhfbgjfk6anc91i4ek10sknv5up3631.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM0ZMZ3tVDMul1FdpP6KHdlTqXZ3pG-l4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "75378003394-6fhfbgjfk6anc91i4ek10sknv5up3631.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
