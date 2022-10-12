@@ -66,13 +66,11 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
 
-<<<<<<< HEAD
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
-=======
+
     implementation platform('com.google.firebase:firebase-bom:30.4.1')
     // TODO: Add the dependencies for Firebase products you want to use
     // When using the BoM, don't specify versions in Firebase dependencies
     // https://firebase.google.com/docs/android/setup#available-libraries
->>>>>>> 7e8bf6a9b95fb2f9f0ddee2018a6a25c69dce470
 }
