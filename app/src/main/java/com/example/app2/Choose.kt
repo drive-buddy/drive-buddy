@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement.spacedBy
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -16,30 +15,14 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.app2.ui.theme.App2Theme
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.ui.graphics.*
-import androidx.compose.ui.res.painterResource
-import com.example.app2.R.drawable
-import androidx.compose.runtime.*
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.focus.FocusState
-import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.text.TextStyle
+import com.example.app2.ui.theme.App2_2Theme
 
-class MainActivity : ComponentActivity() {
-    var db: DBHelper = DBHelper()
-
+class Choose : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
-
-            App2Theme {
-                // A surface container using the 'background' color from the theme
+            App2_2Theme {
+                //Choose your role page
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
@@ -51,21 +34,23 @@ class MainActivity : ComponentActivity() {
 //                        verticalArrangement = Arrangement.Center,
 //                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text(text = "Find your",
-                            fontSize = 42.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = Color.White
-                        )
-                        Text(text = "Drive Buddy",
+                        Text(
+                            text = "Choose",
                             fontSize = 42.sp,
                             fontFamily = FontFamily.SansSerif,
                             fontWeight = FontWeight.ExtraBold,
                             color = Color.Black
                         )
+                        Text(
+                            text = "your role",
+                            fontSize = 42.sp,
+                            fontFamily = FontFamily.SansSerif,
+                            fontWeight = FontWeight.ExtraBold,
+                            color = Color(0xFFEE5252)
+                        )
 
                     }
-                    Column (
+                    Column(
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(40.dp),
@@ -75,43 +60,50 @@ class MainActivity : ComponentActivity() {
                     {
                         Button(
                             onClick = {
-                                val navigate = Intent(this@MainActivity, Choose::class.java)
+                                val navigate = Intent(this@Choose, Driver1::class.java)
                                 startActivity(navigate)
                             },
                             shape = RoundedCornerShape(20.dp),
-                            colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Red)
+                            colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.Black),
+                            modifier = Modifier.height(50.dp).width(200.dp)
                         ) {
                             Text(
-                                text = "Create Account",
+                                text = "Driver",
                                 fontSize = 30.sp,
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.ExtraBold,
-                                color = Color(0xFFEE5252)
+                                color = Color(0xFFFFFFFF)
                             )
                         }
                         Button(
                             onClick = {
-                                val navigate1 = Intent(this@MainActivity, Sign_in::class.java)
+                                val navigate1 = Intent(this@Choose, Passenger1::class.java)
                                 startActivity(navigate1)
-                            },
-                            shape = RoundedCornerShape(20.dp)
+                                      },
+                            shape = RoundedCornerShape(20.dp),
+                            colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.White)
                         ) {
                             Spacer(Modifier.size(ButtonDefaults.IconSpacing))
                             Text(
-                                text = "Sign In",
+                                text = "Passenger",
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.ExtraBold,
-                                fontSize = 30.sp
+                                fontSize = 30.sp,
+                                color = Color(0xFF000000)
                             )
                         }
                     }
-
                 }
             }
         }
     }
 }
 
+//@Composable
+//fun Greeting(name: String) {
+//    Text(text = "Hello $name!")
+//}
+//
 //@Preview(showBackground = true)
 //@Composable
 //fun DefaultPreview() {

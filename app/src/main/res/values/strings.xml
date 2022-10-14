@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Drive Buddy</string>
+    <string name="title_activity_find">Find</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_activity_choose">Choose</string>
+    <string name="title_activity_driver1">Driver1</string>
+    <string name="title_activity_create_driver">Create_Driver</string>
+    <string name="title_activity_no_results">No_results</string>
+    <string name="title_activity_no_result">No_result</string>
+    <string name="title_activity_dummy_page">dummy_page</string>
+    <string name="title_activity_driver2">Driver2</string>
+    <string name="title_activity_driver3">Driver3</string>
+    <string name="title_activity_driver4">Driver4</string>
+    <string name="title_activity_passenger1">Passenger1</string>
+    <string name="title_activity_passenger2">Passenger2</string>
+    <string name="title_activity_passenger3">Passenger3</string>
 </resources>
