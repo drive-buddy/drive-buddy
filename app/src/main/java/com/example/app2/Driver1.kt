@@ -51,7 +51,7 @@ class Driver1 : ComponentActivity() {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .offset(y = 140.dp, x = 40.dp),
+                            .padding(vertical = 140.dp, horizontal = 40.dp),
                     ) {
 
                         Text(
@@ -153,7 +153,7 @@ class Driver1 : ComponentActivity() {
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.ExtraBold,
                                 color = Color(0xFF888686),
-                                modifier = Modifier.offset(y = 10.dp)
+                                modifier = Modifier.padding(vertical = 10.dp)
                             )
                         }
 
@@ -162,7 +162,7 @@ class Driver1 : ComponentActivity() {
                     Row(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(40.dp),
+                            .padding(horizontal = 30.dp, vertical = 20.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.Bottom
                     )

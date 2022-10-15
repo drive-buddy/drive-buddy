@@ -46,133 +46,158 @@ class Driver3 : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Column(
+                    Column (
                         modifier = Modifier
                             .fillMaxSize()
-                            .offset(y = 340.dp, x = 40.dp),
+                            .padding(vertical = 140.dp, horizontal = 40.dp),
                     ) {
-
-                        Text(
-                            text = "Driver",
-                            fontSize = 42.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = Color(0xFFEE5252)
-                        )
-                        Text(
-                            text = "Info",
-                            fontSize = 42.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = Color.Black
-                        )
-                    }
-
-
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .offset(y = 480.dp, x = 40.dp),
-//                        verticalArrangement = Arrangement.Center,
-//                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = "Car Model",
-                            fontSize = 15.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = Color(0xFF888686)
-                        )
-                        InputBar2(
-                            hint = "",
+                        Column(
                             modifier = Modifier
-                                .height(50.dp)
-                                .width(330.dp)
-//                                .padding(1.dp)
-                        )
-
-                        Spacer(Modifier.height(15.dp))
-
-                        Text(
-                            text = "Number",
-                            fontSize = 15.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = Color(0xFF888686)
-                        )
-                        InputBar2(
-                            hint = "",
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(330.dp)
-//                                .padding(1.dp)
-                        )
-
-                        Spacer(Modifier.height(15.dp))
-
-                        Text(
-                            text = "Years of Experience",
-                            fontSize = 15.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = Color(0xFF888686)
-                        )
-                        InputBar2(
-                            hint = "",
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(330.dp)
-//                                .padding(1.dp)
-                        )
-                    }
-
-                    Row(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(40.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.Bottom
-                    )
-                    {
-                        Button(
-                            onClick = {
-                                val navigate = Intent(this@Driver3, Driver2::class.java)
-                                startActivity(navigate)
-                            },
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(160.dp),
-                            shape = RoundedCornerShape(20.dp),
-                            colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFFEE5252))
+                                .fillMaxWidth()
+//                                .padding(vertical = 140.dp, horizontal = 40.dp),
                         ) {
+
                             Text(
-                                text = "Back",
-                                fontSize = 30.sp,
+                                text = "Create",
+                                fontSize = 42.sp,
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.ExtraBold,
-                                color = Color(0xFFFFFFFF)
+                                color = Color.Black
                             )
-                        }
-                        Button(
-                            onClick = {
-                                val navigate1 = Intent(this@Driver3, Driver4::class.java)
-                                startActivity(navigate1)
-                            },
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(160.dp),
-                            shape = RoundedCornerShape(20.dp),
-                            colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFFEE5252))
-                        ) {
                             Text(
-                                text = "Next",
+                                text = "Account",
+                                fontSize = 42.sp,
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.ExtraBold,
-                                fontSize = 30.sp,
-                                color = Color(0xFFFFFFFF)
+                                color = Color(0xFFEE5252)
                             )
                         }
 
+                    }
+
+                    Column (
+                        modifier = Modifier
+                            .fillMaxWidth(),
+//                        horizontalArrangement = Arrangement.,
+                        verticalArrangement = Arrangement.Bottom
+                    ){
+                        // INPUT BOXES
+
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 20.dp, horizontal = 40.dp),
+//                                verticalArrangement = Arrangement.Center,
+//                                horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                text = "Car Model",
+                                fontSize = 15.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color(0xFF888686)
+                            )
+                            InputBar2(
+                                hint = "",
+                                modifier = Modifier
+                                    .height(50.dp)
+                                    .width(330.dp)
+                                //                                .padding(1.dp)
+                            )
+
+                            Spacer(Modifier.height(15.dp))
+
+                            Text(
+                                text = "Number",
+                                fontSize = 15.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color(0xFF888686)
+                            )
+                            InputBar2(
+                                hint = "",
+                                modifier = Modifier
+                                    .height(50.dp)
+                                    .width(330.dp)
+                                //                                .padding(1.dp)
+                            )
+
+                            Spacer(Modifier.height(15.dp))
+
+                            Text(
+                                text = "Years of Experience",
+                                fontSize = 15.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color(0xFF888686)
+                            )
+                            InputBar2(
+                                hint = "",
+                                modifier = Modifier
+                                    .height(50.dp)
+                                    .width(330.dp)
+                                //                                .padding(1.dp)
+                            )
+                        }
+
+
+                        // BUTTONS
+
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 30.dp, vertical = 20.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.Bottom
+                        )
+                        {
+                            Button(
+                                onClick = {
+                                    val navigate = Intent(this@Driver3, Driver2::class.java)
+                                    startActivity(navigate)
+                                },
+                                modifier = Modifier
+                                    .height(50.dp)
+                                    .width(160.dp),
+                                shape = RoundedCornerShape(20.dp),
+                                colors = ButtonDefaults.outlinedButtonColors(
+                                    backgroundColor = Color(
+                                        0xFFEE5252
+                                    )
+                                )
+                            ) {
+                                Text(
+                                    text = "Back",
+                                    fontSize = 30.sp,
+                                    fontFamily = FontFamily.SansSerif,
+                                    fontWeight = FontWeight.ExtraBold,
+                                    color = Color(0xFFFFFFFF)
+                                )
+                            }
+                            Button(
+                                onClick = {
+                                    val navigate1 = Intent(this@Driver3, Driver4::class.java)
+                                    startActivity(navigate1)
+                                },
+                                modifier = Modifier
+                                    .height(50.dp)
+                                    .width(160.dp),
+                                shape = RoundedCornerShape(20.dp),
+                                colors = ButtonDefaults.outlinedButtonColors(
+                                    backgroundColor = Color(
+                                        0xFFEE5252
+                                    )
+                                )
+                            ) {
+                                Text(
+                                    text = "Next",
+                                    fontFamily = FontFamily.SansSerif,
+                                    fontWeight = FontWeight.ExtraBold,
+                                    fontSize = 30.sp,
+                                    color = Color(0xFFFFFFFF)
+                                )
+                            }
+                        }
                     }
                 }
             }

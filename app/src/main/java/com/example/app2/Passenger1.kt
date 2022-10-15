@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -27,6 +28,7 @@ import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role.Companion.Button
 import androidx.compose.ui.text.TextStyle
@@ -162,7 +164,7 @@ class Passenger1 : ComponentActivity() {
                     Row(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(40.dp),
+                            .padding(horizontal = 30.dp, vertical = 20.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.Bottom
                     )
@@ -218,7 +220,9 @@ fun InputBar2(
     modifier: Modifier = Modifier,
     hint: String = "",
     onSearch: (String) -> Unit = {}
-){
+) {
+    val focusManager = LocalFocusManager.current
+
     var text by remember {
         mutableStateOf(hint)
     }
@@ -242,7 +246,13 @@ fun InputBar2(
                 .padding(horizontal = 30.dp, vertical = 12.dp)
                 .onFocusChanged {
 //                    isHintDisplayed = it != FocusState.isFocused
-                }
+                },
+                keyboardActions = KeyboardActions
+                (
+                    onDone = {
+                        focusManager.clearFocus()
+                    }
+                )
         )
     }
 }

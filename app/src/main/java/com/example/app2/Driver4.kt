@@ -71,10 +71,10 @@ class Driver4 : ComponentActivity() {
 
                     Column(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .offset(y = 670.dp, x = 120.dp),
-//                        verticalArrangement = Arrangement.Center,
-//                        horizontalAlignment = Alignment.CenterHorizontally
+                            .fillMaxWidth(),
+//                            .offset(y = 600.dp, x = 120.dp),
+                        verticalArrangement = Arrangement.Bottom,
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
                             text = "Tap ‘Continue’ in order \n" +
@@ -83,54 +83,58 @@ class Driver4 : ComponentActivity() {
                             fontFamily = FontFamily.SansSerif,
                             fontWeight = FontWeight.ExtraBold,
                             color = Color(0xFF888686))
-
-                    }
-
-
-                    Row(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(40.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.Bottom
-                    )
-                    {
-                        Button(
-                            onClick = {
-                                val navigate = Intent(this@Driver4, Driver3::class.java)
-                                startActivity(navigate)
-                            },
+                        Row(
                             modifier = Modifier
-                                .height(50.dp)
-                                .width(160.dp),
-                            shape = RoundedCornerShape(20.dp),
-                            colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFFEE5252))
-                        ) {
-                            Text(
-                                text = "Back",
-                                fontSize = 30.sp,
-                                fontFamily = FontFamily.SansSerif,
-                                fontWeight = FontWeight.ExtraBold,
-                                color = Color(0xFFFFFFFF)
-                            )
+                                .fillMaxWidth()
+                                .padding(horizontal = 30.dp, vertical = 20.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.Bottom
+                        )
+                        {
+                            Button(
+                                onClick = {
+                                    val navigate = Intent(this@Driver4, Driver3::class.java)
+                                    startActivity(navigate)
+                                },
+                                modifier = Modifier
+                                    .height(50.dp)
+                                    .width(160.dp),
+                                shape = RoundedCornerShape(20.dp),
+                                colors = ButtonDefaults.outlinedButtonColors(
+                                    backgroundColor = Color(
+                                        0xFFEE5252
+                                    )
+                                )
+                            ) {
+                                Text(
+                                    text = "Back",
+                                    fontSize = 30.sp,
+                                    fontFamily = FontFamily.SansSerif,
+                                    fontWeight = FontWeight.ExtraBold,
+                                    color = Color(0xFFFFFFFF)
+                                )
+                            }
+                            Button(
+                                onClick = {
+                                    val navigate1 = Intent(this@Driver4, No_result::class.java)
+                                    startActivity(navigate1)
+                                },
+                                shape = RoundedCornerShape(20.dp),
+                                colors = ButtonDefaults.outlinedButtonColors(
+                                    backgroundColor = Color(
+                                        0xFFEE5252
+                                    )
+                                )
+                            ) {
+                                Text(
+                                    text = "Continue",
+                                    fontFamily = FontFamily.SansSerif,
+                                    fontWeight = FontWeight.ExtraBold,
+                                    fontSize = 30.sp,
+                                    color = Color(0xFFFFFFFF)
+                                )
+                            }
                         }
-                        Button(
-                            onClick = {
-                                val navigate1 = Intent(this@Driver4, No_result::class.java)
-                                startActivity(navigate1)
-                            },
-                            shape = RoundedCornerShape(20.dp),
-                            colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFFEE5252))
-                        ) {
-                            Text(
-                                text = "Continue",
-                                fontFamily = FontFamily.SansSerif,
-                                fontWeight = FontWeight.ExtraBold,
-                                fontSize = 30.sp,
-                                color = Color(0xFFFFFFFF)
-                            )
-                        }
-
                     }
                 }
             }

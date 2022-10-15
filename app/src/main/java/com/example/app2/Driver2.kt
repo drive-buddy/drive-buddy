@@ -5,9 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
@@ -51,191 +49,189 @@ class Driver2 : ComponentActivity() {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .offset(y = 60.dp, x = 40.dp),
-                    ) {
-
-                        Text(
-                            text = "Profile",
-                            fontSize = 42.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = Color.Black
-                        )
-                    }
-
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .offset(y = 130.dp, x = 140.dp),
-//                        verticalArrangement = Arrangement.Center,
-//                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Image(painter = painterResource(id = R.drawable.im2),
-                            contentDescription = "Person",
-//                            tint = Color.White,
-                            modifier = Modifier.size(100.dp))
-                    }
-
-                    Box(
-                        modifier = Modifier
-                            .absolutePadding(
-                                left = 140.dp,
-                                top = 230.dp,
-                                right = 0.dp,
-                                bottom = 0.dp
-                            )
-                    ) {
-
-                        Button(
-                            onClick = { /* TO DO */ },
-                            modifier = Modifier
-                                .size(15.dp),
-                            shape = CircleShape,
-                            colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFFEE5252))
-                        ) {
-
-//                            Image(painter = painterResource(id = R.drawable.add),
-//                                contentDescription = "add",
-////                            tint = Color.White,
-//                                modifier = Modifier.size(50.dp))
-                            Icon(
-                                Icons.Default.Add,
-                                modifier = Modifier.size(20.dp),
-                                contentDescription = "add",
-                                tint = Color.White
+                            .padding(vertical = 60.dp),
+                    )
+                    {
+                        Column() {
+                            Text(
+                                text = "Profile",
+                                fontSize = 42.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color.Black,
+                                modifier = Modifier.offset(x = 40.dp)
                             )
                         }
-                    }
+
+                        Column(
+                            modifier = Modifier
+                                .padding(horizontal = 30.dp, vertical = 10.dp)
+                                .fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Image(painter = painterResource(id = R.drawable.im2),
+                                contentDescription = "Person",
+//                                tint = Color.White,
+                                modifier = Modifier
+                                    .size(100.dp))
+                        }
+                        Row (
+                            modifier = Modifier
+//                                    .offset(y = 30.dp)
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center
+
+                        )
+                        {
+                            Button(
+                                onClick = { /* TO DO */ },
+                                modifier = Modifier
+                                    .size(16.dp),
+                                shape = CircleShape,
+                                colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFFEE5252))
+                            ) {
+                                Icon(
+                                    Icons.Default.Add,
+                                    modifier = Modifier.size(200.dp),
+                                    contentDescription = "add",
+                                    tint = Color.White
+                                )
+
+                            }
+                            Text(
+                                text = "Add photo",
+                                fontSize = 13.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color(0xFF888686),
+                                modifier = Modifier
+                                    .offset(x = 10.dp)
+                            )
+//                                Image(painter = painterResource(id = R.drawable.add),
+//                                    contentDescription = "add",
+//    //                            tint = Color.White,
+//                                    modifier = Modifier.size(50.dp))
 
 
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .offset(y = 230.dp, x = 165.dp),
+                        }
+                        // COLUMN FOR USER INFO INPUT
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(horizontal = 40.dp, vertical = 20.dp)
+                                .verticalScroll(rememberScrollState())
+                                .weight(weight = 1f, fill = false)
+                                .padding(horizontal = 10.dp, vertical = 0.dp)
 //                        verticalArrangement = Arrangement.Center,
 //                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = "Add photo",
-                            fontSize = 13.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = Color(0xFF888686)
-                        )
-                    }
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .offset(y = 290.dp, x = 40.dp),
-//                        verticalArrangement = Arrangement.Center,
-//                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = "Name",
-                            fontSize = 15.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = Color(0xFF888686)
-                        )
-                        InputBar2(
-                            hint = "",
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(330.dp)
-//                                .padding(1.dp)
-                        )
+                        ) {
+                            Text(
+                                text = "Name",
+                                fontSize = 15.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color(0xFF888686)
+                            )
+                            InputBar2(
+                                hint = "",
+                                modifier = Modifier
+                                    .height(50.dp)
+                                    .width(350.dp)
+                                    .padding(1.dp)
+                            )
 
-                        Spacer(Modifier.height(5.dp))
+                            Spacer(Modifier.height(5.dp))
 
-                        Text(
-                            text = "Surname",
-                            fontSize = 15.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = Color(0xFF888686)
-                        )
-                        InputBar2(
-                            hint = "",
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(330.dp)
-//                                .padding(1.dp)
-                        )
+                            Text(
+                                text = "Surname",
+                                fontSize = 15.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color(0xFF888686)
+                            )
+                            InputBar2(
+                                hint = "",
+                                modifier = Modifier
+                                    .height(50.dp)
+                                    .width(350.dp)
+                                    .padding(1.dp)
+                            )
 
-                        Spacer(Modifier.height(5.dp))
+                            Spacer(Modifier.height(5.dp))
 
-                        Text(
-                            text = "Gender",
-                            fontSize = 15.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = Color(0xFF888686)
-                        )
-                        InputBar2(
-                            hint = "M/F",
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(330.dp)
-//                                .padding(1.dp)
-                        )
+                            Text(
+                                text = "Gender",
+                                fontSize = 15.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color(0xFF888686)
+                            )
+                            InputBar2(
+                                hint = "M/F",
+                                modifier = Modifier
+                                    .height(50.dp)
+                                    .width(350.dp)
+                                    .padding(1.dp)
+                            )
 
-                        Spacer(Modifier.height(5.dp))
+                            Spacer(Modifier.height(5.dp))
 
-                        Text(
-                            text = "Birth date",
-                            fontSize = 15.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = Color(0xFF888686)
-                        )
-                        InputBar2(
-                            hint = "      YYYY          |            MM          |          DD      ",
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(330.dp)
-//                                .padding(1.dp)
-                        )
+                            Text(
+                                text = "Birth date",
+                                fontSize = 15.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color(0xFF888686)
+                            )
+                            InputBar2(
+                                hint = "      YYYY          |            MM          |          DD      ",
+                                modifier = Modifier
+                                    .height(50.dp)
+                                    .width(350.dp)
+                                    .padding(1.dp)
+                            )
 
-                        Spacer(Modifier.height(5.dp))
+                            Spacer(Modifier.height(5.dp))
 
-                        Text(
-                            text = "Phone number",
-                            fontSize = 15.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = Color(0xFF888686)
-                        )
-                        InputBar2(
-                            hint = "+373 ___ __ ___",
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(330.dp)
-//                                .padding(1.dp)
-                        )
+                            Text(
+                                text = "Phone number",
+                                fontSize = 15.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color(0xFF888686)
+                            )
+                            InputBar2(
+                                hint = "+373 ___ __ ___",
+                                modifier = Modifier
+                                    .height(50.dp)
+                                    .width(350.dp)
+                                    .padding(1.dp)
+                            )
 
-                        Spacer(Modifier.height(5.dp))
+                            Spacer(Modifier.height(5.dp))
 
-                        Text(
-                            text = "Location",
-                            fontSize = 15.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = Color(0xFF888686)
-                        )
-                        InputBar2(
-                            hint = "",
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(330.dp)
-//                                .padding(1.dp)
-                        )
+                            Text(
+                                text = "Location",
+                                fontSize = 15.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color(0xFF888686)
+                            )
+                            InputBar2(
+                                hint = "",
+                                modifier = Modifier
+                                    .height(50.dp)
+                                    .width(350.dp)
+                                    .padding(1.dp)
+                            )
 
+                        }
                     }
 
                     Row(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .padding(40.dp),
+                            .fillMaxWidth()
+                            .padding(horizontal = 30.dp, vertical = 20.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.Bottom
                     )
