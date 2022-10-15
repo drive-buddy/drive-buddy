@@ -74,7 +74,7 @@ class Passenger1 : ComponentActivity() {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .offset(y = 340.dp, x = 40.dp),
+                            .offset(y = 290.dp, x = 40.dp),
 //                        verticalArrangement = Arrangement.Center,
 //                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
@@ -142,26 +142,21 @@ class Passenger1 : ComponentActivity() {
                                 .height(50.dp)
                                 .width(330.dp)
 //                                .padding(1.dp)
-                        )
-                        CheckBoxDemo()
 
-                    }
-
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .offset(y = 670.dp, x = 90.dp),
-//                        verticalArrangement = Arrangement.Center,
-//                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = "I accept all the terms and conditions\n" +
-                                    "of Privacy Policy",
-                            fontSize = 12.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = Color(0xFF888686)
                         )
+                        Row ()
+                        {
+                            CheckBoxDemo()
+                            Text(
+                                text = "I accept all the terms and conditions\n" +
+                                        "of Privacy Policy",
+                                fontSize = 12.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color(0xFF888686),
+                                modifier = Modifier.offset(y = 10.dp)
+                            )
+                        }
                     }
 
                     Row(
