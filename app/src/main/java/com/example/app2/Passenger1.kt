@@ -224,7 +224,7 @@ fun InputBar2(
     val focusManager = LocalFocusManager.current
 
     var text by remember {
-        mutableStateOf(hint)
+        mutableStateOf("")
     }
     var isHintDisplayed by remember{
         mutableStateOf(hint != "")
@@ -245,15 +245,17 @@ fun InputBar2(
                 .background(color = Color(0xFFFAF7F7), shape = CutCornerShape(10))
                 .padding(horizontal = 30.dp, vertical = 12.dp)
                 .onFocusChanged {
-//                    isHintDisplayed = it != FocusState.isFocused
-                },
-                keyboardActions = KeyboardActions
-                (
-                    onDone = {
-                        focusManager.clearFocus()
-                    }
-                )
+                    isHintDisplayed = it.isFocused
+                }
         )
+        if(!isHintDisplayed){
+            Text(
+                text = hint,
+                color = Color(0xFF888686),
+                modifier = Modifier
+                    .padding(horizontal = 30.dp, vertical = 12.dp)
+            )
+        }
     }
 }
 

@@ -55,152 +55,152 @@ class No_result : ComponentActivity() {
                                 .size(60.dp),
                             shape = CircleShape
 
-                            ) {
+                        ) {
 
-                                Icon(
-                                    Icons.Default.Menu,
-                                    modifier = Modifier.fillMaxSize(),
-                                    contentDescription = "menu",
-                                    tint = Color.Black)
-                            }
+                            Icon(
+                                Icons.Default.Menu,
+                                modifier = Modifier.fillMaxSize(),
+                                contentDescription = "menu",
+                                tint = Color.Black)
+                        }
+                    }
+
+                    Box(modifier = Modifier
+                        .absolutePadding(
+                            left = 320.dp,
+                            top = 10.dp)
+                    ) {
+
+                        Button(onClick = { /**/ },
+                            modifier = Modifier
+                                .size(60.dp),
+                            shape = CircleShape,
+                            colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.White)
+
+                        ) {
+
+                            Icon(
+                                Icons.Default.Search,
+                                modifier = Modifier.fillMaxSize(),
+                                contentDescription = "search menu",
+                                tint = bgRed)
+                        }
+                    }
+
+                    Box(modifier = Modifier
+                        .absolutePadding(
+                            left = 35.dp,
+                            top = 65.dp)
+                    ) {
+
+                        Card(modifier = Modifier
+                            .height(30.dp)
+                            .width(170.dp),
+                            shape = RoundedCornerShape(15.dp),
+                            elevation = 5.dp,
+                        ) {
+                            Text(
+                                text = "Results:",
+                                textAlign = TextAlign.Center,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 25.sp,
+                                color = Color.Black
+                            )
+                        }
+                    }
+
+                    Card(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(horizontal = 40.dp, vertical = 100.dp),
+                        shape = RoundedCornerShape(20.dp),
+                        elevation = 5.dp
+                    ) {
+
+                        Box(modifier = Modifier
+                            .padding(horizontal = 40.dp
+                                , vertical = 145.dp)
+                        ) {
+
+                            Text(
+                                text = "There are no such\n" +
+                                        "     rides set yet",
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 30.sp,
+                                color = Grey
+                            )
+
                         }
 
-                                Box(modifier = Modifier
+                        Box(modifier = Modifier
                             .absolutePadding(
-                                left = 320.dp,
-                                top = 10.dp)
-                                ) {
+                                left = 90.dp,
+                                top = 260.dp,
+                                right = 90.dp,
+                                bottom = 210.dp)
+                        ) {
 
-                            Button(onClick = { /**/ },
+                            Image(
+                                painter = painterResource(id = R.drawable.search),
+                                contentDescription = "image",
+                                contentScale = ContentScale.Crop,
                                 modifier = Modifier
-                                    .size(60.dp),
-                                shape = CircleShape,
-                                colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.White)
-
-                                ) {
-
-                                    Icon(
-                                        Icons.Default.Search,
-                                        modifier = Modifier.fillMaxSize(),
-                                        contentDescription = "search menu",
-                                        tint = bgRed)
-                                }
-                            }
-
-                                    Box(modifier = Modifier
-                                .absolutePadding(
-                                    left = 35.dp,
-                                    top = 65.dp)
-                                    ) {
-
-                                Card(modifier = Modifier
-                                    .height(30.dp)
-                                    .width(170.dp),
-                                    shape = RoundedCornerShape(15.dp),
-                                    elevation = 5.dp,
-                                ) {
-                                    Text(
-                                        text = "Results:",
-                                        textAlign = TextAlign.Center,
-                                        fontFamily = FontFamily.SansSerif,
-                                        fontWeight = FontWeight.Bold,
-                                        fontSize = 25.sp,
-                                        color = Color.Black
-                                    )
-                                }
-                            }
-
-                                    Card(
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .padding(horizontal = 40.dp, vertical = 100.dp),
-                                shape = RoundedCornerShape(20.dp),
-                                elevation = 5.dp
-                            ) {
-
-                                Box(modifier = Modifier
-                                    .padding(horizontal = 40.dp
-                                        , vertical = 145.dp)
-                                ) {
-
-                                    Text(
-                                        text = "There are no such\n" +
-                                                "     rides set yet",
-                                        fontFamily = FontFamily.SansSerif,
-                                        fontWeight = FontWeight.Bold,
-                                        fontSize = 30.sp,
-                                        color = Grey
-                                    )
-
-                                }
-
-                                Box(modifier = Modifier
-                                    .absolutePadding(
-                                        left = 90.dp,
-                                        top = 260.dp,
-                                        right = 90.dp,
-                                        bottom = 210.dp)
-                                ) {
-
-                                    Image(
-                                        painter = painterResource(id = R.drawable.search),
-                                        contentDescription = "image",
-                                        contentScale = ContentScale.Crop,
-                                        modifier = Modifier
-                                            .fillMaxSize()
-                                            .clip(CircleShape)
-                                    )
-                                }
-                            }
-                        }
-
-                                Box(modifier = Modifier
-                            .absolutePadding(
-                                left = 310.dp,
-                                top = 680.dp,
-                                right = 0.dp,
-                                bottom = 0.dp)
-                                ) {
-
-                            Button(onClick = { /**/ },
-                                modifier = Modifier.size(70.dp),
-                                shape = CircleShape,
-                                border = BorderStroke(2.dp, Color.White),
-                                ) {
-
-                                    Icon(Icons.Default.Add,
-                                        modifier = Modifier.fillMaxSize(),
-                                        contentDescription = "add",
-                                        tint = Color.White)
-                                }
-                            }
-
-                                    Box(modifier = Modifier
-                                .absolutePadding(
-                                    left = 110.dp,
-                                    top = 740.dp,
-                                    right = 0.dp,
-                                    bottom = 0.dp)
-                                    ) {
-
-                                Button(onClick = { /**/ },
-                                    modifier = Modifier
-                                        .height(40.dp)
-                                        .width(170.dp),
-                                    shape = RoundedCornerShape(20.dp),
-                                    colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.White)
-
-                                    ) {
-
-                                        Text(text = "Back",
-                                            color = bgRed,
-                                            fontFamily = FontFamily.SansSerif,
-                                            fontWeight = FontWeight.Bold,
-                                            fontSize = 22.sp)
-                                    }
-                                }
-                            }
+                                    .fillMaxSize()
+                                    .clip(CircleShape)
+                            )
                         }
                     }
                 }
+
+                Box(modifier = Modifier
+                    .absolutePadding(
+                        left = 310.dp,
+                        top = 680.dp,
+                        right = 0.dp,
+                        bottom = 0.dp)
+                ) {
+
+                    Button(onClick = { /**/ },
+                        modifier = Modifier.size(70.dp),
+                        shape = CircleShape,
+                        border = BorderStroke(2.dp, Color.White),
+                    ) {
+
+                        Icon(Icons.Default.Add,
+                            modifier = Modifier.fillMaxSize(),
+                            contentDescription = "add",
+                            tint = Color.White)
+                    }
+                }
+
+                Box(modifier = Modifier
+                    .absolutePadding(
+                        left = 110.dp,
+                        top = 740.dp,
+                        right = 0.dp,
+                        bottom = 0.dp)
+                ) {
+
+                    Button(onClick = { /**/ },
+                        modifier = Modifier
+                            .height(40.dp)
+                            .width(170.dp),
+                        shape = RoundedCornerShape(20.dp),
+                        colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.White)
+
+                    ) {
+
+                        Text(text = "Back",
+                            color = bgRed,
+                            fontFamily = FontFamily.SansSerif,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 22.sp)
+                    }
+                }
+            }
+        }
+    }
+}
 

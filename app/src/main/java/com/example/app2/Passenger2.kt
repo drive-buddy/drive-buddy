@@ -184,7 +184,7 @@ class Passenger2 : ComponentActivity() {
                                 color = Color(0xFF888686)
                             )
                             InputBar2(
-                                hint = "      YYYY          |            MM          |          DD      ",
+                                hint = "YYYY  |  MM  |   DD   ",
                                 modifier = Modifier
                                     .height(50.dp)
                                     .width(350.dp)
