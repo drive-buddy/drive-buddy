@@ -2,6 +2,7 @@ package com.example.app2
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -39,7 +40,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -96,6 +99,7 @@ class Passenger1 : ComponentActivity() {
                         )
                         InputBar2(
                             hint = "mymail@mail.com",
+                            KeyboardSettings = KeyboardOptions(keyboardType = KeyboardType.Email),
                             modifier = Modifier
                                 .height(50.dp)
                                 .width(330.dp)
@@ -130,6 +134,8 @@ class Passenger1 : ComponentActivity() {
                         )
                         InputBar2(
                             hint = "mysecurepassword123",
+                            KeyboardSettings = KeyboardOptions(keyboardType = KeyboardType.Password),
+                            keyboardTransformation = PasswordVisualTransformation(),
                             modifier = Modifier
                                 .height(50.dp)
                                 .width(330.dp)
@@ -147,6 +153,8 @@ class Passenger1 : ComponentActivity() {
                         )
                         InputBar2(
                             hint = "mysecurepassword123",
+                            KeyboardSettings = KeyboardOptions(keyboardType = KeyboardType.Password),
+                            keyboardTransformation = PasswordVisualTransformation(),
                             modifier = Modifier
                                 .height(50.dp)
                                 .width(330.dp)
@@ -273,6 +281,8 @@ fun InputBar3(
 fun InputBar2(
     modifier: Modifier = Modifier,
     hint: String = "Input Text",
+    KeyboardSettings : KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+    keyboardTransformation : VisualTransformation = VisualTransformation.None,
     onSearch: (String) -> Unit = {}
 ) {
 
@@ -286,6 +296,7 @@ fun InputBar2(
         BasicTextField(
             value = value,
             onValueChange = { value = it },
+            visualTransformation = keyboardTransformation,
             decorationBox = { innerTextField ->
                 Box(
                     Modifier
@@ -303,6 +314,7 @@ fun InputBar2(
             maxLines = 1,
             singleLine = true,
             textStyle = TextStyle(color = Color(0xFF888686)),
+            keyboardOptions = KeyboardSettings,
             modifier = Modifier
                 .fillMaxWidth()
                 .shadow(5.dp, CutCornerShape(10))
@@ -315,11 +327,11 @@ fun InputBar2(
                 (
                 onDone = {
                     focusManager.clearFocus()
+                    Log.i("myTag", value.toString())
                 }
             )
         )
     }
-
 }
 
 @Composable
