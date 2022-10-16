@@ -205,7 +205,6 @@ class Driver1 : ComponentActivity() {
                                 color = Color(0xFFFFFFFF)
                             )
                         }
-
                     }
                 }
             }
