@@ -30,6 +30,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.text.TextStyle
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import java.security.AllPermission
 
 class Sign_in : ComponentActivity() {
@@ -205,7 +206,13 @@ class Sign_in : ComponentActivity() {
                                 )
                             }
                             Button(
-                                onClick = { /* ... */ },
+                                onClick = {
+                                        val navigate1 = Intent(this@Sign_in, SignInGoogle::class.java)
+
+
+                                        startActivity(navigate1)
+                                        finish()
+                                          },
                                 shape = RoundedCornerShape(20.dp),
                                 colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.White),
                                 modifier = Modifier
