@@ -12,6 +12,7 @@ import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.CommonStatusCodes
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -31,6 +32,7 @@ class SignInGoogle : Activity() {
         super.onCreate(savedInstanceState)
 
         oneTapClient = Identity.getSignInClient(this)
+
         signInRequest = BeginSignInRequest.builder()
             .setPasswordRequestOptions(BeginSignInRequest.PasswordRequestOptions.builder()
                 .setSupported(true)
@@ -44,12 +46,10 @@ class SignInGoogle : Activity() {
                     .setFilterByAuthorizedAccounts(true)
                     .build())
             // Automatically sign in when exactly one credential is retrieved.
-            .setAutoSelectEnabled(true)
+//            .setAutoSelectEnabled(true)
             .build()
 
-        auth = Firebase.auth
-
-        oneTapClient.beginSignIn(signInRequest)
+         oneTapClient.beginSignIn(signInRequest)
             .addOnSuccessListener(this) { result ->
                 try {
                     startIntentSenderForResult(
@@ -65,6 +65,7 @@ class SignInGoogle : Activity() {
                 Log.d(TAG, e.localizedMessage)
             }
 
+        auth = Firebase.auth
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -106,6 +107,21 @@ class SignInGoogle : Activity() {
                 }
                 catch (e: ApiException) {
                     // shouldn't happen
+                    when (e.statusCode) {
+                        CommonStatusCodes.CANCELED -> {
+                            Log.d(TAG, "One-tap dialog was closed.")
+                            // Don't re-prompt the user.
+                            showOneTapUI = false
+                        }
+                        CommonStatusCodes.NETWORK_ERROR -> {
+                            Log.d(TAG, "One-tap encountered a network error.")
+                            // Try again or just ignore.
+                        }
+                        else -> {
+                            Log.d(TAG, "Couldn't get credential from result." +
+                                    " (${e.localizedMessage})")
+                        }
+                    }
                 }
             }
         }

@@ -17,8 +17,9 @@
     <string name="title_activity_start_page">StartPage</string>
     <string name="title_activity_sign_up_process">SignUpProcess</string>
 
-    <string name="your_web_client_id">843204761137-d9ftihcs4r0afvn4aj9kf0qnfi62p6p0.apps.googleusercontent.com</string>
+    <string name="your_web_client_id">843204761137-64rjdjo0hguftpomodbpmhhlh06p3htr.apps.googleusercontent.com</string>
     <string name="facebook_app_id">444336131170935</string>
     <string name="fb_login_protocol_scheme">fb1234</string>
     <string name="facebook_client_token">8cf23a405d20ca486f5393e8f8446945</string>
+    <string name="title_activity_sign_in_process">sign_in</string>
 </resources>
