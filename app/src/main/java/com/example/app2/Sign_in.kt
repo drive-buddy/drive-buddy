@@ -24,23 +24,17 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.graphics.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import java.security.AllPermission
 
 class Sign_in : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContent {
             App2_2Theme {
@@ -51,26 +45,6 @@ class Sign_in : ComponentActivity() {
                     color = MaterialTheme.colors.background,
                 )
                 {
-                    var userHashMap : HashMap<String, String> = HashMap<String, String> ()
-                    var userEmail by rememberSaveable { mutableStateOf("") }
-                    var userPassword by rememberSaveable { mutableStateOf("") }
-
-
-
-                    val isPasswordValid by derivedStateOf {
-                        userPassword.length > 7
-                    }
-
-                    var isPasswordVisible by remember {
-                        mutableStateOf(false)
-                    }
-
-                    val icon = if(isPasswordVisible){
-                        painterResource(id = R.drawable.ic_baseline_visibility_24)
-                    }
-                    else{
-                        painterResource(id = R.drawable.ic_baseline_visibility_off_24)
-                    }
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -112,53 +86,36 @@ class Sign_in : ComponentActivity() {
 //                        verticalArrangement = Arrangement.Center,
 //                        horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-
-                            PrettyBar(
-                                type = "Email",
-                                modifier = Modifier
-                                    .height(90.dp)
-                                    .width(330.dp),
-                                activeVariable = userEmail,
-                                onVarChange = {
-                                    userEmail = it
-                                }
+                            Text(
+                                text = "Username",
+                                fontSize = 15.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color.Black
                             )
-
-                            userHashMap["email"] = userEmail
-
-                            Spacer(Modifier.height(15.dp))
-
-                            PrettyBar(
-                                type = "Password",
+                            InputBar(
+                                hint = "",
                                 modifier = Modifier
-                                    .height(90.dp)
-                                    .width(330.dp),
+                                    .height(50.dp)
+                                    .width(330.dp)
 //                                .padding(1.dp)
-                                activeVariable = userPassword,
-                                onVarChange = {
-                                    userPassword = it
-                                },
-                                KeyboardSettings = KeyboardOptions(
-                                    keyboardType = KeyboardType.Password,
-                                    imeAction = ImeAction.Next),
-
-                                keyboardTransformation =
-                                if(isPasswordVisible) VisualTransformation.None
-                                else PasswordVisualTransformation(),
-
-                                trailingI = {
-                                    IconButton(onClick = {
-                                        isPasswordVisible = !isPasswordVisible
-                                    }) {
-                                        Icon(painter = icon,
-                                            contentDescription ="visibility icon"
-                                        )
-                                    }
-                                }
                             )
+                            Spacer(Modifier.height(5.dp))
 
-                            userHashMap["password"] = userPassword
-
+                            Text(
+                                text = "Password",
+                                fontSize = 15.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color.Black
+                            )
+                            InputBar(
+                                hint = "",
+                                modifier = Modifier
+                                    .height(50.dp)
+                                    .width(330.dp)
+//                                .padding(1.dp)
+                            )
                         }
 
                         Column(
@@ -192,8 +149,6 @@ class Sign_in : ComponentActivity() {
                                 onClick = {
                                     val navigate1 = Intent(this@Sign_in, SignInProcess::class.java)
 
-                                    navigate1.putExtra("email", userHashMap["email"])
-                                    navigate1.putExtra("password", userHashMap["password"])
 
                                     startActivity(navigate1)
                                     finish()
@@ -251,7 +206,13 @@ class Sign_in : ComponentActivity() {
                                 )
                             }
                             Button(
-                                onClick = { /* ... */ },
+                                onClick = {
+                                        val navigate1 = Intent(this@Sign_in, SignInGoogle::class.java)
+
+
+                                        startActivity(navigate1)
+                                        finish()
+                                          },
                                 shape = RoundedCornerShape(20.dp),
                                 colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.White),
                                 modifier = Modifier
