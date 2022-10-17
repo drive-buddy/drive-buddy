@@ -30,6 +30,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.text.TextStyle
+import java.security.AllPermission
 
 class Sign_in : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,55 +46,60 @@ class Sign_in : ComponentActivity() {
                 {
                     Column(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .offset(y = 130.dp, x = 120.dp),
-//                        verticalArrangement = Arrangement.Center,
-//                        horizontalAlignment = Alignment.CenterHorizontally
+                            .fillMaxWidth()
+                            .padding(vertical = 60.dp, horizontal = 40.dp)
                     ) {
-                        Text(
-                            text = "Welcome",
-                            fontSize = 42.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = Color(0xFFEE5252)
-                        )
-                    }
+                        Column(
+//                            modifier = Modifier
+//                                .fillMaxSize()
+//                                .offset(y = 130.dp, x = 120.dp),
+////                        verticalArrangement = Arrangement.Center,
+////                        horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                text = "Welcome",
+                                fontSize = 42.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color(0xFFEE5252)
+                            )
+                        }
 
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .offset(y = 200.dp, x = 160.dp),
-//                        verticalArrangement = Arrangement.Center,
-//                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Image(painter = painterResource(id = drawable.logo_fig),
-                            contentDescription = "Person",
-//                            tint = Color.White,
-                            modifier = Modifier.size(100.dp))
-                    }
-
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .offset(y = 340.dp, x = 40.dp),
-//                        verticalArrangement = Arrangement.Center,
-//                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = "Username",
-                            fontSize = 15.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = Color.Black
-                        )
-                        InputBar(
-                            hint = "",
+                        Column(
                             modifier = Modifier
-                                .height(50.dp)
-                                .width(330.dp)
+                                .fillMaxWidth()
+                                .padding(vertical = 20.dp),
+//                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Image(painter = painterResource(id = drawable.logo_fig),
+                                contentDescription = "Person",
+//                            tint = Color.White,
+                                modifier = Modifier.size(100.dp))
+                        }
+
+                        Column(
+                            modifier = Modifier
+//                                .fillMaxSize()
+//                                .offset(y = 340.dp, x = 40.dp),
+//                        verticalArrangement = Arrangement.Center,
+//                        horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                text = "Username",
+                                fontSize = 15.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color.Black
+                            )
+                            InputBar(
+                                hint = "",
+                                modifier = Modifier
+                                    .height(50.dp)
+                                    .width(330.dp)
 //                                .padding(1.dp)
-                        )
-                        Spacer(Modifier.height(5.dp))
+                            )
+                            Spacer(Modifier.height(5.dp))
 
                             Text(
                                 text = "Password",
@@ -109,111 +115,116 @@ class Sign_in : ComponentActivity() {
                                     .width(330.dp)
 //                                .padding(1.dp)
                             )
-                    }
+                        }
 
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .offset(y = 480.dp, x = 230.dp)
-                    )
-                    {
-                        Text(
-                            text = "Forgot Password?",
-                            fontSize = 15.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = Color.Black
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            horizontalAlignment = Alignment.End
+//                                .offset(y = 480.dp, x = 230.dp)
                         )
-                    }
+                        {
+                            Text(
+                                text = "Forgot Password?",
+                                fontSize = 15.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color.Blue
+                            )
+                        }
 
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .offset(y = 620.dp, x = 200.dp),
+                        Spacer(Modifier.height(20.dp))
+
+                        Column(
+                            modifier = Modifier,
+//                                .fillMaxSize(),
+//                                .padding(40.dp)
+//                                .offset(y = 0.dp, x = 10.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = spacedBy(10.dp, Alignment.Bottom)
+                        )
+                        {
+                            Button(
+                                onClick = {
+                                    val navigate1 = Intent(this@Sign_in, SignInProcess::class.java)
+
+
+                                    startActivity(navigate1)
+                                    finish()
+                                },
+                                shape = RoundedCornerShape(20.dp),
+                                colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFFEE5252)),
+                                modifier = Modifier
+                                    .height(50.dp)
+                                    .width(350.dp)
+                            ) {
+                                Text(
+                                    text = "Sign in",
+                                    fontSize = 19.sp,
+                                    fontFamily = FontFamily.SansSerif,
+                                    fontWeight = FontWeight.ExtraBold,
+                                    color = Color(0xFFFFFFFF)
+                                )
+                            }
+
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+//                                .offset(y = 620.dp, x = 200.dp),
 //                        verticalArrangement = Arrangement.Center,
-//                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = "or",
-                            fontSize = 18.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = Color.Black
-                        )
-                    }
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Text(
+                                    text = "or",
+                                    fontSize = 18.sp,
+                                    fontFamily = FontFamily.SansSerif,
+                                    fontWeight = FontWeight.ExtraBold,
+                                    color = Color.Black
+                                )
+                            }
 
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(40.dp)
-                            .offset(y = 0.dp, x = 10.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = spacedBy(30.dp, Alignment.Bottom)
-                    )
-                    {
-                        Button(
-                            onClick = {
-                                val navigate = Intent(this@Sign_in, No_result::class.java)
-                                startActivity(navigate)
-                            },
-                            shape = RoundedCornerShape(20.dp),
-                            colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFFEE5252)),
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(350.dp)
-                        ) {
-                            Text(
-                                text = "Sign in",
-                                fontSize = 19.sp,
-                                fontFamily = FontFamily.SansSerif,
-                                fontWeight = FontWeight.ExtraBold,
-                                color = Color(0xFFFFFFFF)
-                            )
-                        }
-
-                        Spacer(Modifier.height(5.dp))
-
-                        Button(
-                            onClick = { /* ... */ },
-                            shape = RoundedCornerShape(20.dp),
-                            colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFF4267B2)),
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(350.dp)
-                        ) {
-                            Image(painter = painterResource(id = drawable.facebook),
-                                contentDescription = "Facebook icon",
+                            Button(
+                                onClick = { /* ... */ },
+                                shape = RoundedCornerShape(20.dp),
+                                colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFF4267B2)),
+                                modifier = Modifier
+                                    .height(50.dp)
+                                    .width(350.dp)
+                            ) {
+                                Image(painter = painterResource(id = drawable.facebook),
+                                    contentDescription = "Facebook icon",
 //                            tint = Color.White,
-                                modifier = Modifier.size(20.dp))
+                                    modifier = Modifier.size(20.dp))
 
-                            Text(
-                                text = "Sign in with Facebook",
-                                fontSize = 19.sp,
-                                fontFamily = FontFamily.SansSerif,
-                                fontWeight = FontWeight.ExtraBold,
-                                color = Color(0xFFFFFFFF)
-                            )
-                        }
-                        Button(
-                            onClick = { /* ... */ },
-                            shape = RoundedCornerShape(20.dp),
-                            colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.White),
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(350.dp)
-                        ) {
-                            Image(painter = painterResource(id = drawable.google),
-                                contentDescription = "Google icon",
+                                Text(
+                                    text = "Sign in with Facebook",
+                                    fontSize = 19.sp,
+                                    fontFamily = FontFamily.SansSerif,
+                                    fontWeight = FontWeight.ExtraBold,
+                                    color = Color(0xFFFFFFFF)
+                                )
+                            }
+                            Button(
+                                onClick = { /* ... */ },
+                                shape = RoundedCornerShape(20.dp),
+                                colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.White),
+                                modifier = Modifier
+                                    .height(50.dp)
+                                    .width(350.dp)
+                            ) {
+                                Image(painter = painterResource(id = drawable.google),
+                                    contentDescription = "Google icon",
 //                              tint = Color.White,
-                                modifier = Modifier.size(30.dp))
-                            Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-                            Text(
-                                text = "Sign in with Google",
-                                fontFamily = FontFamily.SansSerif,
-                                fontWeight = FontWeight.ExtraBold,
-                                fontSize = 19.sp,
-                                color = Color(0xFF000000)
-                            )
+                                    modifier = Modifier.size(30.dp))
+                                Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+                                Text(
+                                    text = "Sign in with Google",
+                                    fontFamily = FontFamily.SansSerif,
+                                    fontWeight = FontWeight.ExtraBold,
+                                    fontSize = 19.sp,
+                                    color = Color(0xFF000000)
+                                )
+                            }
                         }
                     }
                 }
