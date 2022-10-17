@@ -265,11 +265,16 @@ class Passenger1 : ComponentActivity() {
 //                                    return@Button
 //                                }
 
-                                ///SignInProcess.createAccount(userEmail = "hello")
-
-//                                val act : SignUpProcess = SignUpProcess()
-
                                 val navigate1 = Intent(this@Passenger1, SignUpProcess::class.java)
+
+//                                // setter
+                                navigate1.putExtra("email", userHashMap["email"])
+                                navigate1.putExtra("password", userHashMap["userPassword2"])
+                                navigate1.putExtra("type", "passenger")
+//
+//                                // getter
+//                                navigate1.getStringExtra("hello")
+
                                 startActivity(navigate1)
                                 finish()
                             },
@@ -294,53 +299,6 @@ class Passenger1 : ComponentActivity() {
         }
     }
 }
-
-//@Composable
-//fun InputBar3(
-//    modifier: Modifier = Modifier,
-////        .verticalScroll(),
-////        .navigationBarsWithImePadding,
-//    hint: String = "",
-//    onSearch: (String) -> Unit = {}
-//) {
-//
-//    val focusManager = LocalFocusManager.current
-//
-//    var text by remember {
-//        mutableStateOf("")
-//    }
-//    var isHintDisplayed by remember{
-//        mutableStateOf(hint != "")
-//    }
-//    Box(modifier = modifier){
-//        BasicTextField(
-//            value = text,
-//            onValueChange = {
-//                text = it
-//                onSearch(it)
-//            },
-//            maxLines = 1,
-//            singleLine = true,
-//            textStyle = TextStyle(color = Color(0xFF888686)),
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .shadow(5.dp, CutCornerShape(10))
-//                .background(color = Color(0xFFFAF7F7), shape = CutCornerShape(10))
-//                .padding(horizontal = 30.dp, vertical = 12.dp)
-//                .onFocusChanged {
-//                    isHintDisplayed = it.isFocused
-//                }
-//        )
-//        if(!isHintDisplayed){
-//            Text(
-//                text = hint,
-//                color = Color(0xFF888686),
-//                modifier = Modifier
-//                    .padding(horizontal = 30.dp, vertical = 12.dp)
-//            )
-//        }
-//    }
-//}
 
 @Composable
 fun InputBar2(

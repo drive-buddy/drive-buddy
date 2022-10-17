@@ -7,10 +7,10 @@ open class DataValidator () {
 }
 
 class DataValidatorPageOne (userHashMap : HashMap<String, String>) : DataValidator() {
-    val userEmail : String? = userHashMap["email"]
-    val userName : String?= userHashMap["userName"]
-    val userPassword1 : String? = userHashMap["userPassword1"]
-    val userPassword2 : String? = userHashMap["userPassword2"]
+    private val userEmail : String? = userHashMap["email"]
+    private val userName : String?= userHashMap["userName"]
+    private val userPassword1 : String? = userHashMap["userPassword1"]
+    private val userPassword2 : String? = userHashMap["userPassword2"]
 
 //    @Composable
     fun checkEmail() : Boolean {
