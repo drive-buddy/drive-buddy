@@ -9,6 +9,7 @@ class DBHelper {
     private var TAG: String? = "DB"
     var db: FirebaseFirestore = Firebase.firestore
 
+//    CREATE
     public fun addUser(data: Any) {
         addDocument("users", data)
     }
@@ -25,6 +26,20 @@ class DBHelper {
             }
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error adding document", e)
+            }
+    }
+
+//    READ
+    fun readDocumentsAll(collection: String) {
+        db.collection(collection)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d(TAG, "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error getting documents.", e)
             }
     }
 }
