@@ -209,7 +209,13 @@ class Sign_in : ComponentActivity() {
                             }
 
                             Button(
-                                onClick = { /* ... */ },
+                                onClick = {
+                                        val navigate1 = Intent(this@Sign_in, SignInFacebook::class.java)
+
+
+                                        startActivity(navigate1)
+                                        finish()
+                                          },
                                 shape = RoundedCornerShape(20.dp),
                                 colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFF4267B2)),
                                 modifier = Modifier
