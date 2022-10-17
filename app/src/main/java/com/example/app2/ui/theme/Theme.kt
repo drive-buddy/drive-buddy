@@ -28,12 +28,42 @@ private val LightColorPalette = lightColors(
     onSurface = Black
 )
 
+private val LightColorPalette2 = lightColors(
+    primary = White,
+    primaryVariant = Purple700,
+    secondary = Teal200,
+
+    // Other default colors to override
+    background = White,
+    surface = White,
+    onPrimary = White,
+    onSecondary = Black,
+    onBackground = Black,
+    onSurface = Black
+)
+
 @Composable
 fun App2Theme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {
         LightColorPalette
+    }
+
+    MaterialTheme(
+        colors = colors,
+        typography = Typography,
+        shapes = Shapes,
+        content = content
+    )
+}
+
+@Composable
+fun App2_2Theme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+    val colors = if (darkTheme) {
+        DarkColorPalette
+    } else {
+        LightColorPalette2
     }
 
     MaterialTheme(

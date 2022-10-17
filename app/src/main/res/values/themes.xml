@@ -4,6 +4,10 @@
     <style name="Theme.App2" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">@color/bg_red</item>
         <item name="android:navigationBarColor">@color/bg_red</item>
+    </style>
 
+    <style name="Theme.App2_2" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:navigationBarColor">@color/white</item>
     </style>
 </resources>
