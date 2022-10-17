@@ -114,6 +114,7 @@ class Passenger2 : ComponentActivity() {
 
 
                         }
+                        Spacer(Modifier.height(10.dp))
                         // COLUMN FOR USER INFO INPUT
                         Column(
                             modifier = Modifier
@@ -121,7 +122,7 @@ class Passenger2 : ComponentActivity() {
                                 .padding(horizontal = 40.dp, vertical = 20.dp)
                                 .verticalScroll(rememberScrollState())
                                 .weight(weight = 1f, fill = false)
-                                .padding(horizontal = 10.dp, vertical = 0.dp)
+//                                .padding(horizontal = -10.dp, vertical = 0.dp)
 //                        verticalArrangement = Arrangement.Center,
 //                        horizontalAlignment = Alignment.CenterHorizontally
                         ) {
