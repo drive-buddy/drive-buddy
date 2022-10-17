@@ -14,4 +14,6 @@
     <string name="title_activity_passenger1">Passenger1</string>
     <string name="title_activity_passenger2">Passenger2</string>
     <string name="title_activity_passenger3">Passenger3</string>
+    <string name="title_activity_start_page">StartPage</string>
+    <string name="title_activity_sign_up_process">SignUpProcess</string>
 </resources>
