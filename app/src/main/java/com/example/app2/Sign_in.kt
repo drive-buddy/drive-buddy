@@ -26,6 +26,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.ui.graphics.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
@@ -35,6 +36,8 @@ import java.security.AllPermission
 
 class Sign_in : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        var userHashMap : HashMap<String, String> = HashMap<String, String> ()
+
         super.onCreate(savedInstanceState)
         setContent {
             App2_2Theme {
@@ -87,19 +90,28 @@ class Sign_in : ComponentActivity() {
 //                        horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Text(
-                                text = "Username",
-                                fontSize = 15.sp,
-                                fontFamily = FontFamily.SansSerif,
-                                fontWeight = FontWeight.ExtraBold,
-                                color = Color.Black
+                                    text = "Email",
+                                    fontSize = 15.sp,
+                                    fontFamily = FontFamily.SansSerif,
+                                    fontWeight = FontWeight.ExtraBold,
+                                    color = Color.Black
                             )
-                            InputBar(
+
+                            var userEmail by rememberSaveable { mutableStateOf("") }
+
+                            InputBar2(
                                 hint = "",
                                 modifier = Modifier
                                     .height(50.dp)
-                                    .width(330.dp)
-//                                .padding(1.dp)
+                                    .width(330.dp),
+                                activeVariable = userEmail,
+                                onVarChange = {
+                                    userEmail = it
+                                }
                             )
+
+                            userHashMap["email"] = userEmail
+
                             Spacer(Modifier.height(5.dp))
 
                             Text(
@@ -109,13 +121,23 @@ class Sign_in : ComponentActivity() {
                                 fontWeight = FontWeight.ExtraBold,
                                 color = Color.Black
                             )
-                            InputBar(
+
+                            var userPassword by rememberSaveable { mutableStateOf("") }
+
+                            InputBar2(
                                 hint = "",
                                 modifier = Modifier
                                     .height(50.dp)
-                                    .width(330.dp)
+                                    .width(330.dp),
 //                                .padding(1.dp)
+                                activeVariable = userPassword,
+                                onVarChange = {
+                                    userPassword = it
+                                }
                             )
+
+                            userHashMap["password"] = userPassword
+
                         }
 
                         Column(
@@ -149,6 +171,8 @@ class Sign_in : ComponentActivity() {
                                 onClick = {
                                     val navigate1 = Intent(this@Sign_in, SignInProcess::class.java)
 
+                                    navigate1.putExtra("email", userHashMap["email"])
+                                    navigate1.putExtra("password", userHashMap["password"])
 
                                     startActivity(navigate1)
                                     finish()

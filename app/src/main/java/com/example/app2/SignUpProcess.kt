@@ -1,6 +1,7 @@
 package com.example.app2
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -33,13 +34,37 @@ class SignUpProcess : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    createAccount("adrenalin582@gmail.com", "123123")
+                    val userEmail : String? = intent.getStringExtra("email")
+                    val userPassword : String? = intent.getStringExtra("password")
+                    val userType : String? = intent.getStringExtra("type")
+
+                    if (userEmail!!.isEmpty() || userPassword!!.isEmpty())
+                    {
+                        when (userType)
+                        {
+                            "passenger" -> {
+                                val navigate1 = Intent(this@SignUpProcess, Passenger1::class.java)
+                                startActivity(navigate1)
+                            }
+                            "driver" -> {
+                                val navigate1 = Intent(this@SignUpProcess, Driver1::class.java)
+                                startActivity(navigate1)
+                            }
+                        }
+                        finish()
+                    }
+                    else
+                    {
+                        Log.i("ABOBa", userEmail)
+                        Log.i("ABOBa", userPassword)
+                        createAccount(userEmail = userEmail, userPassword = userPassword)
+                    }
                 }
             }
         }
     }
 
-    public fun createAccount(userEmail : String, userPassword : String)
+    private fun createAccount(userEmail : String, userPassword : String)
     {
         auth.createUserWithEmailAndPassword(userEmail, userPassword)
             .addOnCompleteListener(this) { task ->
@@ -47,6 +72,9 @@ class SignUpProcess : ComponentActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(ContentValues.TAG, "createUserWithEmail:success")
                     val user = auth.currentUser
+                    val navigate1 = Intent(this@SignUpProcess, No_result::class.java)
+                    startActivity(navigate1)
+                    finish()
 //                    updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
@@ -54,6 +82,11 @@ class SignUpProcess : ComponentActivity() {
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
 //                    updateUI(null)
+                    // ERROR
+                    // TO DO CHANGE Passenger1 from debugging
+                    val navigate1 = Intent(this@SignUpProcess, Passenger1::class.java)
+                    startActivity(navigate1)
+                    finish()
                 }
             }
     }
