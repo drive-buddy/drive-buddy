@@ -70,19 +70,11 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Driver4"
-            android:exported="false"
-            android:label="@string/title_activity_driver4"
-            android:theme="@style/Theme.App2_2">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".Driver3"
             android:exported="false"
             android:label="@string/title_activity_driver3"
-            android:theme="@style/Theme.App2_2">
+            android:theme="@style/Theme.App2_2"
+            android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -91,8 +83,9 @@
             android:name=".Driver2"
             android:exported="false"
             android:label="@string/title_activity_driver2"
-            android:theme="@style/Theme.App2_2">
-            <meta-data
+            android:theme="@style/Theme.App2_2"
+            android:windowSoftInputMode="adjustPan">
+        <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
@@ -109,7 +102,8 @@
             android:name=".Driver1"
             android:exported="false"
             android:label="@string/title_activity_driver1"
-            android:theme="@style/Theme.App2_2">
+            android:theme="@style/Theme.App2_2"
+            android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
