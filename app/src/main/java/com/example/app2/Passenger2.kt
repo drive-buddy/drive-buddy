@@ -266,64 +266,64 @@ class Passenger2 : ComponentActivity() {
                         }
                     }
 
-//                    Row(
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                            .padding(horizontal = 30.dp, vertical = 20.dp),
-//                        horizontalArrangement = Arrangement.SpaceBetween,
-//                        verticalAlignment = Alignment.Bottom
-//                    )
-//                    {
-//                        Button(
-//                            onClick = {
-//                                val navigate = Intent(this@Passenger2, Passenger1::class.java)
-//                                startActivity(navigate)
-//                            },
-//                            modifier = Modifier
-//                                .height(50.dp)
-//                                .width(160.dp),
-//                            shape = RoundedCornerShape(20.dp),
-//                            colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFFEE5252))
-//                        ) {
-//                            Text(
-//                                text = "Back",
-//                                fontSize = 30.sp,
-//                                fontFamily = FontFamily.SansSerif,
-//                                fontWeight = FontWeight.ExtraBold,
-//                                color = Color(0xFFFFFFFF)
-//                            )
-//                        }
-//                        Button(
-//                            onClick = {
-//                                val dbEntry : DBHelper = DBHelper()
-//
-//                                dbEntry.addUser(userHashMap)
-//
-//
-//                                val navigate1 = Intent(this@Passenger2, SignUpProcess::class.java)
-//
-//                                navigate1.putExtra("email", userHashMap["email"])
-//                                navigate1.putExtra("password", userHashMap["userPassword"])
-//                                navigate1.putExtra("type", userHashMap["type"])
-//
-//                                startActivity(navigate1)
-//                                finish()
-//                            },
-//                            modifier = Modifier
-//                                .height(50.dp)
-//                                .width(160.dp),
-//                            shape = RoundedCornerShape(20.dp),
-//                            colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFFEE5252))
-//                        ) {
-//                            Text(
-//                                text = "Next",
-//                                fontFamily = FontFamily.SansSerif,
-//                                fontWeight = FontWeight.ExtraBold,
-//                                fontSize = 30.sp,
-//                                color = Color(0xFFFFFFFF)
-//                            )
-//                        }
-//                    }
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 30.dp, vertical = 20.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.Bottom
+                    )
+                    {
+                        Button(
+                            onClick = {
+                                val navigate = Intent(this@Passenger2, Passenger1::class.java)
+                                startActivity(navigate)
+                            },
+                            modifier = Modifier
+                                .height(50.dp)
+                                .width(160.dp),
+                            shape = RoundedCornerShape(20.dp),
+                            colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFFEE5252))
+                        ) {
+                            Text(
+                                text = "Back",
+                                fontSize = 30.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color(0xFFFFFFFF)
+                            )
+                        }
+                        Button(
+                            onClick = {
+                                val dbEntry : DBHelper = DBHelper()
+
+                                dbEntry.addUser(userHashMap)
+
+
+                                val navigate1 = Intent(this@Passenger2, SignUpProcess::class.java)
+
+                                navigate1.putExtra("email", userHashMap["email"])
+                                navigate1.putExtra("password", userHashMap["userPassword"])
+                                navigate1.putExtra("type", userHashMap["type"])
+
+                                startActivity(navigate1)
+                                finish()
+                            },
+                            modifier = Modifier
+                                .height(50.dp)
+                                .width(160.dp),
+                            shape = RoundedCornerShape(20.dp),
+                            colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFFEE5252))
+                        ) {
+                            Text(
+                                text = "Next",
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                fontSize = 30.sp,
+                                color = Color(0xFFFFFFFF)
+                            )
+                        }
+                    }
                 }
             }
         }
