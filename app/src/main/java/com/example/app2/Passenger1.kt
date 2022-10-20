@@ -190,7 +190,9 @@ class Passenger1 : ComponentActivity() {
                                             contentDescription ="visibility icon"
                                         )
                                     }
-                                }
+                                },
+                                showError = true,
+                                errorMessage = "ABOBA"
                             )
 
                             userHashMap["userPassword"] = userPassword

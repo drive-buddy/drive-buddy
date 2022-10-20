@@ -85,11 +85,33 @@ class MainActivity : ComponentActivity() {
     public override fun onStart() {
         super.onStart()
         // Check if user is signed in.
-        if (auth.currentUser != null) {
+        //        Log.i("myTag", auth.currentUser)
+        if (auth.currentUser == null) {
             // Not signed in, launch the Sign In activity
             startActivity(Intent(this, StartPage::class.java))
             finish()
             return
+        }
+        else {
+            // Update if user's account has been disabled
+            // Use this to have updates when the account is
+            // disabled ;)
+            auth.currentUser!!.reload()
+                .addOnCompleteListener(this) { task ->
+                    if (task.isComplete) {
+                        // Signed in, launch the  activity
+                        val navigate1 = Intent(this@MainActivity, No_result::class.java)
+
+                        startActivity(navigate1)
+                        finish()
+                    } else {
+                        // Signed in, launch the  activity
+                        val navigate1 = Intent(this@MainActivity, Sign_in::class.java)
+
+                        startActivity(navigate1)
+                        finish()
+                    }
+                }
         }
     }
 
