@@ -10,11 +10,11 @@ class DBHelper {
     var db: FirebaseFirestore = Firebase.firestore
 
 //    CREATE
-    public fun addUser(data: Any) {
+    public fun addUser(data: HashMap<String, String?>) {
         addDocument("users", data)
     }
 
-    public fun addOrder(data: Any) {
+    public fun addOrder(data: HashMap<String, String?>) {
         addDocument("orders", data)
     }
 

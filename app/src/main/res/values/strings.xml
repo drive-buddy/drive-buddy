@@ -16,4 +16,5 @@
     <string name="title_activity_passenger3">Passenger3</string>
     <string name="title_activity_start_page">StartPage</string>
     <string name="title_activity_sign_up_process">SignUpProcess</string>
+    <string name="title_activity_sign_in_process">SignInProcess</string>
 </resources>

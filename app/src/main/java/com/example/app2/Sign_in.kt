@@ -24,6 +24,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.graphics.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -31,11 +32,14 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import java.security.AllPermission
 
 class Sign_in : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        var userHashMap : HashMap<String, String> = HashMap<String, String> ()
 
         super.onCreate(savedInstanceState)
         setContent {
@@ -47,6 +51,26 @@ class Sign_in : ComponentActivity() {
                     color = MaterialTheme.colors.background,
                 )
                 {
+                    var userHashMap : HashMap<String, String> = HashMap<String, String> ()
+                    var userEmail by rememberSaveable { mutableStateOf("") }
+                    var userPassword by rememberSaveable { mutableStateOf("") }
+
+
+
+                    val isPasswordValid by derivedStateOf {
+                        userPassword.length > 7
+                    }
+
+                    var isPasswordVisible by remember {
+                        mutableStateOf(false)
+                    }
+
+                    val icon = if(isPasswordVisible){
+                        painterResource(id = R.drawable.ic_baseline_visibility_24)
+                    }
+                    else{
+                        painterResource(id = R.drawable.ic_baseline_visibility_off_24)
+                    }
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -88,20 +112,11 @@ class Sign_in : ComponentActivity() {
 //                        verticalArrangement = Arrangement.Center,
 //                        horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Text(
-                                    text = "Email",
-                                    fontSize = 15.sp,
-                                    fontFamily = FontFamily.SansSerif,
-                                    fontWeight = FontWeight.ExtraBold,
-                                    color = Color.Black
-                            )
 
-                            var userEmail by rememberSaveable { mutableStateOf("") }
-
-                            InputBar2(
-                                hint = "",
+                            PrettyBar(
+                                type = "Email",
                                 modifier = Modifier
-                                    .height(50.dp)
+                                    .height(90.dp)
                                     .width(330.dp),
                                 activeVariable = userEmail,
                                 onVarChange = {
@@ -111,27 +126,34 @@ class Sign_in : ComponentActivity() {
 
                             userHashMap["email"] = userEmail
 
-                            Spacer(Modifier.height(5.dp))
+                            Spacer(Modifier.height(15.dp))
 
-                            Text(
-                                text = "Password",
-                                fontSize = 15.sp,
-                                fontFamily = FontFamily.SansSerif,
-                                fontWeight = FontWeight.ExtraBold,
-                                color = Color.Black
-                            )
-
-                            var userPassword by rememberSaveable { mutableStateOf("") }
-
-                            InputBar2(
-                                hint = "",
+                            PrettyBar(
+                                type = "Password",
                                 modifier = Modifier
-                                    .height(50.dp)
+                                    .height(90.dp)
                                     .width(330.dp),
 //                                .padding(1.dp)
                                 activeVariable = userPassword,
                                 onVarChange = {
                                     userPassword = it
+                                },
+                                KeyboardSettings = KeyboardOptions(
+                                    keyboardType = KeyboardType.Password,
+                                    imeAction = ImeAction.Next),
+
+                                keyboardTransformation =
+                                if(isPasswordVisible) VisualTransformation.None
+                                else PasswordVisualTransformation(),
+
+                                trailingI = {
+                                    IconButton(onClick = {
+                                        isPasswordVisible = !isPasswordVisible
+                                    }) {
+                                        Icon(painter = icon,
+                                            contentDescription ="visibility icon"
+                                        )
+                                    }
                                 }
                             )
 

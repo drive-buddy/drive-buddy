@@ -87,28 +87,9 @@ class Passenger3 : ComponentActivity() {
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 30.dp, vertical = 20.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
+                            horizontalArrangement = Arrangement.Center,
                             verticalAlignment = Alignment.Bottom
                         ) {
-                            Button(
-                                onClick = {
-                                    val navigate = Intent(this@Passenger3, Passenger2::class.java)
-                                    startActivity(navigate)
-                                },
-                                modifier = Modifier
-                                    .height(50.dp)
-                                    .width(160.dp),
-                                shape = RoundedCornerShape(20.dp),
-                                colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFFEE5252))
-                            ) {
-                                Text(
-                                    text = "Back",
-                                    fontSize = 30.sp,
-                                    fontFamily = FontFamily.SansSerif,
-                                    fontWeight = FontWeight.ExtraBold,
-                                    color = Color(0xFFFFFFFF)
-                                )
-                            }
                             Button(
                                 onClick = {
                                     val navigate1 = Intent(this@Passenger3, No_result::class.java)
@@ -125,7 +106,6 @@ class Passenger3 : ComponentActivity() {
                                     color = Color(0xFFFFFFFF)
                                 )
                             }
-
                         }
                     }
                 }

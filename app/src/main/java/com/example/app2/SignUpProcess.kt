@@ -43,11 +43,11 @@ class SignUpProcess : ComponentActivity() {
                         when (userType)
                         {
                             "passenger" -> {
-                                val navigate1 = Intent(this@SignUpProcess, Passenger1::class.java)
+                                val navigate1 = Intent(this@SignUpProcess, Passenger2::class.java)
                                 startActivity(navigate1)
                             }
                             "driver" -> {
-                                val navigate1 = Intent(this@SignUpProcess, Driver1::class.java)
+                                val navigate1 = Intent(this@SignUpProcess, Driver2::class.java)
                                 startActivity(navigate1)
                             }
                         }
@@ -58,6 +58,18 @@ class SignUpProcess : ComponentActivity() {
                         Log.i("ABOBa", userEmail)
                         Log.i("ABOBa", userPassword)
                         createAccount(userEmail = userEmail, userPassword = userPassword)
+                        when (userType)
+                        {
+                            "passenger" -> {
+                                val navigate1 = Intent(this@SignUpProcess, Passenger3::class.java)
+                                startActivity(navigate1)
+                            }
+                            "driver" -> {
+                                val navigate1 = Intent(this@SignUpProcess, Driver3::class.java)
+                                startActivity(navigate1)
+                            }
+                        }
+                        finish()
                     }
                 }
             }

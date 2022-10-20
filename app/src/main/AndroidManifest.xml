@@ -44,8 +44,8 @@
             android:exported="false"
             android:label="@string/title_activity_passenger3"
             android:theme="@style/Theme.App2_2"
-            android:windowSoftInputMode="adjustResize">
-            <meta-data
+            android:windowSoftInputMode="adjustPan">
+        <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
@@ -54,7 +54,7 @@
             android:exported="false"
             android:label="@string/title_activity_passenger2"
             android:theme="@style/Theme.App2_2"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -64,8 +64,8 @@
             android:exported="false"
             android:label="@string/title_activity_passenger1"
             android:theme="@style/Theme.App2_2"
-            android:windowSoftInputMode="adjustResize">
-            <meta-data
+            android:windowSoftInputMode="adjustPan">
+        <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
