@@ -289,13 +289,13 @@ class Driver2 : ComponentActivity() {
                                     .width(330.dp),
 
                                 type = "Birth date",
-                                hint = "DD/MM/YYYY",
+                                hint = "MM/DD/YYYY",
                                 activeVariable = birthDate,
                                 onVarChange = {
                                     birthDate = it
                                 },
                                 KeyboardSettings = KeyboardOptions(
-                                    keyboardType = KeyboardType.Number,
+                                    keyboardType = KeyboardType.Text,
                                     imeAction = ImeAction.Next
                                 ),
                                 errorMessage = validateBirthDateError,
@@ -386,7 +386,7 @@ class Driver2 : ComponentActivity() {
                                 },
                                 KeyboardSettings = KeyboardOptions(
                                     keyboardType = KeyboardType.Text,
-                                    imeAction = ImeAction.Next
+                                    imeAction = ImeAction.Done
                                 ),
                                 errorMessage = validateYearOfExpError,
                                 showError = !validateYearOfExp
