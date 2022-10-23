@@ -228,7 +228,9 @@ class Driver2 : ComponentActivity() {
                                 activeVariable = name,
                                 onVarChange = {
                                     name = it
-                                }
+                                },
+                                errorMessage = validateNameError,
+                                showError = !validateName
                             )
 
                             userHashMap["userFirstName"] = name
@@ -244,7 +246,9 @@ class Driver2 : ComponentActivity() {
                                 activeVariable = surname,
                                 onVarChange = {
                                     surname = it
-                                }
+                                },
+                                errorMessage = validateSurnameError,
+                                showError = !validateSurname
                             )
 
                             userHashMap["userSurname"] = surname
@@ -261,7 +265,9 @@ class Driver2 : ComponentActivity() {
                                 activeVariable = gender,
                                 onVarChange = {
                                     gender = it
-                                }
+                                },
+                                errorMessage = validateGenderError,
+                                showError = !validateGender
                             )
 
                             userHashMap["userGender"] = gender
@@ -282,7 +288,9 @@ class Driver2 : ComponentActivity() {
                                 KeyboardSettings = KeyboardOptions(
                                     keyboardType = KeyboardType.Number,
                                     imeAction = ImeAction.Next
-                                )
+                                ),
+                                errorMessage = validateBirthDateError,
+                                showError = !validateBirthDate
                             )
 
                             userHashMap["userBirthDate"] = birthDate
@@ -303,7 +311,9 @@ class Driver2 : ComponentActivity() {
                                 KeyboardSettings = KeyboardOptions(
                                     keyboardType = KeyboardType.Phone,
                                     imeAction = ImeAction.Next
-                                )
+                                ),
+                                errorMessage = validatePhoneNrError,
+                                showError = !validatePhoneNr
                             )
 
                             userHashMap["userPhoneNumber"] = phoneNr
@@ -324,7 +334,9 @@ class Driver2 : ComponentActivity() {
                                 KeyboardSettings = KeyboardOptions(
                                     keyboardType = KeyboardType.Text,
                                     imeAction = ImeAction.Next
-                                )
+                                ),
+                                errorMessage = validateCarModelError,
+                                showError = !validateCarModel
                             )
 
                             userHashMap["carModel"] = carModel
@@ -345,7 +357,9 @@ class Driver2 : ComponentActivity() {
                                 KeyboardSettings = KeyboardOptions(
                                     keyboardType = KeyboardType.Text,
                                     imeAction = ImeAction.Next
-                                )
+                                ),
+                                errorMessage = validateCarPlateError,
+                                showError = !validateCarPlate
                             )
 
                             Spacer(Modifier.height(15.dp))
@@ -364,7 +378,9 @@ class Driver2 : ComponentActivity() {
                                 KeyboardSettings = KeyboardOptions(
                                     keyboardType = KeyboardType.Text,
                                     imeAction = ImeAction.Next
-                                )
+                                ),
+                                errorMessage = validateYearOfExpError,
+                                showError = !validateYearOfExp
                             )
 
                             userHashMap["yearOfExp"] = yearOfExp
