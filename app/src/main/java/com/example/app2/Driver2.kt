@@ -172,14 +172,12 @@ class Driver2 : ComponentActivity() {
                             Image(
                                 painter = painterResource(id = R.drawable.im2),
                                 contentDescription = "Person",
-//                                tint = Color.White,
                                 modifier = Modifier
                                     .size(100.dp)
                             )
                         }
                         Row(
                             modifier = Modifier
-//                                    .offset(y = 30.dp)
                                 .fillMaxWidth(),
                             horizontalArrangement = Arrangement.Center
 
@@ -294,10 +292,6 @@ class Driver2 : ComponentActivity() {
                                 onVarChange = {
                                     birthDate = it
                                 },
-                                KeyboardSettings = KeyboardOptions(
-                                    keyboardType = KeyboardType.Text,
-                                    imeAction = ImeAction.Next
-                                ),
                                 errorMessage = validateBirthDateError,
                                 showError = !validateBirthDate
                             )
@@ -340,10 +334,6 @@ class Driver2 : ComponentActivity() {
                                 onVarChange = {
                                     carModel = it
                                 },
-                                KeyboardSettings = KeyboardOptions(
-                                    keyboardType = KeyboardType.Text,
-                                    imeAction = ImeAction.Next
-                                ),
                                 errorMessage = validateCarModelError,
                                 showError = !validateCarModel
                             )
@@ -363,10 +353,6 @@ class Driver2 : ComponentActivity() {
                                 onVarChange = {
                                     carPlate = it
                                 },
-                                KeyboardSettings = KeyboardOptions(
-                                    keyboardType = KeyboardType.Text,
-                                    imeAction = ImeAction.Next
-                                ),
                                 errorMessage = validateCarPlateError,
                                 showError = !validateCarPlate
                             )

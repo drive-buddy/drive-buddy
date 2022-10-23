@@ -22,7 +22,6 @@ class Driver3 : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             App2_2Theme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
@@ -54,7 +53,6 @@ class Driver3 : ComponentActivity() {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth(),
-//                            .offset(y = 600.dp, x = 120.dp),
                         verticalArrangement = Arrangement.Bottom,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {

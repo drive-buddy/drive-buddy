@@ -121,8 +121,6 @@ class Passenger2 : ComponentActivity() {
                         }
                     }
 
-
-
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
@@ -148,13 +146,11 @@ class Passenger2 : ComponentActivity() {
                         ) {
                             Image(painter = painterResource(id = R.drawable.im2),
                                 contentDescription = "Person",
-//                                tint = Color.White,
                                 modifier = Modifier
                                     .size(100.dp))
                         }
                         Row (
                             modifier = Modifier
-//                                    .offset(y = 30.dp)
                                 .fillMaxWidth(),
                             horizontalArrangement = Arrangement.Center
 

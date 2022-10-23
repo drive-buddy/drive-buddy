@@ -19,9 +19,6 @@ import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-//class ComposeableBar {
-//}
-
 @Composable
 fun PrettyBar(
     modifier: Modifier = Modifier,

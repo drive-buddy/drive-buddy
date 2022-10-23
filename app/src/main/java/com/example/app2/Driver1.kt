@@ -51,7 +51,6 @@ class Driver1 : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             App2_2Theme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
@@ -162,7 +161,6 @@ class Driver1 : ComponentActivity() {
                                 modifier = Modifier
                                     .height(90.dp)
                                     .width(330.dp),
-//                                .padding(1.dp)
                                 activeVariable = userEmail,
                                 onVarChange = {
                                     userEmail = it
@@ -265,7 +263,6 @@ class Driver1 : ComponentActivity() {
                             userHashMap["userPasswordConfirm"] = userPasswordConfirm
 
                             Row (
-//                                modifier = Modifier.
                                 horizontalArrangement = Arrangement.Start
                             )
                             {
