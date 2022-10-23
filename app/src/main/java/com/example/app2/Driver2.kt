@@ -97,7 +97,7 @@ class Driver2 : ComponentActivity() {
 
                         val birthDateRegex = ("(0[1-9]|1[0-2])\\/(0[1-9]|1\\d|2" +
                                 "\\d|3[01])\\/(19|20)\\d{2}").toRegex()
-                        
+
                         val carPlateRegex = ("(^[A-Z]{2}[0-9]{2}\\s?[A-Z]{3})" +
                                 "|(^[A-Z][0-9]{1,3}[A-Z]{3}|(^[A-Z]{3}[0-9]{1,3}[A-Z])|" +
                                 "(^[0-9]{1,4}[A-Z]{1,2})|(^[0-9]{1,3}[A-Z]{1,3})|" +
@@ -119,6 +119,22 @@ class Driver2 : ComponentActivity() {
                         return validateName && validateSurname && validateGender
                                 && validateBirthDate && validatePhoneNr && validateCarModel
                                 && validateCarPlate && validateYearOfExp
+                    }
+
+                    fun register(
+                        name: String,
+                        surname: String,
+                        gender: String,
+                        birthDate: String,
+                        phoneNr: String,
+                        carModel: String,
+                        carPlate: String,
+                        yearOfExp: String
+                    ){
+                        if(validateData(name, surname, gender, birthDate,
+                                phoneNr, carModel, carPlate, yearOfExp)){
+//                            button logic required
+                        }
                     }
 
                     Column(
@@ -258,7 +274,7 @@ class Driver2 : ComponentActivity() {
                                     .width(330.dp),
 
                                 type = "Birth date",
-                                hint = "YYYY | MM | DD",
+                                hint = "DD/MM/YYYY",
                                 activeVariable = birthDate,
                                 onVarChange = {
                                     birthDate = it
