@@ -83,7 +83,9 @@ class Passenger2 : ComponentActivity() {
                                      phoneNr: String): Boolean{
 
                         val genderRegex = "(?=.*[MF]).{1,}".toRegex()
-                        val birthDateRegex = "(0[1-9]|1[0-2])\\/(0[1-9]|1\\d|2\\d|3[01])\\/(19|20)\\d{2}".toRegex()
+
+                        val birthDateRegex = ("(0[1-9]|1[0-2])\\/(0[1-9]|1\\d|2" +
+                                "\\d|3[01])\\/(19|20)\\d{2}").toRegex()
 
 
                         validateName = name.isNotBlank()
@@ -106,9 +108,7 @@ class Passenger2 : ComponentActivity() {
                         if(validateData(name, surname, gender, birthDate, phoneNr)){
 
                             val dbEntry : DBHelper = DBHelper()
-
                             dbEntry.addUser(userHashMap)
-
 
                             val navigate1 = Intent(this@Passenger2, SignUpProcess::class.java)
 
