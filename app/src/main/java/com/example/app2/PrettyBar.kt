@@ -7,7 +7,6 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.*
@@ -33,19 +32,13 @@ fun PrettyBar(
     trailingI : @Composable (() -> Unit)? = null,
     KeyboardSettings : KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text,
         imeAction = ImeAction.Next),
-    isPasswordField : Boolean = false,
-    isPasswordVisible : Boolean = false,
     keyboardTransformation : VisualTransformation = VisualTransformation.None,
-    showError : Boolean = false,
-    errorMessage : String = ""
+    showError: Boolean = false,
+    errorMessage: String = ""
 ){
 
     val focusManager = LocalFocusManager.current
-    Column(modifier = modifier
-        .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ){
+    Box(modifier = modifier){
         OutlinedTextField(
             value = activeVariable,
             onValueChange = onVarChange,
@@ -66,43 +59,39 @@ fun PrettyBar(
                     color = Color(0xFFFAF7F7),
                     shape = CutCornerShape(10)
                 )
-//                .padding(horizontal = 12.dp, vertical = 12.dp),
-                .padding(bottom = 10.dp),
+                .padding(horizontal = 12.dp, vertical = 15.dp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = Color(0xFF888686),
                 unfocusedBorderColor = Color(0xFF888686)
             ),
             trailingIcon = trailingI,
+            visualTransformation = keyboardTransformation,
             keyboardOptions = KeyboardSettings,
-            visualTransformation = when {
-                isPasswordField && isPasswordVisible -> VisualTransformation.None
-                isPasswordField -> PasswordVisualTransformation()
-                else -> VisualTransformation.None
-            },
             keyboardActions = KeyboardActions(
-                onNext = {focusManager.moveFocus(FocusDirection.Down)}
+//                onNext = {focusManager.moveFocus(FocusDirection.Down)}
+                onDone = {focusManager.clearFocus()}
             ),
-            isError = showError,
-
+            isError = showError
         )
+        if(showError){
+            Text(
+                text = errorMessage,
+                color = MaterialTheme.colors.error,
+                style = MaterialTheme.typography.caption,
+                modifier = Modifier
+                    .padding(start = 20.dp)
+                    .offset(y = (76).dp)
+                    .fillMaxWidth(0.9f)
+
+            )
+
+        }
         if (activeVariable == ""){
             Text(
                 text = "",
                 color = Color(0xFF888686),
                 modifier = Modifier
                     .padding(horizontal = 30.dp, vertical = 12.dp)
-            )
-        }
-        if (showError)
-        {
-            Text(
-                text = errorMessage,
-                color = MaterialTheme.colors.error,
-                style = MaterialTheme.typography.caption,
-                modifier = Modifier
-                    .padding(start = 8.dp)
-                    .offset(y = (-8).dp)
-                    .fillMaxWidth(fraction = 0.9f)
             )
         }
     }

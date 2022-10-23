@@ -247,22 +247,22 @@ class Passenger2 : ComponentActivity() {
 
                             Spacer(Modifier.height(20.dp))
 
-//                            PrettyBar(
-//                                modifier = Modifier
-//                                    .height(90.dp)
-//                                    .width(330.dp),
-//
-//                                type = "Location",
-//                                hint = "Chisinau",
-//                                activeVariable = location,
-//                                onVarChange = {
-//                                    location = it
-//                                }
-//                            )
-//
-//                            userHashMap["userPhoneNumber"] = phoneNr
-//
-//                            Spacer(Modifier.height(15.dp))
+                            PrettyBar(
+                                modifier = Modifier
+                                    .height(90.dp)
+                                    .width(330.dp),
+
+                                type = "Location",
+                                hint = "Chisinau",
+                                activeVariable = location,
+                                onVarChange = {
+                                    location = it
+                                }
+                            )
+
+                            userHashMap["userPhoneNumber"] = phoneNr
+
+                            Spacer(Modifier.height(15.dp))
                         }
                     }
 

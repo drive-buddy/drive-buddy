@@ -318,6 +318,7 @@ class Driver2 : ComponentActivity() {
                             )
 
                             userHashMap["yearOfExp"] = yearOfExp
+                            Spacer(Modifier.height(15.dp))
                         }
                     }
 
