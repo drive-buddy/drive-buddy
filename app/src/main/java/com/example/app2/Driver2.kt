@@ -98,11 +98,7 @@ class Driver2 : ComponentActivity() {
                         val birthDateRegex = ("(0[1-9]|1[0-2])\\/(0[1-9]|1\\d|2" +
                                 "\\d|3[01])\\/(19|20)\\d{2}").toRegex()
 
-                        val carPlateRegex = ("(^[A-Z]{2}[0-9]{2}\\s?[A-Z]{3})" +
-                                "|(^[A-Z][0-9]{1,3}[A-Z]{3}|(^[A-Z]{3}[0-9]{1,3}[A-Z])|" +
-                                "(^[0-9]{1,4}[A-Z]{1,2})|(^[0-9]{1,3}[A-Z]{1,3})|" +
-                                "(^[A-Z]{1,2}[0-9]{1,4})|(^[A-Z]{1,3}[0-9]{1,3})|" +
-                                "(^[A-Z]{1,3}[0-9]{1,4})|(^[0-9]{3}[DX]{1}[0-9]{3})").toRegex()
+//                        val carPlateRegex = ("(^[A-Z]{2}[0-9]{2}\\s?[A-Z]{3})).toRegex()
 
                         val yearOfExpRegex = "(?=.*[0-9]).{1,}".toRegex()
 
@@ -113,7 +109,9 @@ class Driver2 : ComponentActivity() {
                         validateBirthDate = birthDateRegex.matches(birthDate)
                         validatePhoneNr = Patterns.PHONE.matcher(phoneNr).matches()
                         validateCarModel = carModel.isNotBlank()
-                        validateCarPlate = carPlateRegex.matches(carPlate)
+                        validateCarPlate = carPlate.isNotBlank()
+//                        validateCarPlate = carPlateRegex.matches(carPlate)
+//                        Need to find a suitable Regex
                         validateYearOfExp = yearOfExpRegex.matches(yearOfExp)
 
                         return validateName && validateSurname && validateGender
@@ -133,7 +131,18 @@ class Driver2 : ComponentActivity() {
                     ){
                         if(validateData(name, surname, gender, birthDate,
                                 phoneNr, carModel, carPlate, yearOfExp)){
-//                            button logic required
+                            val dbEntry: DBHelper = DBHelper()
+
+                            dbEntry.addUser(userHashMap)
+
+                            val navigate1 = Intent(this@Driver2, SignUpProcess::class.java)
+
+                            navigate1.putExtra("email", userHashMap["email"])
+                            navigate1.putExtra("password", userHashMap["userPassword"])
+                            navigate1.putExtra("type", userHashMap["type"])
+
+                            startActivity(navigate1)
+                            finish()
                         }
                     }
 
@@ -419,18 +428,8 @@ class Driver2 : ComponentActivity() {
                         }
                         Button(
                             onClick = {
-                                val dbEntry: DBHelper = DBHelper()
-
-                                dbEntry.addUser(userHashMap)
-
-                                val navigate1 = Intent(this@Driver2, SignUpProcess::class.java)
-
-                                navigate1.putExtra("email", userHashMap["email"])
-                                navigate1.putExtra("password", userHashMap["userPassword"])
-                                navigate1.putExtra("type", userHashMap["type"])
-
-                                startActivity(navigate1)
-                                finish()
+                                register(name, surname, gender, birthDate,
+                                    phoneNr, carModel, carPlate, yearOfExp)
                             },
                             modifier = Modifier
                                 .height(50.dp)
