@@ -56,37 +56,33 @@ class Driver2 : ComponentActivity() {
                     userHashMap["userPassword"] = intent.getStringExtra("password")
                     userHashMap["type"] = intent.getStringExtra("type")
 
-                    var name by rememberSaveable {
-                        mutableStateOf("")
-                    }
+                    var name by rememberSaveable { mutableStateOf("") }
+                    var surname by rememberSaveable { mutableStateOf("") }
+                    var gender by rememberSaveable { mutableStateOf("") }
+                    var birthDate by rememberSaveable { mutableStateOf("") }
+                    var phoneNr by rememberSaveable { mutableStateOf("") }
+                    var carModel by rememberSaveable { mutableStateOf("") }
+                    var carPlate by rememberSaveable { mutableStateOf("") }
+                    var yearOfExp by rememberSaveable { mutableStateOf("") }
 
-                    var surname by rememberSaveable {
-                        mutableStateOf("")
-                    }
+                    var validateName by rememberSaveable { mutableStateOf(true) }
+                    var validateSurname by rememberSaveable { mutableStateOf(true) }
+                    var validateGender by rememberSaveable { mutableStateOf(true) }
+                    var validateBirthDate by rememberSaveable { mutableStateOf(true) }
+                    var validatePhoneNr by rememberSaveable { mutableStateOf(true) }
+                    var validateCarModel by rememberSaveable { mutableStateOf(true) }
+                    var validateCarPlate by rememberSaveable { mutableStateOf(true) }
+                    var validateYearOfExp by rememberSaveable { mutableStateOf(true) }
 
-                    var gender by rememberSaveable {
-                        mutableStateOf("")
-                    }
+                    val validateNameError = "Please input a valid name"
+                    val validateSurnameError = "Please input a valid Surname"
+                    val validateGenderError = "Please input a valid Gender: M/F"
+                    val validateBirthDateError = "Please input birth date in required form"
+                    val validatePhoneNrError = "Please input a valid phone number"
+                    val validateCarModelError = "Please input a valid car model"
+                    val validateCarPlateError = "Please input a valid car plate"
+                    val validateYearOfExpError = "Please input years of experience"
 
-                    var birthDate by rememberSaveable {
-                        mutableStateOf("")
-                    }
-
-                    var phoneNr by rememberSaveable {
-                        mutableStateOf("")
-                    }
-
-                    var carModel by rememberSaveable {
-                        mutableStateOf("")
-                    }
-
-                    var carPlate by rememberSaveable {
-                        mutableStateOf("")
-                    }
-
-                    var yearOfExp by rememberSaveable {
-                        mutableStateOf("")
-                    }
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
