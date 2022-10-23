@@ -242,7 +242,7 @@ class Driver1 : ComponentActivity() {
 
                                 KeyboardSettings = KeyboardOptions(
                                     keyboardType = KeyboardType.Password,
-                                    imeAction = ImeAction.Next),
+                                    imeAction = ImeAction.Done),
 
                                 keyboardTransformation =
                                 if(isPasswordVisible) VisualTransformation.None
