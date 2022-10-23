@@ -59,34 +59,67 @@ class Driver1 : ComponentActivity() {
                     val userHashMap : HashMap<String, String> = HashMap<String, String> ()
 
                     var userName by rememberSaveable { mutableStateOf("") }
-
                     var userEmail by rememberSaveable { mutableStateOf("") }
-
-                    val isEmailValid by derivedStateOf {
-                        Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()
-                    }
-
-                    var userPassword by rememberSaveable {
-                        mutableStateOf("")
-                    }
-
-                    var userPasswordConfirm by rememberSaveable {
-                        mutableStateOf("")
-                    }
-
-                    val isPasswordValid by derivedStateOf {
-                        userPassword.length > 7
-                    }
-
-                    var isPasswordVisible by remember {
-                        mutableStateOf(false)
-                    }
+                    var userPassword by rememberSaveable { mutableStateOf("") }
+                    var userPasswordConfirm by rememberSaveable { mutableStateOf("") }
+                    var isPasswordVisible by remember { mutableStateOf(false) }
 
                     val icon = if(isPasswordVisible){
                         painterResource(id = R.drawable.ic_baseline_visibility_24)
                     }
                     else{
                         painterResource(id = R.drawable.ic_baseline_visibility_off_24)
+                    }
+
+                    var validateName by rememberSaveable { mutableStateOf(true) }
+                    var validateEmail by rememberSaveable { mutableStateOf(true) }
+                    var validatePassword by rememberSaveable { mutableStateOf(true) }
+                    var validateConfirmPassword by rememberSaveable { mutableStateOf(true) }
+                    var validatePasswordsEqual by rememberSaveable { mutableStateOf(true) }
+
+                    val validateNameError = "Please input a valid name"
+                    val validateEmailError = "The format of the email doesn't seem right"
+                    val validatePasswordError = "Must mix capital and non-capital letters"
+                    val validatePasswordsEqualsError = "Password must be equal"
+
+                    fun validateData(name: String,
+                                     email: String,
+                                     password: String,
+                                     confirmPassword: String): Boolean{
+                        val passwordRegex = "(?=.*[a-z])(?=.*[A-Z]).{1,}".toRegex()
+
+                        validateName = name.isNotBlank()
+                        validateEmail = Patterns.EMAIL_ADDRESS.matcher(email).matches()
+                        validatePassword = passwordRegex.matches(password)
+                        validateConfirmPassword = passwordRegex.matches(confirmPassword)
+                        validatePasswordsEqual = password == confirmPassword
+
+                        return validateName && validateEmail && validatePassword
+                                && validateConfirmPassword && validatePasswordsEqual
+
+                    }
+
+                    fun register(
+                        name: String,
+                        email: String,
+                        password: String,
+                        confirmPassword: String
+                    ){
+                        if(validateData(name, email, password, confirmPassword)){
+                            val navigate1 = Intent(this@Driver1, Driver2::class.java)
+
+//                                // setter
+                            navigate1.putExtra("email", userHashMap["email"])
+                            navigate1.putExtra("username", userHashMap["userName"])
+                            navigate1.putExtra("password", userHashMap["userPassword"])
+                            navigate1.putExtra("type", "driver")
+//
+//                                // getter
+//                                navigate1.getStringExtra("hello")
+
+                            startActivity(navigate1)
+                            finish()
+                        }
                     }
 
                     Column(
@@ -135,7 +168,9 @@ class Driver1 : ComponentActivity() {
                                     userEmail = it
                                 },
                                 KeyboardSettings = KeyboardOptions(keyboardType = KeyboardType.Email,
-                                    imeAction = ImeAction.Next)
+                                    imeAction = ImeAction.Next),
+                                errorMessage = validateEmailError,
+                                showError = !validateEmail
                             )
 
                             userHashMap["email"] = userEmail
@@ -150,7 +185,9 @@ class Driver1 : ComponentActivity() {
                                 activeVariable = userName,
                                 onVarChange = {
                                     userName = it
-                                }
+                                },
+                                errorMessage = validateNameError,
+                                showError = !validateName
                             )
 
                             userHashMap["userName"] = userName
@@ -184,7 +221,9 @@ class Driver1 : ComponentActivity() {
                                             contentDescription ="visibility icon"
                                         )
                                     }
-                                }
+                                },
+                                errorMessage = validatePasswordError,
+                                showError = !validatePassword
                             )
 
                             userHashMap["userPassword"] = userPassword
@@ -217,7 +256,10 @@ class Driver1 : ComponentActivity() {
                                             contentDescription ="visibility icon"
                                         )
                                     }
-                                }
+                                },
+                                errorMessage = if(!validateConfirmPassword) validatePasswordError
+                                else validatePasswordsEqualsError,
+                                showError = !validatePasswordsEqual || !validateConfirmPassword
                             )
 
                             userHashMap["userPasswordConfirm"] = userPasswordConfirm
@@ -287,21 +329,9 @@ class Driver1 : ComponentActivity() {
 //                                {
 //                                    Log.i("myTag", "password issue")
 //                                    return@Button
-//                                }
+//                                },
 
-                                val navigate1 = Intent(this@Driver1, Driver2::class.java)
-
-//                                // setter
-                                navigate1.putExtra("email", userHashMap["email"])
-                                navigate1.putExtra("username", userHashMap["userName"])
-                                navigate1.putExtra("password", userHashMap["userPassword"])
-                                navigate1.putExtra("type", "driver")
-//
-//                                // getter
-//                                navigate1.getStringExtra("hello")
-
-                                startActivity(navigate1)
-                                finish()
+                                register(userName, userEmail, userPassword ,userPasswordConfirm)
                             },
                             modifier = Modifier
                                 .height(50.dp)

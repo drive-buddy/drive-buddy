@@ -64,6 +64,7 @@ class Passenger1 : ComponentActivity() {
                 ) {
 
                     val userHashMap : HashMap<String, String> = HashMap<String, String> ()
+
                     var userName by rememberSaveable { mutableStateOf("") }
                     var userEmail by rememberSaveable { mutableStateOf("") }
                     var userPassword by rememberSaveable { mutableStateOf("") }
@@ -86,7 +87,7 @@ class Passenger1 : ComponentActivity() {
                     var validatePasswordsEqual by rememberSaveable { mutableStateOf(true) }
 
                     val validateNameError = "Please input a valid name"
-                    val validateEmailError = "The formal of the email doesn't seem right"
+                    val validateEmailError = "The format of the email doesn't seem right"
                     val validatePasswordError = "Must mix capital and non-capital letters"
                     val validatePasswordsEqualsError = "Password must be equal"
 
@@ -339,7 +340,7 @@ class Passenger1 : ComponentActivity() {
 //                                {
 //                                    Log.i("myTag", "password issue")
 //                                    return@Button
-//                                }
+//                                },
 
 
                                 register(userName, userEmail, userPassword ,userPasswordConfirm)
