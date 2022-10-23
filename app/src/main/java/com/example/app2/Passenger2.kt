@@ -63,7 +63,6 @@ class Passenger2 : ComponentActivity() {
                     var gender by rememberSaveable { mutableStateOf("") }
                     var birthDate by rememberSaveable { mutableStateOf("") }
                     var phoneNr by rememberSaveable { mutableStateOf("") }
-//                    var location by rememberSaveable { mutableStateOf("") }
 
                     var validateName by rememberSaveable { mutableStateOf(true) }
                     var validateSurname by rememberSaveable { mutableStateOf(true) }
@@ -194,9 +193,6 @@ class Passenger2 : ComponentActivity() {
                                 .padding(horizontal = 40.dp, vertical = 20.dp)
                                 .verticalScroll(rememberScrollState())
                                 .weight(weight = 1f, fill = false)
-//                                .padding(horizontal = -10.dp, vertical = 0.dp)
-//                        verticalArrangement = Arrangement.Center,
-//                        horizontalAlignment = Alignment.CenterHorizontally
                         ) {
 
                             Spacer(Modifier.height(15.dp))
@@ -329,19 +325,6 @@ class Passenger2 : ComponentActivity() {
                         Button(
                             onClick = {
                                       register(name, surname, gender, birthDate, phoneNr)
-//                                val dbEntry : DBHelper = DBHelper()
-//
-//                                dbEntry.addUser(userHashMap)
-//
-//
-//                                val navigate1 = Intent(this@Passenger2, SignUpProcess::class.java)
-//
-//                                navigate1.putExtra("email", userHashMap["email"])
-//                                navigate1.putExtra("password", userHashMap["userPassword"])
-//                                navigate1.putExtra("type", userHashMap["type"])
-//
-//                                startActivity(navigate1)
-//                                finish()
                             },
                             modifier = Modifier
                                 .height(50.dp)
