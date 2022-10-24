@@ -43,11 +43,11 @@ class SignUpProcess : ComponentActivity() {
                         when (userType)
                         {
                             "passenger" -> {
-                                val navigate1 = Intent(this@SignUpProcess, Passenger2::class.java)
+                                val navigate1 = Intent(this@SignUpProcess, Passenger1::class.java)
                                 startActivity(navigate1)
                             }
                             "driver" -> {
-                                val navigate1 = Intent(this@SignUpProcess, Driver2::class.java)
+                                val navigate1 = Intent(this@SignUpProcess, Driver1::class.java)
                                 startActivity(navigate1)
                             }
                         }
@@ -57,26 +57,14 @@ class SignUpProcess : ComponentActivity() {
                     {
                         Log.i("ABOBa", userEmail)
                         Log.i("ABOBa", userPassword)
-                        createAccount(userEmail = userEmail, userPassword = userPassword)
-                        when (userType)
-                        {
-                            "passenger" -> {
-                                val navigate1 = Intent(this@SignUpProcess, Passenger3::class.java)
-                                startActivity(navigate1)
-                            }
-                            "driver" -> {
-                                val navigate1 = Intent(this@SignUpProcess, Driver3::class.java)
-                                startActivity(navigate1)
-                            }
-                        }
-                        finish()
+                        createAccount(userEmail = userEmail, userPassword = userPassword, userType = userType!!)
                     }
                 }
             }
         }
     }
 
-    private fun createAccount(userEmail : String, userPassword : String)
+    private fun createAccount(userEmail : String, userPassword : String, userType : String)
     {
         auth.createUserWithEmailAndPassword(userEmail, userPassword)
             .addOnCompleteListener(this) { task ->
@@ -87,17 +75,26 @@ class SignUpProcess : ComponentActivity() {
                     val navigate1 = Intent(this@SignUpProcess, No_result::class.java)
                     startActivity(navigate1)
                     finish()
-//                    updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
+                    val temp : List<String> = task.exception
+                        .toString()
+                        .split(": ")
+                    val errorMsg = temp[1]
+                    Toast.makeText(baseContext, errorMsg,
                         Toast.LENGTH_SHORT).show()
-//                    updateUI(null)
-                    // ERROR
-                    // TO DO CHANGE Passenger1 from debugging
-                    val navigate1 = Intent(this@SignUpProcess, Passenger1::class.java)
-                    startActivity(navigate1)
+                    when (userType)
+                    {
+                        "passenger" -> {
+                            val navigate1 = Intent(this@SignUpProcess, Passenger1::class.java)
+                            startActivity(navigate1)
+                        }
+                        "driver" -> {
+                            val navigate1 = Intent(this@SignUpProcess, Driver1::class.java)
+                            startActivity(navigate1)
+                        }
+                    }
                     finish()
                 }
             }
