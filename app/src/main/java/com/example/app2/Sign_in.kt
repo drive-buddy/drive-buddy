@@ -1,7 +1,9 @@
 package com.example.app2
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
@@ -39,6 +41,11 @@ import androidx.compose.ui.text.input.VisualTransformation
 import java.security.AllPermission
 
 class Sign_in : ComponentActivity() {
+
+    override fun onStart() {
+        super.onStart()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -55,7 +62,19 @@ class Sign_in : ComponentActivity() {
                     var userEmail by rememberSaveable { mutableStateOf("") }
                     var userPassword by rememberSaveable { mutableStateOf("") }
 
+                    var errorMsg : String = ""
+                    var showErrorMsg : Boolean = false
 
+                    if (intent.getStringExtra("signIn_error") != null)
+                    {
+                        val temp : List<String> = intent
+                            .getStringExtra("signIn_error")!!
+                            .split(": ")
+                        errorMsg = temp[1]
+
+                        showErrorMsg = true
+
+                    }
 
                     val isPasswordValid by derivedStateOf {
                         userPassword.length > 7
@@ -121,10 +140,12 @@ class Sign_in : ComponentActivity() {
                                 activeVariable = userEmail,
                                 onVarChange = {
                                     userEmail = it
-                                }
+                                },
+                                showError = showErrorMsg,
+                                errorMessage = errorMsg
                             )
 
-                            userHashMap["email"] = userEmail
+                            userHashMap["email"] = userEmail.trim()
 
                             Spacer(Modifier.height(15.dp))
 
@@ -154,10 +175,11 @@ class Sign_in : ComponentActivity() {
                                             contentDescription ="visibility icon"
                                         )
                                     }
-                                }
-                            )
+                                },
+                                showError = showErrorMsg
+                                )
 
-                            userHashMap["password"] = userPassword
+                            userHashMap["password"] = userPassword.trim()
 
                         }
 
@@ -196,7 +218,7 @@ class Sign_in : ComponentActivity() {
                                     navigate1.putExtra("password", userHashMap["password"])
 
                                     startActivity(navigate1)
-                                    finish()
+//                                    finish()
                                 },
                                 shape = RoundedCornerShape(20.dp),
                                 colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFFEE5252)),
