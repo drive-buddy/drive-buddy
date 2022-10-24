@@ -85,7 +85,7 @@ fun PrettyBar(
             )
         }
     }
-    if(showError) {
+    if(showError && errorMessage != "") {
         Spacer(Modifier.height(5.dp))
         Text(
             text = errorMessage,
