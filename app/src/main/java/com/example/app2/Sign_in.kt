@@ -188,7 +188,6 @@ class Sign_in : ComponentActivity() {
                                 onClick = {
                                         val navigate1 = Intent(this@Sign_in, SignInFacebook::class.java)
 
-
                                         startActivity(navigate1)
                                         finish()
                                           },
