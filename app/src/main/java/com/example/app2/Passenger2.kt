@@ -207,7 +207,7 @@ class Passenger2 : ComponentActivity() {
                                 showError = !validateName
                             )
 
-                            userHashMap["userFirstName"] = name
+                            userHashMap["userFirstName"] = name.trim()
 
                             Spacer(Modifier.height(15.dp))
 
@@ -225,7 +225,7 @@ class Passenger2 : ComponentActivity() {
                                 showError = !validateSurname
                             )
 
-                            userHashMap["userSurname"] = surname
+                            userHashMap["userSurname"] = surname.trim()
 
                             Spacer(Modifier.height(15.dp))
 
@@ -244,7 +244,7 @@ class Passenger2 : ComponentActivity() {
                                 showError = !validateGender
                             )
 
-                            userHashMap["userGender"] = gender
+                            userHashMap["userGender"] = gender.trim()
 
                             Spacer(Modifier.height(15.dp))
 
@@ -263,7 +263,7 @@ class Passenger2 : ComponentActivity() {
                                 showError = !validateBirthDate
                             )
 
-                            userHashMap["userBirthDate"] = birthDate
+                            userHashMap["userBirthDate"] = birthDate.trim()
 
                             Spacer(Modifier.height(15.dp))
 
@@ -285,7 +285,7 @@ class Passenger2 : ComponentActivity() {
                                 showError = !validatePhoneNr
                             )
 
-                            userHashMap["userPhoneNumber"] = phoneNr
+                            userHashMap["userPhoneNumber"] = phoneNr.trim()
 
                             Spacer(Modifier.height(15.dp))
                         }

@@ -180,7 +180,7 @@ class Passenger1 : ComponentActivity() {
                                 showError = !validateEmail
                             )
 
-                            userHashMap["email"] = userEmail
+                            userHashMap["email"] = userEmail.trim()
 
                             Spacer(Modifier.height(15.dp))
 
@@ -197,7 +197,7 @@ class Passenger1 : ComponentActivity() {
                                 showError = !validateName
                             )
 
-                            userHashMap["userName"] = userName
+                            userHashMap["userName"] = userName.trim()
 
                             Spacer(Modifier.height(15.dp))
 
@@ -233,7 +233,7 @@ class Passenger1 : ComponentActivity() {
                                 showError = !validatePassword
                             )
 
-                            userHashMap["userPassword"] = userPassword
+                            userHashMap["userPassword"] = userPassword.trim()
 
                             Spacer(Modifier.height(15.dp))
 
@@ -269,7 +269,7 @@ class Passenger1 : ComponentActivity() {
                                 showError = !validatePasswordsEqual || !validateConfirmPassword
                             )
 
-                            userHashMap["userPasswordConfirm"] = userPasswordConfirm
+                            userHashMap["userPasswordConfirm"] = userPasswordConfirm.trim()
 
                             Spacer(Modifier.height(15.dp))
 

@@ -240,7 +240,7 @@ class Driver2 : ComponentActivity() {
                                 showError = !validateName
                             )
 
-                            userHashMap["userFirstName"] = name
+                            userHashMap["userFirstName"] = name.trim()
 
                             Spacer(Modifier.height(15.dp))
 
@@ -258,7 +258,7 @@ class Driver2 : ComponentActivity() {
                                 showError = !validateSurname
                             )
 
-                            userHashMap["userSurname"] = surname
+                            userHashMap["userSurname"] = surname.trim()
 
                             Spacer(Modifier.height(15.dp))
 
@@ -277,7 +277,7 @@ class Driver2 : ComponentActivity() {
                                 showError = !validateGender
                             )
 
-                            userHashMap["userGender"] = gender
+                            userHashMap["userGender"] = gender.trim()
 
                             Spacer(Modifier.height(15.dp))
 
@@ -296,7 +296,7 @@ class Driver2 : ComponentActivity() {
                                 showError = !validateBirthDate
                             )
 
-                            userHashMap["userBirthDate"] = birthDate
+                            userHashMap["userBirthDate"] = birthDate.trim()
 
                             Spacer(Modifier.height(15.dp))
 
@@ -319,7 +319,7 @@ class Driver2 : ComponentActivity() {
                                 showError = !validatePhoneNr
                             )
 
-                            userHashMap["userPhoneNumber"] = phoneNr
+                            userHashMap["userPhoneNumber"] = phoneNr.trim()
 
                             Spacer(Modifier.height(15.dp))
 
@@ -338,7 +338,7 @@ class Driver2 : ComponentActivity() {
                                 showError = !validateCarModel
                             )
 
-                            userHashMap["carModel"] = carModel
+                            userHashMap["carModel"] = carModel.trim()
 
                             Spacer(Modifier.height(15.dp))
 
@@ -378,7 +378,7 @@ class Driver2 : ComponentActivity() {
                                 showError = !validateYearOfExp
                             )
 
-                            userHashMap["yearOfExp"] = yearOfExp
+                            userHashMap["yearOfExp"] = yearOfExp.trim()
                             Spacer(Modifier.height(15.dp))
                         }
                     }
