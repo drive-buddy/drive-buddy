@@ -114,42 +114,30 @@ class No_result : ComponentActivity() {
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(horizontal = 40.dp, vertical = 100.dp),
-                        shape = RoundedCornerShape(20.dp),
+                        shape = RoundedCornerShape(30.dp),
                         elevation = 5.dp
                     ) {
 
-                        Box(modifier = Modifier
-                            .padding(horizontal = 40.dp
-                                , vertical = 145.dp)
+                        Column(modifier = Modifier
+                            .padding(horizontal = 40.dp, vertical = 145.dp)
                         ) {
 
                             Text(
-                                text = "There are no such\n" +
-                                        "     rides set yet",
+                                text = "There are no such rides set yet",
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 30.sp,
                                 color = Grey
                             )
-
-                        }
-
-                        Box(modifier = Modifier
-                            .absolutePadding(
-                                left = 90.dp,
-                                top = 260.dp,
-                                right = 90.dp,
-                                bottom = 210.dp)
-                        ) {
-
                             Image(
                                 painter = painterResource(id = R.drawable.search),
                                 contentDescription = "image",
-                                contentScale = ContentScale.Crop,
+//                                contentScale = ContentScale.Crop,
                                 modifier = Modifier
                                     .fillMaxSize()
                                     .clip(CircleShape)
                             )
+
                         }
                     }
                 }
