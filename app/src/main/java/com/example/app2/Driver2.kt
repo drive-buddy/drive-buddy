@@ -131,15 +131,9 @@ class Driver2 : ComponentActivity() {
                     ){
                         if(validateData(name, surname, gender, birthDate,
                                 phoneNr, carModel, carPlate, yearOfExp)){
-                            val dbEntry: DBHelper = DBHelper()
-
-                            dbEntry.addUser(userHashMap)
-
                             val navigate1 = Intent(this@Driver2, SignUpProcess::class.java)
 
-                            navigate1.putExtra("email", userHashMap["email"])
-                            navigate1.putExtra("password", userHashMap["userPassword"])
-                            navigate1.putExtra("type", userHashMap["type"])
+                            navigate1.putExtra("userHashMap", userHashMap)
 
                             startActivity(navigate1)
                             finish()

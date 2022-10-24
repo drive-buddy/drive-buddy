@@ -2,6 +2,7 @@ package com.example.app2
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -99,22 +100,17 @@ class Passenger2 : ComponentActivity() {
                     }
 
                     fun register(
-                        name: String,
-                        surname: String,
-                        gender: String,
-                        birthDate: String,
-                        phoneNr: String
+                        userHashMap : HashMap<String, String?>
                     ){
-                        if(validateData(name, surname, gender, birthDate, phoneNr)){
-
-                            val dbEntry : DBHelper = DBHelper()
-                            dbEntry.addUser(userHashMap)
-
+                        if(validateData(
+                                name, surname, gender, birthDate, phoneNr
+                            )){
                             val navigate1 = Intent(this@Passenger2, SignUpProcess::class.java)
 
-                            navigate1.putExtra("email", userHashMap["email"])
-                            navigate1.putExtra("password", userHashMap["userPassword"])
-                            navigate1.putExtra("type", userHashMap["type"])
+                            for ((key, value) in userHashMap) {
+                                Log.i("Values", "$key : $value")
+                            }
+                            navigate1.putExtra("userHashMap", userHashMap)
 
                             startActivity(navigate1)
                             finish()
@@ -320,7 +316,7 @@ class Passenger2 : ComponentActivity() {
                         }
                         Button(
                             onClick = {
-                                      register(name, surname, gender, birthDate, phoneNr)
+                                      register(userHashMap)
                             },
                             modifier = Modifier
                                 .height(50.dp)

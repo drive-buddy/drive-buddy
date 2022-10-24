@@ -97,11 +97,11 @@ class Sign_in : ComponentActivity() {
                             .padding(vertical = 60.dp, horizontal = 40.dp)
                     ) {
                         Column(
-//                            modifier = Modifier
-//                                .fillMaxSize()
+                            modifier = Modifier
+                                .fillMaxSize(),
 //                                .offset(y = 130.dp, x = 120.dp),
 ////                        verticalArrangement = Arrangement.Center,
-////                        horizontalAlignment = Alignment.CenterHorizontally
+                        horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Text(
                                 text = "Welcome",
