@@ -20,4 +20,5 @@
     <string name="facebook_app_id">444336131170935</string>
     <string name="facebook_client_token">5574df50a97200a69ded53378a3599d4</string>
     <string name="fb_login_protocol_scheme">fb444336131170935</string>
+    <string name="title_activity_schedule_ride">Schedule_ride</string>
 </resources>

@@ -1,4 +1,5 @@
 package com.example.app2
+import android.content.Intent
 import android.media.Image
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -104,7 +105,7 @@ class No_result : ComponentActivity() {
                                 textAlign = TextAlign.Center,
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.Bold,
-                                fontSize = 25.sp,
+                                fontSize = 22.sp,
                                 color = Color.Black
                             )
                         }
@@ -123,7 +124,7 @@ class No_result : ComponentActivity() {
                         ) {
 
                             Text(
-                                text = "There are no such rides set yet",
+                                text = "There are no rides set yet",
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 30.sp,
@@ -132,7 +133,6 @@ class No_result : ComponentActivity() {
                             Image(
                                 painter = painterResource(id = R.drawable.search),
                                 contentDescription = "image",
-//                                contentScale = ContentScale.Crop,
                                 modifier = Modifier
                                     .fillMaxSize()
                                     .clip(CircleShape)
@@ -150,7 +150,10 @@ class No_result : ComponentActivity() {
                         bottom = 0.dp)
                 ) {
 
-                    Button(onClick = { /**/ },
+                    Button(onClick = {
+                        val navigate = Intent(this@No_result, Schedule_ride::class.java)
+                        startActivity(navigate)
+                                     },
                         modifier = Modifier.size(70.dp),
                         shape = CircleShape,
                         border = BorderStroke(2.dp, Color.White),
@@ -166,7 +169,7 @@ class No_result : ComponentActivity() {
                 Box(modifier = Modifier
                     .absolutePadding(
                         left = 110.dp,
-                        top = 740.dp,
+                        top = 730.dp,
                         right = 0.dp,
                         bottom = 0.dp)
                 ) {
@@ -184,7 +187,7 @@ class No_result : ComponentActivity() {
                             color = bgRed,
                             fontFamily = FontFamily.SansSerif,
                             fontWeight = FontWeight.Bold,
-                            fontSize = 22.sp)
+                            fontSize = 20.sp)
                     }
                 }
             }
