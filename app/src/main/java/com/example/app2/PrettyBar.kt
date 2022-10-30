@@ -19,6 +19,9 @@ import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+//class ComposeableBar {
+//}
+
 @Composable
 fun PrettyBar(
     modifier: Modifier = Modifier,
@@ -30,22 +33,27 @@ fun PrettyBar(
     KeyboardSettings : KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text,
         imeAction = ImeAction.Next),
     keyboardTransformation : VisualTransformation = VisualTransformation.None,
-){
+    showError: Boolean = false,
+    errorMessage: String = ""
+) {
 
     val focusManager = LocalFocusManager.current
-    Box(modifier = modifier){
+    Box(modifier = modifier) {
         OutlinedTextField(
             value = activeVariable,
             onValueChange = onVarChange,
             singleLine = true,
             textStyle = TextStyle(color = Color(0xFF888686)),
             placeholder = { Text(text = hint, color = Color(0xFF888686)) },
-            label = { Text(text = type,
-                color = Color(0xFF888686),
-                fontSize = 15.sp,
-                fontFamily = FontFamily.SansSerif,
-                fontWeight = FontWeight.ExtraBold,
-            ) },
+            label = {
+                Text(
+                    text = type,
+                    color = Color(0xFF888686),
+                    fontSize = 15.sp,
+                    fontFamily = FontFamily.SansSerif,
+                    fontWeight = FontWeight.ExtraBold,
+                )
+            },
 
             modifier = Modifier
                 .fillMaxWidth()
@@ -54,9 +62,7 @@ fun PrettyBar(
                     color = Color(0xFFFAF7F7),
                     shape = CutCornerShape(10)
                 )
-//                .padding(horizontal = 12.dp, vertical = 12.dp)
-            ,
-            colors = TextFieldDefaults.outlinedTextFieldColors(
+            ,colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = Color(0xFF888686),
                 unfocusedBorderColor = Color(0xFF888686)
             ),
@@ -64,16 +70,22 @@ fun PrettyBar(
             visualTransformation = keyboardTransformation,
             keyboardOptions = KeyboardSettings,
             keyboardActions = KeyboardActions(
-                onNext = {focusManager.moveFocus(FocusDirection.Down)}
-            )
+//                onNext = {focusManager.moveFocus(FocusDirection.Down)}
+                onDone = { focusManager.clearFocus() }
+            ),
+            isError = showError
         )
-        if (activeVariable == ""){
+        if (showError) {
             Text(
-                text = "",
-                color = Color(0xFF888686),
+                text = errorMessage,
+                color = MaterialTheme.colors.error,
+                style = MaterialTheme.typography.caption,
                 modifier = Modifier
-                    .padding(horizontal = 30.dp, vertical = 12.dp)
+                    .padding(start = 20.dp)
+                    .offset(y = (76).dp)
+                    .fillMaxWidth(0.9f)
             )
+
         }
     }
 }
