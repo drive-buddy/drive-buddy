@@ -173,8 +173,6 @@ class Driver1 : ComponentActivity() {
 
                             userHashMap["email"] = userEmail.trim()
 
-                            Spacer(Modifier.height(15.dp))
-
                             PrettyBar(
                                 modifier = Modifier
                                     .height(90.dp)
@@ -190,7 +188,6 @@ class Driver1 : ComponentActivity() {
 
                             userHashMap["userName"] = userName.trim()
 
-                            Spacer(Modifier.height(15.dp))
 
                             PrettyBar(
                                 modifier = Modifier
@@ -226,7 +223,6 @@ class Driver1 : ComponentActivity() {
 
                             userHashMap["userPassword"] = userPassword.trim()
 
-                            Spacer(Modifier.height(15.dp))
 
                             PrettyBar(
                                 modifier = Modifier

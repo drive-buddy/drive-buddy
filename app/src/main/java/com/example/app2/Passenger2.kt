@@ -157,6 +157,7 @@ class Passenger2 : ComponentActivity() {
                                 modifier = Modifier
                                     .size(16.dp),
                                 shape = CircleShape,
+                                contentPadding = PaddingValues(0.dp),
                                 colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFFEE5252))
                             ) {
                                 Icon(
@@ -205,8 +206,6 @@ class Passenger2 : ComponentActivity() {
 
                             userHashMap["userFirstName"] = name.trim()
 
-                            Spacer(Modifier.height(15.dp))
-
                             PrettyBar(
                                 modifier = Modifier
                                     .height(90.dp)
@@ -222,8 +221,6 @@ class Passenger2 : ComponentActivity() {
                             )
 
                             userHashMap["userSurname"] = surname.trim()
-
-                            Spacer(Modifier.height(15.dp))
 
                             PrettyBar(
                                 modifier = Modifier
@@ -242,8 +239,6 @@ class Passenger2 : ComponentActivity() {
 
                             userHashMap["userGender"] = gender.trim()
 
-                            Spacer(Modifier.height(15.dp))
-
                             PrettyBar(
                                 modifier = Modifier
                                     .height(90.dp)
@@ -260,8 +255,6 @@ class Passenger2 : ComponentActivity() {
                             )
 
                             userHashMap["userBirthDate"] = birthDate.trim()
-
-                            Spacer(Modifier.height(15.dp))
 
                             PrettyBar(
                                 modifier = Modifier
@@ -282,8 +275,6 @@ class Passenger2 : ComponentActivity() {
                             )
 
                             userHashMap["userPhoneNumber"] = phoneNr.trim()
-
-                            Spacer(Modifier.height(15.dp))
                         }
                     }
 

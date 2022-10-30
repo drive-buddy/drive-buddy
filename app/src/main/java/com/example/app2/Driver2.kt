@@ -182,6 +182,7 @@ class Driver2 : ComponentActivity() {
                                 modifier = Modifier
                                     .size(16.dp),
                                 shape = CircleShape,
+                                contentPadding = PaddingValues(0.dp),
                                 colors = ButtonDefaults.outlinedButtonColors(
                                     backgroundColor = Color(
                                         0xFFEE5252
@@ -236,7 +237,6 @@ class Driver2 : ComponentActivity() {
 
                             userHashMap["userFirstName"] = name.trim()
 
-                            Spacer(Modifier.height(15.dp))
 
                             PrettyBar(
                                 modifier = Modifier
@@ -253,8 +253,6 @@ class Driver2 : ComponentActivity() {
                             )
 
                             userHashMap["userSurname"] = surname.trim()
-
-                            Spacer(Modifier.height(15.dp))
 
                             PrettyBar(
                                 modifier = Modifier
@@ -273,8 +271,6 @@ class Driver2 : ComponentActivity() {
 
                             userHashMap["userGender"] = gender.trim()
 
-                            Spacer(Modifier.height(15.dp))
-
                             PrettyBar(
                                 modifier = Modifier
                                     .height(90.dp)
@@ -291,8 +287,6 @@ class Driver2 : ComponentActivity() {
                             )
 
                             userHashMap["userBirthDate"] = birthDate.trim()
-
-                            Spacer(Modifier.height(15.dp))
 
                             PrettyBar(
                                 modifier = Modifier
@@ -315,8 +309,6 @@ class Driver2 : ComponentActivity() {
 
                             userHashMap["userPhoneNumber"] = phoneNr.trim()
 
-                            Spacer(Modifier.height(15.dp))
-
                             PrettyBar(
                                 modifier = Modifier
                                     .height(90.dp)
@@ -334,8 +326,6 @@ class Driver2 : ComponentActivity() {
 
                             userHashMap["carModel"] = carModel.trim()
 
-                            Spacer(Modifier.height(15.dp))
-
                             PrettyBar(
                                 modifier = Modifier
                                     .height(90.dp)
@@ -350,8 +340,6 @@ class Driver2 : ComponentActivity() {
                                 errorMessage = validateCarPlateError,
                                 showError = !validateCarPlate
                             )
-
-                            Spacer(Modifier.height(15.dp))
 
                             PrettyBar(
                                 modifier = Modifier
@@ -373,7 +361,6 @@ class Driver2 : ComponentActivity() {
                             )
 
                             userHashMap["yearOfExp"] = yearOfExp.trim()
-                            Spacer(Modifier.height(15.dp))
                         }
                     }
 
