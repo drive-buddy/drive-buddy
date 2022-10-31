@@ -1,5 +1,6 @@
 package com.example.app2
 
+import android.graphics.Paint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CutCornerShape
@@ -7,6 +8,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.*
@@ -16,11 +18,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.*
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
-//class ComposeableBar {
-//}
 
 @Composable
 fun PrettyBar(
@@ -35,7 +35,7 @@ fun PrettyBar(
     keyboardTransformation : VisualTransformation = VisualTransformation.None,
     showError: Boolean = false,
     errorMessage: String = ""
-) {
+){
 
     val focusManager = LocalFocusManager.current
     Box(modifier = modifier) {
@@ -62,7 +62,8 @@ fun PrettyBar(
                     color = Color(0xFFFAF7F7),
                     shape = CutCornerShape(10)
                 )
-            ,colors = TextFieldDefaults.outlinedTextFieldColors(
+                .padding(horizontal = 12.dp, vertical = 15.dp),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = Color(0xFF888686),
                 unfocusedBorderColor = Color(0xFF888686)
             ),
@@ -70,22 +71,32 @@ fun PrettyBar(
             visualTransformation = keyboardTransformation,
             keyboardOptions = KeyboardSettings,
             keyboardActions = KeyboardActions(
-//                onNext = {focusManager.moveFocus(FocusDirection.Down)}
+//                onNext = {focusManager.moveFocus(FocusDirection.Down)},
                 onDone = { focusManager.clearFocus() }
             ),
             isError = showError
         )
-        if (showError) {
+        if (activeVariable == ""){
             Text(
-                text = errorMessage,
-                color = MaterialTheme.colors.error,
-                style = MaterialTheme.typography.caption,
+                text = "",
+                color = Color(0xFF888686),
                 modifier = Modifier
-                    .padding(start = 20.dp)
-                    .offset(y = (76).dp)
-                    .fillMaxWidth(0.9f)
+                    .padding(horizontal = 30.dp, vertical = 12.dp)
             )
-
         }
+    }
+    if(showError && errorMessage != "") {
+        Spacer(Modifier.height(5.dp))
+        Text(
+            text = errorMessage,
+            color = MaterialTheme.colors.error,
+            style = MaterialTheme.typography.caption,
+//                textAlign = TextAlign.Left,
+            modifier = Modifier
+                .padding(start = 20.dp)
+//                    .offset(y = (76).dp)
+                .fillMaxWidth(0.9f)
+
+        )
     }
 }

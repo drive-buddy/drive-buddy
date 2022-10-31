@@ -2,7 +2,6 @@ package com.example.app2
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -100,17 +99,22 @@ class Passenger2 : ComponentActivity() {
                     }
 
                     fun register(
-                        userHashMap : HashMap<String, String?>
+                        name: String,
+                        surname: String,
+                        gender: String,
+                        birthDate: String,
+                        phoneNr: String
                     ){
-                        if(validateData(
-                                name, surname, gender, birthDate, phoneNr
-                            )){
+                        if(validateData(name, surname, gender, birthDate, phoneNr)){
+
+                            val dbEntry : DBHelper = DBHelper()
+                            dbEntry.addUser(userHashMap)
+
                             val navigate1 = Intent(this@Passenger2, SignUpProcess::class.java)
 
-                            for ((key, value) in userHashMap) {
-                                Log.i("Values", "$key : $value")
-                            }
-                            navigate1.putExtra("userHashMap", userHashMap)
+                            navigate1.putExtra("email", userHashMap["email"])
+                            navigate1.putExtra("password", userHashMap["userPassword"])
+                            navigate1.putExtra("type", userHashMap["type"])
 
                             startActivity(navigate1)
                             finish()
@@ -157,7 +161,6 @@ class Passenger2 : ComponentActivity() {
                                 modifier = Modifier
                                     .size(16.dp),
                                 shape = CircleShape,
-                                contentPadding = PaddingValues(0.dp),
                                 colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFFEE5252))
                             ) {
                                 Icon(
@@ -206,6 +209,8 @@ class Passenger2 : ComponentActivity() {
 
                             userHashMap["userFirstName"] = name.trim()
 
+                            Spacer(Modifier.height(15.dp))
+
                             PrettyBar(
                                 modifier = Modifier
                                     .height(90.dp)
@@ -222,6 +227,8 @@ class Passenger2 : ComponentActivity() {
 
                             userHashMap["userSurname"] = surname.trim()
 
+                            Spacer(Modifier.height(15.dp))
+
                             PrettyBar(
                                 modifier = Modifier
                                     .height(90.dp)
@@ -237,7 +244,9 @@ class Passenger2 : ComponentActivity() {
                                 showError = !validateGender
                             )
 
-                            userHashMap["userGender"] = gender.trim()
+                            userHashMap["userGender"] = gender
+
+                            Spacer(Modifier.height(15.dp))
 
                             PrettyBar(
                                 modifier = Modifier
@@ -255,6 +264,8 @@ class Passenger2 : ComponentActivity() {
                             )
 
                             userHashMap["userBirthDate"] = birthDate.trim()
+
+                            Spacer(Modifier.height(15.dp))
 
                             PrettyBar(
                                 modifier = Modifier
@@ -275,6 +286,8 @@ class Passenger2 : ComponentActivity() {
                             )
 
                             userHashMap["userPhoneNumber"] = phoneNr.trim()
+
+                            Spacer(Modifier.height(15.dp))
                         }
                     }
 
@@ -299,7 +312,7 @@ class Passenger2 : ComponentActivity() {
                         ) {
                             Text(
                                 text = "Back",
-                                fontSize = 25.sp,
+                                fontSize = 30.sp,
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.ExtraBold,
                                 color = Color(0xFFFFFFFF)
@@ -307,7 +320,7 @@ class Passenger2 : ComponentActivity() {
                         }
                         Button(
                             onClick = {
-                                      register(userHashMap)
+                                      register(name, surname, gender, birthDate, phoneNr)
                             },
                             modifier = Modifier
                                 .height(50.dp)
@@ -319,7 +332,7 @@ class Passenger2 : ComponentActivity() {
                                 text = "Next",
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.ExtraBold,
-                                fontSize = 25.sp,
+                                fontSize = 30.sp,
                                 color = Color(0xFFFFFFFF)
                             )
                         }
