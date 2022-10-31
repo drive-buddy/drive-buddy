@@ -74,7 +74,7 @@ class DBHelper {
     ) {
         // create the query
         val driversRef = db.collection("orders")
-        var query = driversRef.limit(20)
+        var query = driversRef.limit(limit.toLong())
 
         if (from != null)
             query = query.whereEqualTo("from", from)
