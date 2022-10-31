@@ -2,13 +2,11 @@ package com.example.app2
 
 import android.content.ContentValues
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -24,7 +22,6 @@ import com.google.firebase.ktx.Firebase
 class SignUpProcess : ComponentActivity() {
     private lateinit var auth: FirebaseAuth
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,27 +34,20 @@ class SignUpProcess : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    val allInfo : HashMap<String, String?> =
-                        intent.getSerializableExtra("userHashMap", HashMap::class.java) as HashMap<String, String?>
-
-                    for ((key, value) in allInfo) {
-                        Log.i("AnyWay", "$key : $value")
-                    }
-
-                    val userEmail : String? = allInfo["email"]
-                    val userPassword : String? = allInfo["userPassword"]
-                    val userType : String? = allInfo["type"]
+                    val userEmail : String? = intent.getStringExtra("email")
+                    val userPassword : String? = intent.getStringExtra("password")
+                    val userType : String? = intent.getStringExtra("type")
 
                     if (userEmail!!.isEmpty() || userPassword!!.isEmpty())
                     {
                         when (userType)
                         {
                             "passenger" -> {
-                                val navigate1 = Intent(this@SignUpProcess, Passenger1::class.java)
+                                val navigate1 = Intent(this@SignUpProcess, Passenger2::class.java)
                                 startActivity(navigate1)
                             }
                             "driver" -> {
-                                val navigate1 = Intent(this@SignUpProcess, Driver1::class.java)
+                                val navigate1 = Intent(this@SignUpProcess, Driver2::class.java)
                                 startActivity(navigate1)
                             }
                         }
@@ -67,46 +57,47 @@ class SignUpProcess : ComponentActivity() {
                     {
                         Log.i("ABOBa", userEmail)
                         Log.i("ABOBa", userPassword)
-                        createAccount(userEmail = userEmail, userPassword = userPassword, allInfo = allInfo)
+                        createAccount(userEmail = userEmail, userPassword = userPassword)
+                        when (userType)
+                        {
+                            "passenger" -> {
+                                val navigate1 = Intent(this@SignUpProcess, Passenger3::class.java)
+                                startActivity(navigate1)
+                            }
+                            "driver" -> {
+                                val navigate1 = Intent(this@SignUpProcess, Driver3::class.java)
+                                startActivity(navigate1)
+                            }
+                        }
+                        finish()
                     }
                 }
             }
         }
     }
 
-    private fun createAccount(userEmail : String, userPassword : String, allInfo : HashMap<String, String?>)
+    private fun createAccount(userEmail : String, userPassword : String)
     {
         auth.createUserWithEmailAndPassword(userEmail, userPassword)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(ContentValues.TAG, "createUserWithEmail:success")
-                    val dbEntry : DBHelper = DBHelper()
-                    allInfo["uid"] = auth.currentUser?.uid
-                    dbEntry.addUser(allInfo)
+                    val user = auth.currentUser
                     val navigate1 = Intent(this@SignUpProcess, No_result::class.java)
                     startActivity(navigate1)
                     finish()
+//                    updateUI(user)
                 } else {
-                    // If sign up fails, display a message to the user.
+                    // If sign in fails, display a message to the user.
                     Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
-                    val temp : List<String> = task.exception
-                        .toString()
-                        .split(": ")
-                    val errorMsg = temp[1]
-                    Toast.makeText(baseContext, errorMsg,
+                    Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
-                    when (allInfo["type"])
-                    {
-                        "passenger" -> {
-                            val navigate1 = Intent(this@SignUpProcess, Passenger1::class.java)
-                            startActivity(navigate1)
-                        }
-                        "driver" -> {
-                            val navigate1 = Intent(this@SignUpProcess, Driver1::class.java)
-                            startActivity(navigate1)
-                        }
-                    }
+//                    updateUI(null)
+                    // ERROR
+                    // TO DO CHANGE Passenger1 from debugging
+                    val navigate1 = Intent(this@SignUpProcess, Passenger1::class.java)
+                    startActivity(navigate1)
                     finish()
                 }
             }
