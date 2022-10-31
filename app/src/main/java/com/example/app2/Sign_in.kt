@@ -29,7 +29,6 @@ import androidx.compose.ui.graphics.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
@@ -43,7 +42,6 @@ class Sign_in : ComponentActivity() {
     override fun onStart() {
         super.onStart()
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -213,7 +211,7 @@ class Sign_in : ComponentActivity() {
                         {
                             Button(
                                 onClick = {
-                                    val navigate1 = Intent(this@Sign_in, SignInProcess::class.java)
+                                    val navigate1 = Intent(this@SignIn, SignInProcess::class.java)
 
                                     navigate1.putExtra("email", userHashMap["email"])
                                     navigate1.putExtra("password", userHashMap["password"])
@@ -253,7 +251,12 @@ class Sign_in : ComponentActivity() {
                             }
 
                             Button(
-                                onClick = { /* ... */ },
+                                onClick = {
+                                        val navigate1 = Intent(this@SignIn, SignInFacebook::class.java)
+
+                                        startActivity(navigate1)
+                                        finish()
+                                          },
                                 shape = RoundedCornerShape(20.dp),
                                 colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFF4267B2)),
                                 modifier = Modifier
@@ -274,7 +277,13 @@ class Sign_in : ComponentActivity() {
                                 )
                             }
                             Button(
-                                onClick = { /* ... */ },
+                                onClick = {
+                                        val navigate1 = Intent(this@SignIn, SignInGoogle::class.java)
+
+
+                                        startActivity(navigate1)
+                                        finish()
+                                          },
                                 shape = RoundedCornerShape(20.dp),
                                 colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.White),
                                 modifier = Modifier

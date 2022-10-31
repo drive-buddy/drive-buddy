@@ -29,7 +29,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import com.example.app2.ui.theme.App2_2Theme
 
 class Schedule_ride: ComponentActivity() {
-    //    private var list = mutableStateListOf<SelectableItemModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -158,7 +157,6 @@ class Schedule_ride: ComponentActivity() {
 
                             }
 //                            ContentView(list = list)
-
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth(),
@@ -231,9 +229,6 @@ class Schedule_ride: ComponentActivity() {
                         }
 
                     }
-
-
-
 
                     Row(
                         modifier = Modifier

@@ -47,6 +47,54 @@ class DBHelper {
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error getting user by id", e)
             }
+
+        return returnedDocuments
+    }
+
+    // retrieve a single user based on id and call the callback on user data
+    fun getUser(userID: String, callback: (data: Map<String, Any?>) -> Unit) {
+        db.collection("users").document(userID)
+            .get()
+            .addOnSuccessListener { document -> callback(document.data!!) }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error getting user by id", e)
+            }
+    }
+
+    fun searchOrders(
+        from: String,
+        to: String,
+        date: Date,
+        seatsNum: Int = -1, // if -1 then doesn't matter
+        isSmoking: Boolean = false,
+        allowsPets: Boolean = false,
+        allowsLuggage: Boolean = true
+    ) : QuerySnapshot? {
+        var returnedDocuments: QuerySnapshot? = null
+
+        // create the query
+        val driversRef = db.collection("orders")
+        var query = driversRef
+                    .whereEqualTo("from", from)
+                    .whereEqualTo("to", to)
+                    .whereEqualTo("date", date)
+                    .whereEqualTo("isSmoking", isSmoking)
+                    .whereEqualTo("allowsPets", allowsPets)
+                    .whereEqualTo("allowsLuggage", allowsLuggage)
+
+        if (seatsNum != -1)
+            query = query.whereEqualTo("seats", seatsNum)
+
+        // execute the query
+        query.get()
+            .addOnSuccessListener { documents ->
+                returnedDocuments = documents
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error getting orders.", e)
+            }
+
+        return returnedDocuments
     }
 
     fun getOrders(
