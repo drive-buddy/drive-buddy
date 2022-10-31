@@ -31,24 +31,12 @@ class DBHelper {
     }
 
     //    READ
-    fun readDocumentsAll(collection: String): Array<Any> {
-        var returnedDocuments: Array<Any> = arrayOf<Any>()
-
+    fun getDocumentsAll(collection: String, callback: (data: QuerySnapshot) -> Unit){
         db.collection(collection)
             .limit(50)
             .get()
-            .addOnSuccessListener { result ->
-//                for (document in result) {
-//                    Log.d(TAG, "${document.id} => ${document.data}")
-//                }
-
-                returnedDocuments += result
-            }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "Error getting documents.", e)
-            }
-
-        return returnedDocuments
+            .addOnSuccessListener { result -> callback(result) }
+            .addOnFailureListener { e -> Log.w(TAG, "Error getting documents.", e) }
     }
 
     // retrieve a single user based on id and call the callback on user data
