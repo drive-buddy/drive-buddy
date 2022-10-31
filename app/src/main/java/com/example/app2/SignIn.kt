@@ -20,20 +20,15 @@ import androidx.compose.foundation.Image
 import androidx.compose.ui.res.painterResource
 import com.example.app2.R.drawable
 import androidx.compose.runtime.Composable
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.ui.graphics.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.text.TextStyle
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import java.security.AllPermission
 
-class Sign_in : ComponentActivity() {
+class SignIn : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -147,7 +142,7 @@ class Sign_in : ComponentActivity() {
                         {
                             Button(
                                 onClick = {
-                                    val navigate1 = Intent(this@Sign_in, SignInProcess::class.java)
+                                    val navigate1 = Intent(this@SignIn, SignInProcess::class.java)
 
 
                                     startActivity(navigate1)
@@ -186,7 +181,7 @@ class Sign_in : ComponentActivity() {
 
                             Button(
                                 onClick = {
-                                        val navigate1 = Intent(this@Sign_in, SignInFacebook::class.java)
+                                        val navigate1 = Intent(this@SignIn, SignInFacebook::class.java)
 
                                         startActivity(navigate1)
                                         finish()
@@ -212,7 +207,7 @@ class Sign_in : ComponentActivity() {
                             }
                             Button(
                                 onClick = {
-                                        val navigate1 = Intent(this@Sign_in, SignInGoogle::class.java)
+                                        val navigate1 = Intent(this@SignIn, SignInGoogle::class.java)
 
 
                                         startActivity(navigate1)
