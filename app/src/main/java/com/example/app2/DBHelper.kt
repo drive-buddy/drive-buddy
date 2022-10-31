@@ -51,7 +51,7 @@ class DBHelper {
         return returnedDocuments
     }
 
-    // retrieve a single user based on id
+    // retrieve a single user based on id and call the callback on user data
     fun getUser(userID: String, callback: (data: Map<String, Any?>) -> Unit) {
         db.collection("users").document(userID)
             .get()
