@@ -2,6 +2,7 @@ package com.example.app2
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
@@ -46,41 +47,80 @@ class Passenger2 : ComponentActivity() {
         setContent {
             App2_2Theme {
 
-                var name by rememberSaveable {
-                    mutableStateOf("")
-                }
-
-                var surname by rememberSaveable {
-                    mutableStateOf("")
-                }
-
-                var gender by rememberSaveable {
-                    mutableStateOf("")
-                }
-
-                var birthDate by rememberSaveable {
-                    mutableStateOf("")
-                }
-
-                var phoneNr by rememberSaveable {
-                    mutableStateOf("")
-                }
-
-                var location by rememberSaveable {
-                    mutableStateOf("")
-                }
-
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
                     val userHashMap : HashMap<String, String?> = HashMap<String, String?> ()
 
-
                     userHashMap["email"] = intent.getStringExtra("email")
                     userHashMap["userName"] = intent.getStringExtra("username")
                     userHashMap["userPassword"] = intent.getStringExtra("password")
                     userHashMap["type"] = intent.getStringExtra("type")
+
+                    var name by rememberSaveable { mutableStateOf("") }
+                    var surname by rememberSaveable { mutableStateOf("") }
+                    var gender by rememberSaveable { mutableStateOf("") }
+                    var birthDate by rememberSaveable { mutableStateOf("") }
+                    var phoneNr by rememberSaveable { mutableStateOf("") }
+
+                    var validateName by rememberSaveable { mutableStateOf(true) }
+                    var validateSurname by rememberSaveable { mutableStateOf(true) }
+                    var validateGender by rememberSaveable { mutableStateOf(true) }
+                    var validateBirthDate by rememberSaveable { mutableStateOf(true) }
+                    var validatePhoneNr by rememberSaveable { mutableStateOf(true) }
+
+                    val validateNameError = "Please input a valid name"
+                    val validateSurnameError = "Please input a valid Surname"
+                    val validateGenderError = "Please input a valid Gender: M/F"
+                    val validateBirthDateError = "Please input birth date in required form"
+                    val validatePhoneNrError = "Please input a valid phone number"
+
+                    fun validateData(name: String,
+                                     surname: String,
+                                     gender: String,
+                                     birthDate: String,
+                                     phoneNr: String): Boolean{
+
+                        val genderRegex = "(?=.*[MF]).{1,}".toRegex()
+
+                        val birthDateRegex = ("(0[1-9]|1[0-2])\\/(0[1-9]|1\\d|2" +
+                                "\\d|3[01])\\/(19|20)\\d{2}").toRegex()
+
+
+                        validateName = name.isNotBlank()
+                        validateSurname = surname.isNotBlank()
+                        validateGender = genderRegex.matches(gender)
+                        validateBirthDate = birthDateRegex.matches(birthDate)
+                        validatePhoneNr = Patterns.PHONE.matcher(phoneNr).matches()
+
+                        return validateName && validateSurname && validateGender
+                                && validateBirthDate && validatePhoneNr
+                    }
+
+                    fun register(
+                        name: String,
+                        surname: String,
+                        gender: String,
+                        birthDate: String,
+                        phoneNr: String
+                    ){
+                        if(validateData(name, surname, gender, birthDate, phoneNr)){
+
+                            val dbEntry : DBHelper = DBHelper()
+                            dbEntry.addUser(userHashMap)
+
+                            val navigate1 = Intent(this@Passenger2, SignUpProcess::class.java)
+
+                            navigate1.putExtra("email", userHashMap["email"])
+                            navigate1.putExtra("password", userHashMap["userPassword"])
+                            navigate1.putExtra("type", userHashMap["type"])
+
+                            startActivity(navigate1)
+                            finish()
+                        }
+                    }
+
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
@@ -106,13 +146,11 @@ class Passenger2 : ComponentActivity() {
                         ) {
                             Image(painter = painterResource(id = R.drawable.im2),
                                 contentDescription = "Person",
-//                                tint = Color.White,
                                 modifier = Modifier
                                     .size(100.dp))
                         }
                         Row (
                             modifier = Modifier
-//                                    .offset(y = 30.dp)
                                 .fillMaxWidth(),
                             horizontalArrangement = Arrangement.Center
 
@@ -151,9 +189,6 @@ class Passenger2 : ComponentActivity() {
                                 .padding(horizontal = 40.dp, vertical = 20.dp)
                                 .verticalScroll(rememberScrollState())
                                 .weight(weight = 1f, fill = false)
-//                                .padding(horizontal = -10.dp, vertical = 0.dp)
-//                        verticalArrangement = Arrangement.Center,
-//                        horizontalAlignment = Alignment.CenterHorizontally
                         ) {
 
                             Spacer(Modifier.height(15.dp))
@@ -167,10 +202,12 @@ class Passenger2 : ComponentActivity() {
                                 activeVariable = name,
                                 onVarChange = {
                                     name = it
-                                }
+                                },
+                                errorMessage = validateNameError,
+                                showError = !validateName
                             )
 
-                            userHashMap["userFirstName"] = name
+                            userHashMap["userFirstName"] = name.trim()
 
                             Spacer(Modifier.height(15.dp))
 
@@ -183,10 +220,12 @@ class Passenger2 : ComponentActivity() {
                                 activeVariable = surname,
                                 onVarChange = {
                                     surname = it
-                                }
+                                },
+                                errorMessage = validateSurnameError,
+                                showError = !validateSurname
                             )
 
-                            userHashMap["userSurname"] = surname
+                            userHashMap["userSurname"] = surname.trim()
 
                             Spacer(Modifier.height(15.dp))
 
@@ -200,7 +239,9 @@ class Passenger2 : ComponentActivity() {
                                 activeVariable = gender,
                                 onVarChange = {
                                     gender = it
-                                }
+                                },
+                                errorMessage = validateGenderError,
+                                showError = !validateGender
                             )
 
                             userHashMap["userGender"] = gender
@@ -213,17 +254,16 @@ class Passenger2 : ComponentActivity() {
                                     .width(330.dp),
 
                                 type = "Birth date",
-                                hint = "YYYY | MM | DD",
+                                hint = "MM/DD/YYYY",
                                 activeVariable = birthDate,
                                 onVarChange = {
                                     birthDate = it
                                 },
-                                KeyboardSettings = KeyboardOptions(
-                                    keyboardType = KeyboardType.Number,
-                                    imeAction = ImeAction.Next)
+                                errorMessage = validateBirthDateError,
+                                showError = !validateBirthDate
                             )
 
-                            userHashMap["userBirthDate"] = birthDate
+                            userHashMap["userBirthDate"] = birthDate.trim()
 
                             Spacer(Modifier.height(15.dp))
 
@@ -240,29 +280,14 @@ class Passenger2 : ComponentActivity() {
                                 },
                                 KeyboardSettings = KeyboardOptions(
                                     keyboardType = KeyboardType.Phone,
-                                    imeAction = ImeAction.Next)
+                                    imeAction = ImeAction.Done),
+                                errorMessage = validatePhoneNrError,
+                                showError = !validatePhoneNr
                             )
 
-                            userHashMap["userPhoneNumber"] = phoneNr
+                            userHashMap["userPhoneNumber"] = phoneNr.trim()
 
-                            Spacer(Modifier.height(20.dp))
-
-//                            PrettyBar(
-//                                modifier = Modifier
-//                                    .height(90.dp)
-//                                    .width(330.dp),
-//
-//                                type = "Location",
-//                                hint = "Chisinau",
-//                                activeVariable = location,
-//                                onVarChange = {
-//                                    location = it
-//                                }
-//                            )
-//
-//                            userHashMap["userPhoneNumber"] = phoneNr
-//
-//                            Spacer(Modifier.height(15.dp))
+                            Spacer(Modifier.height(15.dp))
                         }
                     }
 
@@ -295,19 +320,7 @@ class Passenger2 : ComponentActivity() {
                         }
                         Button(
                             onClick = {
-                                val dbEntry : DBHelper = DBHelper()
-
-                                dbEntry.addUser(userHashMap)
-
-
-                                val navigate1 = Intent(this@Passenger2, SignUpProcess::class.java)
-
-                                navigate1.putExtra("email", userHashMap["email"])
-                                navigate1.putExtra("password", userHashMap["userPassword"])
-                                navigate1.putExtra("type", userHashMap["type"])
-
-                                startActivity(navigate1)
-                                finish()
+                                      register(name, surname, gender, birthDate, phoneNr)
                             },
                             modifier = Modifier
                                 .height(50.dp)

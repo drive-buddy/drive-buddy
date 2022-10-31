@@ -38,6 +38,7 @@ class SignInProcess : ComponentActivity() {
                     if (userEmail.isEmpty() || userPassword.isEmpty())
                     {
                         val navigate1 = Intent(this@SignInProcess, Sign_in::class.java)
+                        navigate1.putExtra("signIn_error", "One or more fields are empty")
                         startActivity(navigate1)
                         finish()
                     }
@@ -52,10 +53,31 @@ class SignInProcess : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        if (currentUser != null){
-//            reload();
+        // Initialize Firebase Auth and check if the user is signed in
+        auth = Firebase.auth
+        setContent {
+            App2Theme {
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
+                ) {
+                    val userEmail = intent.getStringExtra("email").toString()
+                    val userPassword = intent.getStringExtra("password").toString()
+
+                    if (userEmail.isEmpty() || userPassword.isEmpty())
+                    {
+                        val navigate1 = Intent(this@SignInProcess, Sign_in::class.java)
+                        navigate1.putExtra("signIn_error", "ABOBA: One or more fields is empty.")
+                        startActivity(navigate1)
+                        finish()
+                    }
+                    else
+                    {
+                        signIn(userEmail = userEmail, userPassword = userPassword)
+                    }
+                }
+            }
         }
     }
 
@@ -79,6 +101,8 @@ class SignInProcess : ComponentActivity() {
 //                    updateUI(null)
                     // ERROR
                     val navigate1 = Intent(this@SignInProcess, Sign_in::class.java)
+                    val errorMsg : String = task.exception.toString()
+                    navigate1.putExtra("signIn_error", errorMsg)
                     startActivity(navigate1)
                     finish()
                 }

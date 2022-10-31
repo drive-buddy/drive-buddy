@@ -29,7 +29,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import com.example.app2.ui.theme.App2_2Theme
 
 class Schedule_ride: ComponentActivity() {
-//    private var list = mutableStateListOf<SelectableItemModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -81,7 +80,7 @@ class Schedule_ride: ComponentActivity() {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 60.dp)
+                            .padding(vertical = 70.dp)
 //                            .verticalScroll(rememberScrollState())
 
                     )
@@ -104,7 +103,6 @@ class Schedule_ride: ComponentActivity() {
                                 modifier = Modifier.offset(x = 40.dp)
                             )
                         }
-
 
                         // COLUMN FOR USER INFO INPUT
                         Column(
@@ -159,117 +157,110 @@ class Schedule_ride: ComponentActivity() {
 
                             }
 //                            ContentView(list = list)
-
-                                Row(
-                                    modifier = Modifier
-                                        .fillMaxWidth(),
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
 //                                    .padding(horizontal = 30.dp, vertical = 20.dp),
-                                    horizontalArrangement = Arrangement.Start,
-                                    verticalAlignment = Alignment.CenterVertically
-                                )
-                                {
-                                    Button(
-                                        onClick = {/**/ },
-                                        shape = RoundedCornerShape(5.dp),
-                                        contentPadding = PaddingValues(0.dp),
-                                        colors = ButtonDefaults.outlinedButtonColors(
-                                            backgroundColor = Color(
-                                                0xFFEE5252
-                                            )
-                                        ),
-                                        modifier = Modifier
-                                            .height(40.dp)
-                                            .width(40.dp)
-                                    ) {
-                                        Icon(
-                                            Icons.Default.Person,
-                                            modifier = Modifier.fillMaxSize(),
-                                            contentDescription = "Person",
-                                            tint = Color.White
+                                horizontalArrangement = Arrangement.Start,
+                                verticalAlignment = Alignment.CenterVertically
+                            )
+                            {
+                                Button(
+                                    onClick = {/**/ },
+                                    shape = RoundedCornerShape(5.dp),
+                                    contentPadding = PaddingValues(0.dp),
+                                    colors = ButtonDefaults.outlinedButtonColors(
+                                        backgroundColor = Color(
+                                            0xFFEE5252
                                         )
-                                    }
-                                    Spacer(Modifier.width(10.dp))
-                                    PrettyBar(
-                                        modifier = Modifier
-                                            .height(90.dp)
-                                            .width(100.dp),
+                                    ),
+                                    modifier = Modifier
+                                        .height(40.dp)
+                                        .width(40.dp)
+                                ) {
+                                    Icon(
+                                        Icons.Default.Person,
+                                        modifier = Modifier.fillMaxSize(),
+                                        contentDescription = "Person",
+                                        tint = Color.White
+                                    )
+                                }
+                                Spacer(Modifier.width(10.dp))
+                                PrettyBar(
+                                    modifier = Modifier
+                                        .height(90.dp)
+                                        .width(100.dp),
 
-                                        type = "Nr of seats",
-                                        activeVariable = nrOfSeats,
-                                        onVarChange = {
-                                            from = it
-                                        },
-                                                KeyboardSettings = KeyboardOptions(
-                                                keyboardType = KeyboardType.Phone,
+                                    type = "Nr of seats",
+                                    activeVariable = nrOfSeats,
+                                    onVarChange = {
+                                        from = it
+                                    },
+                                    KeyboardSettings = KeyboardOptions(
+                                        keyboardType = KeyboardType.Phone,
                                         imeAction = ImeAction.Next
                                     )
+                                )
+
+                                userHashMap["nrOfSeats"] = nrOfSeats
+
+                                Spacer(Modifier.width(10.dp))
+
+                                PrettyBar(
+                                    modifier = Modifier
+                                        .height(90.dp)
+                                        .width(150.dp),
+
+                                    type = "Price",
+                                    activeVariable = price,
+                                    onVarChange = {
+                                        price = it
+                                    },
+                                    KeyboardSettings = KeyboardOptions(
+                                        keyboardType = KeyboardType.Phone,
+                                        imeAction = ImeAction.Next
                                     )
+                                )
+                                userHashMap["Price"] = price
 
-                                    userHashMap["nrOfSeats"] = nrOfSeats
-
-                                    Spacer(Modifier.width(10.dp))
-
-                                    PrettyBar(
-                                        modifier = Modifier
-                                            .height(90.dp)
-                                            .width(150.dp),
-
-                                        type = "Price",
-                                        activeVariable = price,
-                                        onVarChange = {
-                                            price = it
-                                        },
-                                        KeyboardSettings = KeyboardOptions(
-                                            keyboardType = KeyboardType.Phone,
-                                            imeAction = ImeAction.Next
-                                    )
-                                    )
-                                    userHashMap["Price"] = price
-
-                                }
+                            }
                             Spacer(Modifier.height(10.dp))
                             FilterList(filterss)
-                            }
-
                         }
 
+                    }
 
-
-
-                        Row(
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 30.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.Bottom
+                    )
+                    {
+                        Button(
+                            onClick = {/**/ },
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 30.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.Bottom
-                        )
-                        {
-                            Button(
-                                onClick = {
-//                                val navigate = Intent(this@Driver2, Driver1::class.java)
-//                                startActivity(navigate)
-                                },
-                                modifier = Modifier
-                                    .height(50.dp)
-                                    .width(160.dp),
-                                shape = RoundedCornerShape(20.dp),
-                                colors = ButtonDefaults.outlinedButtonColors(
-                                    backgroundColor = Color(0xFFEE5252)
-                                )
-                            ) {
-                                Text(
-                                    text = "Cancel",
-                                    fontSize = 30.sp,
-                                    fontFamily = FontFamily.SansSerif,
-                                    fontWeight = FontWeight.ExtraBold,
-                                    color = Color(0xFFFFFFFF)
-                                )
-                            }
-                            Button(
-                                onClick = {
-                                    val dbEntry: DBHelper = DBHelper()
+                                .height(50.dp)
+                                .width(160.dp),
+                            shape = RoundedCornerShape(20.dp),
+                            colors = ButtonDefaults.outlinedButtonColors(
+                                backgroundColor = Color(0xFFEE5252)
+                            )
+                        ) {
+                            Text(
+                                text = "Cancel",
+                                fontSize = 20.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color(0xFFFFFFFF)
+                            )
+                        }
+                        Button(
+                            onClick = {
+                                val dbEntry: DBHelper = DBHelper()
 
-                                    dbEntry.addUser(userHashMap)
+                                dbEntry.addUser(userHashMap)
 
 //                                val navigate1 = Intent(this@Driver2, Driver3::class.java)
 
@@ -278,80 +269,29 @@ class Schedule_ride: ComponentActivity() {
 //                                navigate1.putExtra("type", userHashMap["type"])
 //
 //                                startActivity(navigate1)
-                                    finish()
-                                },
-                                modifier = Modifier
-                                    .height(50.dp)
-                                    .width(160.dp),
-                                shape = RoundedCornerShape(20.dp),
-                                colors = ButtonDefaults.outlinedButtonColors(
-                                    backgroundColor = Color(
-                                        0xFFEE5252
-                                    )
+                                finish()
+                            },
+                            modifier = Modifier
+                                .height(50.dp)
+                                .width(160.dp),
+                            shape = RoundedCornerShape(20.dp),
+                            colors = ButtonDefaults.outlinedButtonColors(
+                                backgroundColor = Color(
+                                    0xFFEE5252
                                 )
-                            ) {
-                                Text(
-                                    text = "Confirm",
-                                    fontFamily = FontFamily.SansSerif,
-                                    fontWeight = FontWeight.ExtraBold,
-                                    fontSize = 30.sp,
-                                    color = Color(0xFFFFFFFF)
-                                )
-                            }
+                            )
+                        ) {
+                            Text(
+                                text = "Confirm",
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                fontSize = 20.sp,
+                                color = Color(0xFFFFFFFF)
+                            )
                         }
                     }
                 }
             }
-
-
         }
-    }
-
-data class Filters(val name: String)
-
-val filterss = listOf(
-    Filters("Smoking"),
-    Filters("Animals"),
-    Filters("Luggage"),
-)
-
-@Composable
-fun FilterList(filterss: List<Filters>) {
-    LazyColumn(
-    ) {
-        items(filterss) { filter ->
-            FilterRow(filter)
-        }
-    }
-}
-
-@Composable
-fun FilterRow(filter: Filters) {
-    Card(
-        modifier = Modifier
-            .width(140.dp)
-//            .background((Color(0xFFEBE8E8)))
-    ) {
-//        Column(
-////            modifier = Modifier.background(Color(0xFFD4D0D0)),
-//            horizontalAlignment = Alignment.Start,
-//            verticalArrangement = Arrangement.Top,
-//        )
-//        {
-            Row(modifier = Modifier
-                .background((Color(0xFFE2E2E2))),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ){
-
-                Text(
-                    filter.name,
-                    color = Color.Black,
-                    fontSize = 18.sp,
-                    fontWeight  = FontWeight.W700,
-                    modifier = Modifier.padding(10.dp)
-                )
-                CheckBoxDemo()
-            }
-//        }
     }
 }

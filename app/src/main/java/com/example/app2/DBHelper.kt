@@ -10,7 +10,7 @@ class DBHelper {
     private var TAG: String? = "DB"
     var db: FirebaseFirestore = Firebase.firestore
 
-//    CREATE
+    //    CREATE
     public fun addUser(data: HashMap<String, String?>) {
         addDocument("users", data)
     }
@@ -30,22 +30,22 @@ class DBHelper {
             }
     }
 
-//    READ
-    fun readDocumentsAll(collection: String): Array<Any> {
-        var returnedDocuments: Array<Any> = arrayOf<Any>()
-
+    //    READ
+    fun getDocumentsAll(collection: String, callback: (data: QuerySnapshot) -> Unit){
         db.collection(collection)
             .limit(50)
             .get()
-            .addOnSuccessListener { result ->
-//                for (document in result) {
-//                    Log.d(TAG, "${document.id} => ${document.data}")
-//                }
+            .addOnSuccessListener { result -> callback(result) }
+            .addOnFailureListener { e -> Log.w(TAG, "Error getting documents.", e) }
+    }
 
-                returnedDocuments += result
-            }
+    // retrieve a single user based on id and call the callback on user data
+    fun getUser(userID: String, callback: (data: Map<String, Any?>) -> Unit) {
+        db.collection("users").document(userID)
+            .get()
+            .addOnSuccessListener { document -> callback(document.data!!) }
             .addOnFailureListener { e ->
-                Log.w(TAG, "Error getting documents.", e)
+                Log.w(TAG, "Error getting user by id", e)
             }
 
         return returnedDocuments
@@ -95,5 +95,113 @@ class DBHelper {
             }
 
         return returnedDocuments
+    }
+
+    fun getOrders(
+        callback: (data: QuerySnapshot) -> Unit,
+        from: String? = null,
+        to: String? = null,
+        date: Date? = null,
+        seatsNum: Int? = null,
+        isSmoking: Boolean? = null,
+        allowsPets: Boolean? = null,
+        allowsLuggage: Boolean? = null,
+        limit: Int = 20
+    ) {
+        // create the query
+        val driversRef = db.collection("orders")
+        var query = driversRef.limit(limit.toLong())
+
+        if (from != null)
+            query = query.whereEqualTo("from", from)
+
+        if (to != null)
+            query = query.whereEqualTo("to", to)
+
+        if (date != null)
+            query = query.whereEqualTo("date", date)
+
+        if (seatsNum != null)
+            query = query.whereEqualTo("seats", seatsNum)
+
+        if (allowsLuggage != null)
+            query = query.whereEqualTo(FieldPath.of("preferences", "allowsLuggage"), allowsLuggage)
+
+        if (allowsPets != null)
+            query = query.whereEqualTo(FieldPath.of("preferences", "allowsPets"), allowsPets)
+
+        if (isSmoking != null)
+            query = query.whereEqualTo(FieldPath.of("preferences", "isSmoking"), isSmoking)
+
+        // execute the query
+        query.get()
+            .addOnSuccessListener { documents -> callback(documents) }
+            .addOnFailureListener { e -> Log.w(TAG, "Error getting orders.", e) }
+    }
+
+    fun getUsers(
+        callback: (data: QuerySnapshot) -> Unit,
+        type: String? = null, // driver or passenger
+        firstName: String? = null,
+        lastName: String? = null,
+        username: String? = null,
+        email: String? = null,
+        gender: Char? = null,
+        phoneNumber: String? = null,
+        yearsOfXp: Int? = null,
+        age: Int? = null,
+        rank: Int? = null,
+        carModel: String? = null,
+        carNumber: String? = null,
+        uid: String? = null,
+        limit: Int = 20
+    ) {
+        // create the query
+        val driversRef = db.collection("users")
+        var query = driversRef.limit(limit.toLong())
+
+        if (type != null && (type.lowercase() == "passenger" || type.lowercase() == "driver"))
+            query = query.whereEqualTo("type", type)
+
+        if (firstName != null && firstName.length > 0)
+            query = query.whereEqualTo("firstName", firstName)
+
+        if (lastName != null && lastName.length > 0)
+            query = query.whereEqualTo("lastName", lastName)
+
+        if (username != null && username.length > 0)
+            query = query.whereEqualTo("username", username)
+
+        if (phoneNumber != null && phoneNumber.length > 0)
+            query = query.whereEqualTo("phoneNumber", phoneNumber)
+
+        if (email != null && email.length > 0)
+            query = query.whereEqualTo("email", email)
+
+        if (carModel != null && carModel.length > 0)
+            query = query.whereEqualTo("carModel", carModel)
+
+        if (carNumber != null && carNumber.length > 0)
+            query = query.whereEqualTo("carNumber", carNumber)
+
+        if (uid != null && uid.length > 0)
+            query = query.whereEqualTo("uid", uid)
+
+        if (yearsOfXp != null)
+            query = query.whereEqualTo("yearsOfXp", yearsOfXp)
+
+        if (age != null)
+            query = query.whereEqualTo("age", age)
+
+        if (rank != null)
+            query = query.whereEqualTo("rank", rank)
+
+        if (gender != null && (gender == 'M' || gender == 'F'))
+            query = query.whereEqualTo("gender", gender)
+
+        // execute the query
+        query.get()
+            .addOnSuccessListener { documents -> callback(documents) }
+            .addOnFailureListener { e -> Log.w(TAG, "Error getting orders.", e) }
     }
 }

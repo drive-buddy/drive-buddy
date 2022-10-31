@@ -69,7 +69,7 @@ class Choose : ComponentActivity() {
                         ) {
                             Text(
                                 text = "Driver",
-                                fontSize = 30.sp,
+                                fontSize = 25.sp,
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.ExtraBold,
                                 color = Color(0xFFFFFFFF)
@@ -88,7 +88,7 @@ class Choose : ComponentActivity() {
                                 text = "Passenger",
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.ExtraBold,
-                                fontSize = 30.sp,
+                                fontSize = 25.sp,
                                 color = Color(0xFF000000)
                             )
                         }
@@ -98,16 +98,3 @@ class Choose : ComponentActivity() {
         }
     }
 }
-
-//@Composable
-//fun Greeting(name: String) {
-//    Text(text = "Hello $name!")
-//}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun DefaultPreview() {
-//    App2Theme {
-//        Greeting("Android")
-//    }
-//}

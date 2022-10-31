@@ -1,4 +1,6 @@
 package com.example.app2
+import android.content.Intent
+import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -98,7 +100,7 @@ class NoResult : ComponentActivity() {
                                 textAlign = TextAlign.Center,
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.Bold,
-                                fontSize = 25.sp,
+                                fontSize = 22.sp,
                                 color = Color.Black
                             )
                         }
@@ -108,42 +110,29 @@ class NoResult : ComponentActivity() {
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(horizontal = 40.dp, vertical = 100.dp),
-                        shape = RoundedCornerShape(20.dp),
+                        shape = RoundedCornerShape(30.dp),
                         elevation = 5.dp
                     ) {
 
-                        Box(modifier = Modifier
-                            .padding(horizontal = 40.dp
-                                , vertical = 145.dp)
+                        Column(modifier = Modifier
+                            .padding(horizontal = 40.dp, vertical = 145.dp)
                         ) {
 
                             Text(
-                                text = "There are no such\n" +
-                                        "     rides set yet",
+                                text = "There are no rides set yet",
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 30.sp,
                                 color = Grey
                             )
-
-                        }
-
-                        Box(modifier = Modifier
-                            .absolutePadding(
-                                left = 90.dp,
-                                top = 260.dp,
-                                right = 90.dp,
-                                bottom = 210.dp)
-                        ) {
-
                             Image(
                                 painter = painterResource(id = R.drawable.search),
                                 contentDescription = "image",
-                                contentScale = ContentScale.Crop,
                                 modifier = Modifier
                                     .fillMaxSize()
                                     .clip(CircleShape)
                             )
+
                         }
                     }
                 }
@@ -156,7 +145,10 @@ class NoResult : ComponentActivity() {
                         bottom = 0.dp)
                 ) {
 
-                    Button(onClick = { /**/ },
+                    Button(onClick = {
+                        val navigate = Intent(this@No_result, Schedule_ride::class.java)
+                        startActivity(navigate)
+                                     },
                         modifier = Modifier.size(70.dp),
                         shape = CircleShape,
                         border = BorderStroke(2.dp, Color.White),
@@ -172,7 +164,7 @@ class NoResult : ComponentActivity() {
                 Box(modifier = Modifier
                     .absolutePadding(
                         left = 110.dp,
-                        top = 740.dp,
+                        top = 730.dp,
                         right = 0.dp,
                         bottom = 0.dp)
                 ) {
@@ -190,7 +182,7 @@ class NoResult : ComponentActivity() {
                             color = bgRed,
                             fontFamily = FontFamily.SansSerif,
                             fontWeight = FontWeight.Bold,
-                            fontSize = 22.sp)
+                            fontSize = 20.sp)
                     }
                 }
             }
