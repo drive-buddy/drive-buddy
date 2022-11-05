@@ -64,12 +64,12 @@ fun ShowDatePicker(){
         )
     }
 
-    Spacer(Modifier.width(10.dp))
+    Spacer(Modifier.width(3.dp))
 
     PrettyBar(
         modifier = Modifier
             .height(90.dp)
-            .width(100.dp)
+            .width(128.dp)
             .padding(vertical = 0.dp),
 
         type = "Date",
@@ -77,7 +77,6 @@ fun ShowDatePicker(){
         onVarChange = {
             date.value = it
         }
-
     )
 
 }

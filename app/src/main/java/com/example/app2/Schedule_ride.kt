@@ -39,50 +39,33 @@ class Schedule_ride: ComponentActivity() {
                 ) {
                     val userHashMap: HashMap<String, String?> = HashMap<String, String?>()
 
-                    var from by rememberSaveable {
-                        mutableStateOf("")
-                    }
+                    var destinationFrom by rememberSaveable { mutableStateOf("") }
+                    var destinationTo by rememberSaveable { mutableStateOf("") }
+                    var date by rememberSaveable { mutableStateOf("") }
+                    var time by rememberSaveable { mutableStateOf("") }
+                    var nrOfSeats by rememberSaveable { mutableStateOf("") }
+                    var price by rememberSaveable { mutableStateOf("") }
 
-                    var to by rememberSaveable {
-                        mutableStateOf("")
-                    }
-                    var nrOfSeats by rememberSaveable {
-                        mutableStateOf("")
-                    }
+                    var validateDestFrom by rememberSaveable { mutableStateOf(true) }
+                    var validateDestTo by rememberSaveable { mutableStateOf(true) }
+                    var validateDate by rememberSaveable { mutableStateOf(true) }
+                    var validateTime by rememberSaveable { mutableStateOf(true) }
+                    var validateNrOfSeats by rememberSaveable { mutableStateOf(true) }
+                    var validatePrice by rememberSaveable { mutableStateOf(true) }
 
-                    var price by rememberSaveable {
-                        mutableStateOf("")
-                    }
+                    val destFromError = "Please input a valid address"
+                    val destFromToError = "Please input a valid address"
+                    val dateError = "Please input a valid date"
+                    val timeError = "Please input a valid time"
+                    val nrOfSeatsError = "Please input a valid nr of seats"
+                    val priceError = "Please input a valid price"
 
-//                    var gender by rememberSaveable {
-//                        mutableStateOf("")
-//                    }
-//
-//                    var birthDate by rememberSaveable {
-//                        mutableStateOf("")
-//                    }
-//
-//                    var phoneNr by rememberSaveable {
-//                        mutableStateOf("")
-//                    }
-//
-//                    var carModel by rememberSaveable {
-//                        mutableStateOf("")
-//                    }
-//
-//                    var carPlate by rememberSaveable {
-//                        mutableStateOf("")
-//                    }
-//
-//                    var yearOfExp by rememberSaveable {
-//                        mutableStateOf("")
-//                    }
+
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 70.dp)
 //                            .verticalScroll(rememberScrollState())
-
                     )
                     {
                         Column() {
@@ -119,15 +102,16 @@ class Schedule_ride: ComponentActivity() {
                                     .width(330.dp),
 
                                 type = "From",
-                                activeVariable = from,
+                                activeVariable = destinationFrom,
                                 onVarChange = {
-                                    from = it
-                                }
+                                    destinationFrom = it
+                                },
+                                errorMessage = destFromError,
+                                showError = !validateDestFrom
                             )
+                            userHashMap["from"] = destinationFrom.trim()
 
-                            userHashMap["from"] = from
-
-//                            Spacer(Modifier.height(10.dp))
+                            Spacer(Modifier.height(10.dp))
 
                             PrettyBar(
                                 modifier = Modifier
@@ -135,28 +119,33 @@ class Schedule_ride: ComponentActivity() {
                                     .width(330.dp),
 
                                 type = "To",
-                                activeVariable = to,
+                                activeVariable = destinationTo,
                                 onVarChange = {
-                                    to = it
-                                }
+                                    destinationTo = it
+                                },
+                                errorMessage = destFromToError,
+                                showError = !validateDestTo
                             )
 
-                            userHashMap["to"] = to
+                            userHashMap["to"] = destinationTo.trim()
+
+                            Spacer(Modifier.height(10.dp))
 
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth(),
-//                                    .padding(horizontal = 30.dp, vertical = 20.dp),
                                 horizontalArrangement = Arrangement.Start,
                                 verticalAlignment = Alignment.CenterVertically
                             )
                             {
                                 ShowDatePicker()
-                                Spacer(Modifier.width(10.dp))
+                                Spacer(Modifier.width(5.dp))
                                 ShowTimePicker()
 
                             }
 //                            ContentView(list = list)
+                            Spacer(Modifier.height(10.dp))
+
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth(),
@@ -185,16 +174,16 @@ class Schedule_ride: ComponentActivity() {
                                         tint = Color.White
                                     )
                                 }
-                                Spacer(Modifier.width(10.dp))
+                                Spacer(Modifier.width(3.dp))
                                 PrettyBar(
                                     modifier = Modifier
                                         .height(90.dp)
-                                        .width(100.dp),
+                                        .width(130.dp),
 
                                     type = "Nr of seats",
                                     activeVariable = nrOfSeats,
                                     onVarChange = {
-                                        from = it
+                                        nrOfSeats = it
                                     },
                                     KeyboardSettings = KeyboardOptions(
                                         keyboardType = KeyboardType.Phone,

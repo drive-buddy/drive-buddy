@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 import com.example.app2.ui.theme.App2Theme
 import com.example.app2.ui.theme.bgRed
 import com.example.app2.ui.theme.Grey
-class NoResult : ComponentActivity() {
+class No_result : ComponentActivity() {
     var db: DBHelper = DBHelper()
 
     override fun onCreate(savedInstanceState: Bundle?) {

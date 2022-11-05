@@ -50,12 +50,12 @@ fun ShowTimePicker(){
             contentDescription = "Time icon",
             modifier = Modifier.size(20.dp))
     }
-    Spacer(Modifier.width(10.dp))
+    Spacer(Modifier.width(3.dp))
 
     PrettyBar(
         modifier = Modifier
             .height(90.dp)
-            .width(90.dp)
+            .width(92.dp)
             .padding(vertical = 0.dp),
 
         type = "Time",
