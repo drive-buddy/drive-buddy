@@ -61,7 +61,7 @@ class StartPage : ComponentActivity() {
                         {
                             Button(
                                 onClick = {
-                                    val navigate = Intent(this@StartPage, Choose::class.java)
+                                    val navigate = Intent(this@StartPage, Schedule_ride::class.java)
                                     startActivity(navigate)
                                 },
                                 shape = RoundedCornerShape(20.dp),
