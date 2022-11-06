@@ -70,17 +70,11 @@ class Schedule_ride: ComponentActivity() {
                                      time: String,
                                      nrOfSeats: String,
                                      price: String): Boolean{
-                        // a normal regEx
-//                            val dateRegex = ("(0[1-9]|1\\d|2\\d|3[01])\\/" +
-//                                "(0[1-9]|1[0-2])\\/(19|20)\\d{2}").toRegex()
-                        // BAD ONE but works with DatePicker
-                        val dateRegex = ("(0?[1-9]|1\\d|2\\d|3[01])\\/" +
+
+                        val dateRegex = ("(0[1-9]|1\\d|2\\d|3[01])\\/" +
                                 "(0[1-9]|1[0-2])\\/(19|20)\\d{2}").toRegex()
 
-                        // a normal regEx
-//                        val timeRegex = ("([01][0-9]|2[0-3]):([0-5][0-9])").toRegex()
-                        // BAD ONE but works with TimePicker
-                        val timeRegex = ("([01]?[0-9]|2[0-3]):([0-5]?[0-9]?)").toRegex()
+                        val timeRegex = ("([01][0-9]|2[0-3]):([0-5][0-9])").toRegex()
 
                         validateDestFrom = from.isNotBlank()
                         validateDestTo = to.isNotBlank()
