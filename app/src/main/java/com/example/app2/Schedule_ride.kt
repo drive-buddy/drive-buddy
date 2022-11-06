@@ -1,6 +1,8 @@
 package com.example.app2
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
@@ -60,6 +62,46 @@ class Schedule_ride: ComponentActivity() {
                     val nrOfSeatsError = "Please input a valid nr of seats"
                     val priceError = "Please input a valid price"
 
+                    fun validateData(from: String,
+                                     to: String,
+                                     date: String,
+                                     time: String,
+                                     nrOfSeats: String,
+                                     price: String): Boolean{
+                        val dateRegex = ("(0[1-9]|1\\d|2\\d|3[01])\\/" +
+                                "(0[1-9]|1[0-2])\\/(19|20)\\d{2}").toRegex()
+
+                        // a normal regEx
+//                        val timeRegex = ("(0[0-9]|1[0-2]):([0-5][0-9])").toRegex()
+                        // BAD ONE but works with TimePicker
+                        val timeRegex = ("(0?[0-9]|1[0-2]):([0-5]?[0-9]?)").toRegex()
+
+                        validateDestFrom = from.isNotBlank()
+                        validateDestTo = to.isNotBlank()
+                        validateDate = dateRegex.matches(date)
+                        validateTime = timeRegex.matches(time)
+                        validateNrOfSeats = nrOfSeats.isNotBlank()
+                        validatePrice = price.isNotBlank()
+
+                        return validateDestFrom && validateDestTo && validateDate
+                                && validateTime && validateNrOfSeats && validatePrice
+                    }
+
+                    fun register(
+                        from: String,
+                        to: String,
+                        date: String,
+                        time: String,
+                        nrOfSeats: String,
+                        price: String
+                    ){
+                        if(validateData(from, to, date, time, nrOfSeats, price)){
+                            val dbEntry : DBHelper = DBHelper()
+                            dbEntry.addOrder(userHashMap)
+                            val navigate1 = Intent(this@Schedule_ride, Driver3::class.java)
+                        }
+                    }
+
 
                     Column(
                         modifier = Modifier
@@ -102,6 +144,7 @@ class Schedule_ride: ComponentActivity() {
                                     .width(330.dp),
 
                                 type = "From",
+                                hint = "Comrat",
                                 activeVariable = destinationFrom,
                                 onVarChange = {
                                     destinationFrom = it
@@ -119,6 +162,7 @@ class Schedule_ride: ComponentActivity() {
                                     .width(330.dp),
 
                                 type = "To",
+                                hint = "Chisinau",
                                 activeVariable = destinationTo,
                                 onVarChange = {
                                     destinationTo = it
@@ -138,12 +182,20 @@ class Schedule_ride: ComponentActivity() {
                                 verticalAlignment = Alignment.CenterVertically
                             )
                             {
-                                ShowDatePicker()
-                                Spacer(Modifier.width(5.dp))
-                                ShowTimePicker()
+                                date = ShowDatePicker(
+                                    messageError = "",
+                                    errorState = validateDate)
 
+                                Spacer(Modifier.width(5.dp))
+
+                                time = ShowTimePicker(
+                                    messageError = "",
+                                    errorState = validateTime
+                                )
                             }
-//                            ContentView(list = list)
+                            userHashMap["date"] = date.trim()
+                            userHashMap["time"] = time.trim()
+
                             Spacer(Modifier.height(10.dp))
 
                             Row(
@@ -181,6 +233,7 @@ class Schedule_ride: ComponentActivity() {
                                         .width(130.dp),
 
                                     type = "Nr of seats",
+                                    hint = "2",
                                     activeVariable = nrOfSeats,
                                     onVarChange = {
                                         nrOfSeats = it
@@ -188,10 +241,11 @@ class Schedule_ride: ComponentActivity() {
                                     KeyboardSettings = KeyboardOptions(
                                         keyboardType = KeyboardType.Phone,
                                         imeAction = ImeAction.Next
-                                    )
+                                    ),
+                                    showError = !validateNrOfSeats
                                 )
 
-                                userHashMap["nrOfSeats"] = nrOfSeats
+                                userHashMap["nrOfSeats"] = nrOfSeats.trim()
 
                                 Spacer(Modifier.width(10.dp))
 
@@ -201,22 +255,24 @@ class Schedule_ride: ComponentActivity() {
                                         .width(150.dp),
 
                                     type = "Price",
+                                    hint = "20 lei",
                                     activeVariable = price,
                                     onVarChange = {
                                         price = it
                                     },
                                     KeyboardSettings = KeyboardOptions(
                                         keyboardType = KeyboardType.Phone,
-                                        imeAction = ImeAction.Next
-                                    )
+                                        imeAction = ImeAction.Done
+                                    ),
+                                    showError = !validatePrice
                                 )
-                                userHashMap["Price"] = price
+                                userHashMap["price"] = price.trim()
 
                             }
                             Spacer(Modifier.height(10.dp))
                             FilterList(filterss)
-                        }
 
+                        }
                     }
 
                     Row(
@@ -228,7 +284,10 @@ class Schedule_ride: ComponentActivity() {
                     )
                     {
                         Button(
-                            onClick = {/**/ },
+                            onClick = {
+                                val navigate = Intent(this@Schedule_ride, No_result::class.java)
+                                startActivity(navigate)
+                            },
                             modifier = Modifier
                                 .height(50.dp)
                                 .width(160.dp),
@@ -247,18 +306,13 @@ class Schedule_ride: ComponentActivity() {
                         }
                         Button(
                             onClick = {
-                                val dbEntry: DBHelper = DBHelper()
-
-                                dbEntry.addUser(userHashMap)
-
-//                                val navigate1 = Intent(this@Driver2, Driver3::class.java)
-
-//                                navigate1.putExtra("email", userHashMap["email"])
-//                                navigate1.putExtra("password", userHashMap["userPassword"])
-//                                navigate1.putExtra("type", userHashMap["type"])
-//
-//                                startActivity(navigate1)
-                                finish()
+                                register(
+                                    destinationFrom,
+                                    destinationTo,
+                                    date,
+                                    time,
+                                    nrOfSeats,
+                                    price)
                             },
                             modifier = Modifier
                                 .height(50.dp)

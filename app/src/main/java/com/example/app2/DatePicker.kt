@@ -1,6 +1,7 @@
 package com.example.app2
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.widget.DatePicker
 import androidx.activity.ComponentActivity
@@ -25,7 +26,10 @@ import androidx.compose.ui.unit.sp
 import java.util.*
 
 @Composable
-fun ShowDatePicker(){
+fun ShowDatePicker(
+    messageError: String,
+    errorState: Boolean
+): String{
     val context = LocalContext.current
 
     val year: Int
@@ -76,7 +80,9 @@ fun ShowDatePicker(){
         activeVariable = date.value,
         onVarChange = {
             date.value = it
-        }
+        },
+        errorMessage = messageError,
+        showError = !errorState
     )
-
+    return date.value
 }

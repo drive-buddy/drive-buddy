@@ -22,7 +22,10 @@ import androidx.compose.ui.unit.dp
 import java.util.*
 
 @Composable
-fun ShowTimePicker(){
+fun ShowTimePicker(
+    messageError: String,
+    errorState: Boolean
+): String{
     val Context = LocalContext.current
 
     val calendar = Calendar.getInstance()
@@ -62,7 +65,9 @@ fun ShowTimePicker(){
         activeVariable = time.value,
         onVarChange = {
             time.value = it
-        }
-
+        },
+        errorMessage = messageError,
+        showError = !errorState
     )
+    return time.value
 }

@@ -91,10 +91,8 @@ fun PrettyBar(
             text = errorMessage,
             color = MaterialTheme.colors.error,
             style = MaterialTheme.typography.caption,
-//                textAlign = TextAlign.Left,
             modifier = Modifier
                 .padding(start = 20.dp)
-//                    .offset(y = (76).dp)
                 .fillMaxWidth(0.9f)
 
         )

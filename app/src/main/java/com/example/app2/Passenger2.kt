@@ -84,8 +84,8 @@ class Passenger2 : ComponentActivity() {
 
                         val genderRegex = "(?=.*[MF]).{1,}".toRegex()
 
-                        val birthDateRegex = ("(0[1-9]|1[0-2])\\/(0[1-9]|1\\d|2" +
-                                "\\d|3[01])\\/(19|20)\\d{2}").toRegex()
+                        val birthDateRegex = ("(0[1-9]|1\\d|2\\d|3[01])\\/" +
+                                "(0[1-9]|1[0-2])\\/(19|20)\\d{2}").toRegex()
 
 
                         validateName = name.isNotBlank()
@@ -254,7 +254,7 @@ class Passenger2 : ComponentActivity() {
                                     .width(330.dp),
 
                                 type = "Birth date",
-                                hint = "MM/DD/YYYY",
+                                hint = "DD/MM/YYYY",
                                 activeVariable = birthDate,
                                 onVarChange = {
                                     birthDate = it
