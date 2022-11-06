@@ -40,6 +40,8 @@ class Schedule_ride: ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     val userHashMap: HashMap<String, String?> = HashMap<String, String?>()
+                    var filterHashMap: HashMap<String, String?> = HashMap<String, String?>()
+                    var result: HashMap<String, String?> = HashMap<String, String?>()
 
                     var destinationFrom by rememberSaveable { mutableStateOf("") }
                     var destinationTo by rememberSaveable { mutableStateOf("") }
@@ -97,8 +99,10 @@ class Schedule_ride: ComponentActivity() {
                     ){
                         if(validateData(from, to, date, time, nrOfSeats, price)){
                             val dbEntry : DBHelper = DBHelper()
-                            dbEntry.addOrder(userHashMap)
-                            val navigate1 = Intent(this@Schedule_ride, Driver3::class.java)
+                            result = (userHashMap + filterHashMap) as HashMap<String, String?>
+                            dbEntry.addOrder(result)
+                            val navigate1 = Intent(this@Schedule_ride, No_result::class.java)
+                            startActivity(navigate1)
                         }
                     }
 
@@ -270,8 +274,7 @@ class Schedule_ride: ComponentActivity() {
 
                             }
                             Spacer(Modifier.height(10.dp))
-                            FilterList(filterss)
-
+                            filterHashMap = FilterList(filterss)
                         }
                     }
 
