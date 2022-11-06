@@ -188,6 +188,7 @@ class Driver2 : ComponentActivity() {
                                 modifier = Modifier
                                     .size(16.dp),
                                 shape = CircleShape,
+                                contentPadding = PaddingValues(0.dp),
                                 colors = ButtonDefaults.outlinedButtonColors(
                                     backgroundColor = Color(
                                         0xFFEE5252

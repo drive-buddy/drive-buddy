@@ -49,7 +49,18 @@ fun ShowDatePicker(
     val datePickerDialog = DatePickerDialog(
         context,
         { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
-            date.value = "$dayOfMonth/${month+1}/$year"
+            if(dayOfMonth < 10 && (month+1) < 10) {
+                date.value = "0$dayOfMonth/0${month + 1}/$year"
+            }
+            else if(dayOfMonth < 10){
+                date.value = "0$dayOfMonth/${month + 1}/$year"
+            }
+            else if(month < 10){
+                date.value = "$dayOfMonth/0${month + 1}/$year"
+            }
+            else{
+                date.value = "$dayOfMonth/${month + 1}/$year"
+            }
         }, year, month, day
     )
     Button(onClick = { datePickerDialog.show() },
