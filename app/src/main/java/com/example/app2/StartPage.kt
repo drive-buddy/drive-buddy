@@ -23,7 +23,6 @@ class StartPage : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             setContent {
-
                 App2Theme {
                     // A surface container using the 'background' color from the theme
                     Surface(

@@ -21,6 +21,7 @@
     <string name="facebook_client_token">5574df50a97200a69ded53378a3599d4</string>
     <string name="fb_login_protocol_scheme">fb444336131170935</string>
     <string name="title_activity_schedule_ride">Schedule_ride</string>
-<!--    <string name="your_web_client_id">843204761137-64rjdjo0hguftpomodbpmhhlh06p3htr.apps.googleusercontent.com</string>-->
+    <!--    <string name="your_web_client_id">843204761137-64rjdjo0hguftpomodbpmhhlh06p3htr.apps.googleusercontent.com</string>-->
     <string name="your_web_client_id">843204761137-oisskld76m360t4gkijcnqip62c0pq2l.apps.googleusercontent.com</string>
+    <string name="title_activity_example">Example</string>
 </resources>
