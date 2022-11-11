@@ -1,4 +1,4 @@
-package com.example.app2
+package com.example.app2.signup
 
 import android.content.ContentValues
 import android.content.Intent
@@ -10,10 +10,13 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import com.example.app2.No_result
+import com.example.app2.driver.Driver2
+import com.example.app2.driver.Driver3
+import com.example.app2.passenger.Passenger1
+import com.example.app2.passenger.Passenger2
+import com.example.app2.passenger.Passenger3
 import com.example.app2.ui.theme.App2Theme
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth

@@ -1,4 +1,4 @@
-package com.example.app2
+package com.example.app2.helperfiles
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background

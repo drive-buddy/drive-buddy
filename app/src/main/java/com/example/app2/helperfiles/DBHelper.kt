@@ -1,4 +1,4 @@
-package com.example.app2
+package com.example.app2.helperfiles
 
 import android.util.Log
 import com.google.firebase.firestore.*

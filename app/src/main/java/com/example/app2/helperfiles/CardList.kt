@@ -1,4 +1,4 @@
-package com.example.app2
+package com.example.app2.helperfiles
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.app2.R
 
 data class Infos(
    val price: String,

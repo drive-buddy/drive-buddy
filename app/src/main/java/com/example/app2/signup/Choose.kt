@@ -1,4 +1,4 @@
-package com.example.app2
+package com.example.app2.signup
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,6 +15,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.app2.driver.Driver1
+import com.example.app2.passenger.Passenger1
 import com.example.app2.ui.theme.App2_2Theme
 
 class Choose : ComponentActivity() {

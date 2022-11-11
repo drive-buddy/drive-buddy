@@ -1,9 +1,7 @@
-package com.example.app2
+package com.example.app2.signin
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
@@ -21,21 +19,15 @@ import androidx.compose.ui.unit.sp
 import com.example.app2.ui.theme.App2_2Theme
 import androidx.compose.ui.res.painterResource
 import com.example.app2.R.drawable
-import androidx.compose.runtime.Composable
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.ui.graphics.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import java.security.AllPermission
+import com.example.app2.PrettyBar
+import com.example.app2.R
 
 class Sign_in : ComponentActivity() {
 
@@ -57,7 +49,7 @@ class Sign_in : ComponentActivity() {
                     color = MaterialTheme.colors.background,
                 )
                 {
-                    var userHashMap : HashMap<String, String> = HashMap<String, String> ()
+                    val userHashMap : HashMap<String, String> = HashMap<String, String> ()
                     var userEmail by rememberSaveable { mutableStateOf("") }
                     var userPassword by rememberSaveable { mutableStateOf("") }
 
