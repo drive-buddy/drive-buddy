@@ -24,7 +24,6 @@ class StartPage : ComponentActivity() {
         setContent {
             setContent {
                 App2Theme {
-                    // A surface container using the 'background' color from the theme
                     Surface(
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colors.background
@@ -33,16 +32,16 @@ class StartPage : ComponentActivity() {
                             modifier = Modifier
                                 .fillMaxSize()
                                 .offset(y = 140.dp, x = 55.dp),
-//                        verticalArrangement = Arrangement.Center,
-//                        horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Text(text = "Find your",
+                            Text(
+                                text = "Find your",
                                 fontSize = 42.sp,
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.ExtraBold,
                                 color = Color.White
                             )
-                            Text(text = "Drive Buddy",
+                            Text(
+                                text = "Drive Buddy",
                                 fontSize = 42.sp,
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.ExtraBold,
@@ -50,7 +49,7 @@ class StartPage : ComponentActivity() {
                             )
 
                         }
-                        Column (
+                        Column(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .padding(40.dp),
