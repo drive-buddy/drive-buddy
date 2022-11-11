@@ -224,26 +224,6 @@ class DBHelper {
                     ride.update("passengers", FieldValue.arrayUnion(passengerRef))
                 }
             }
-
-//        db.collection("orders")
-//            .whereEqualTo(FieldPath.documentId(), rideId)
-//            .get()
-//            .addOnSuccessListener { ride ->
-//                if (!ride.isEmpty) {
-//                    val passengers: ArrayList<DocumentReference> = ride.documents[0].data?.get("passengers") as ArrayList<DocumentReference>
-//                    val rideRef: DocumentReference = db.document("")
-//
-//                    // if the passengers field is not null, extend the array
-//                    if (passengers != null) {
-////                        passengers.add(db.document("users/" + passengerId))
-//
-//                    }
-//                    // else create the array with one value
-//                    else {
-//
-//                    }
-//                }
-//            }
-//            .addOnFailureListener { e -> Log.w(TAG, "Error getting ride by id", e) }
+            .addOnFailureListener { e -> Log.w(TAG, "Error getting order by id.", e) }
     }
 }
