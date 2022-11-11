@@ -42,7 +42,7 @@ class No_result : ComponentActivity() {
                     Scaffold(
                         scaffoldState = scaffoldState,
                         topBar = {
-                            com.example.app2.helperfiles.AppBar(
+                            AppBar(
                                 onNavigationIconClick = {
                                     scope.launch {
                                         scaffoldState.drawerState.open()

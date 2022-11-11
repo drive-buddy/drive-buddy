@@ -146,6 +146,6 @@ fun AppBar(
                     tint = Color.White
                 )
             }
-            }
+        }
     )
 }
