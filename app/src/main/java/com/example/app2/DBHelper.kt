@@ -40,22 +40,13 @@ class DBHelper {
     }
 
     // retrieve a single user based on id and call the callback on user data
-//    fun getUser(userID: String, callback: (data: Map<String, Any?>) -> Unit) {
-//        db.collection("users").document(userID)
-//            .get()
-//            .addOnSuccessListener { document -> callback(document.data!!) }
-//            .addOnFailureListener { e ->
-//                Log.w(TAG, "Error getting user by id", e)
-//            }
-//
-//        return returnedDocuments
-//    }
-
-    // retrieve a single user based on id and call the callback on user data
     fun getUser(userID: String, callback: (data: Map<String, Any?>) -> Unit) {
         db.collection("users").document(userID)
             .get()
-            .addOnSuccessListener { document -> callback(document.data!!) }
+            .addOnSuccessListener { document ->
+                if (document != null)
+                    callback(document.data as Map<String, Any?>)
+            }
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error getting user by id", e)
             }
@@ -203,5 +194,56 @@ class DBHelper {
         query.get()
             .addOnSuccessListener { documents -> callback(documents) }
             .addOnFailureListener { e -> Log.w(TAG, "Error getting orders.", e) }
+    }
+
+    fun getOrderPassengers(rideId: String, callback: (data: Any) -> Unit) {
+        db.collection("orders")
+            .whereEqualTo(FieldPath.documentId(), rideId)
+            .get()
+            .addOnSuccessListener { ride ->
+                if (ride != null) {
+                    val passengers = ride.documents[0].data?.get("passengers")
+
+                    if (passengers != null) {
+                        callback(passengers)
+                    }
+                }
+            }
+            .addOnFailureListener { e -> Log.w(TAG, "Error getting order by id.", e) }
+    }
+
+    // UPDATE
+    fun addPassengerToRide(rideId: String, passengerId: String) {
+        val ride: DocumentReference = db.collection("orders").document(rideId)
+
+        ride.get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val passengerRef: DocumentReference = db.collection("users").document(passengerId)
+
+                    ride.update("passengers", FieldValue.arrayUnion(passengerRef))
+                }
+            }
+
+//        db.collection("orders")
+//            .whereEqualTo(FieldPath.documentId(), rideId)
+//            .get()
+//            .addOnSuccessListener { ride ->
+//                if (!ride.isEmpty) {
+//                    val passengers: ArrayList<DocumentReference> = ride.documents[0].data?.get("passengers") as ArrayList<DocumentReference>
+//                    val rideRef: DocumentReference = db.document("")
+//
+//                    // if the passengers field is not null, extend the array
+//                    if (passengers != null) {
+////                        passengers.add(db.document("users/" + passengerId))
+//
+//                    }
+//                    // else create the array with one value
+//                    else {
+//
+//                    }
+//                }
+//            }
+//            .addOnFailureListener { e -> Log.w(TAG, "Error getting ride by id", e) }
     }
 }
