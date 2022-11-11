@@ -1,4 +1,4 @@
-package com.example.app2
+package com.example.app2.helperfiles
 
 import android.graphics.Color
 import androidx.compose.material.Checkbox

@@ -20,9 +20,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.app2.helperfiles.*
 import com.example.app2.ui.theme.App2Theme
 import com.example.app2.ui.theme.Grey
-import com.example.app2.ui.theme.White
 import kotlinx.coroutines.launch
 
 class No_result : ComponentActivity() {
@@ -42,7 +42,7 @@ class No_result : ComponentActivity() {
                     Scaffold(
                         scaffoldState = scaffoldState,
                         topBar = {
-                            AppBar(
+                            com.example.app2.helperfiles.AppBar(
                                 onNavigationIconClick = {
                                     scope.launch {
                                         scaffoldState.drawerState.open()

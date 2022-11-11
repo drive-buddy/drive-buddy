@@ -16,6 +16,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.app2.signin.Sign_in
+import com.example.app2.signup.Choose
 import com.example.app2.ui.theme.App2Theme
 
 class StartPage : ComponentActivity() {

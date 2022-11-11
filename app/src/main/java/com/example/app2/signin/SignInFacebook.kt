@@ -1,4 +1,4 @@
-package com.example.app2
+package com.example.app2.signin
 
 import android.content.Intent
 import android.os.Bundle

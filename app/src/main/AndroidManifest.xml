@@ -18,15 +18,6 @@
         android:theme="@style/Theme.App2"
         tools:targetApi="31">
         <activity
-            android:name=".Example"
-            android:exported="false"
-            android:label="@string/title_activity_example"
-            android:theme="@style/Theme.App2">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".Schedule_ride"
             android:exported="false"
             android:label="@string/title_activity_schedule_ride"
@@ -36,7 +27,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".SignUpProcess"
+            android:name=".signup.SignUpProcess"
             android:exported="false"
             android:label="@string/title_activity_sign_up_process"
             android:theme="@style/Theme.App2">
@@ -45,7 +36,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".SignInProcess"
+            android:name=".signin.SignInProcess"
             android:exported="false"
             android:label="@string/title_activity_sign_in_process"
             android:theme="@style/Theme.App2">
@@ -63,7 +54,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Passenger3"
+            android:name=".passenger.Passenger3"
             android:exported="false"
             android:label="@string/title_activity_passenger3"
             android:theme="@style/Theme.App2_2"
@@ -73,7 +64,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Passenger2"
+            android:name=".passenger.Passenger2"
             android:exported="false"
             android:label="@string/title_activity_passenger2"
             android:theme="@style/Theme.App2_2"
@@ -83,7 +74,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Passenger1"
+            android:name=".passenger.Passenger1"
             android:exported="false"
             android:label="@string/title_activity_passenger1"
             android:theme="@style/Theme.App2_2"
@@ -93,7 +84,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Driver3"
+            android:name=".driver.Driver3"
             android:exported="false"
             android:label="@string/title_activity_driver3"
             android:theme="@style/Theme.App2_2"
@@ -103,7 +94,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Driver2"
+            android:name=".driver.Driver2"
             android:exported="false"
             android:label="@string/title_activity_driver2"
             android:theme="@style/Theme.App2_2"
@@ -122,7 +113,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Driver1"
+            android:name=".driver.Driver1"
             android:exported="false"
             android:label="@string/title_activity_driver1"
             android:theme="@style/Theme.App2_2"
@@ -132,7 +123,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Choose"
+            android:name=".signup.Choose"
             android:exported="false"
             android:label="@string/title_activity_choose"
             android:theme="@style/Theme.App2_2">
@@ -141,7 +132,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Sign_in"
+            android:name=".signin.Sign_in"
             android:exported="false"
             android:label="@string/title_activity_main2"
             android:theme="@style/Theme.App2_2">
@@ -165,8 +156,7 @@
         </activity>
         <activity
             android:name="com.facebook.FacebookActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name" />
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" />
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
@@ -180,7 +170,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SignInGoogle"
+            android:name=".signin.SignInGoogle"
             android:theme="@style/Theme.App2_2" />
 
         <meta-data

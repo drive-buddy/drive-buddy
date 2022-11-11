@@ -1,4 +1,4 @@
-package com.example.app2
+package com.example.app2.signin
 
 import android.content.ContentValues
 import android.content.Intent
@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
+import com.example.app2.No_result
 import com.example.app2.ui.theme.App2Theme
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
