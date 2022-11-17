@@ -73,8 +73,8 @@ class Driver3 : ComponentActivity() {
                         {
                             Button(
                                 onClick = {
-                                    val navigate1 = Intent(this@Driver3, No_result::class.java)
-                                    startActivity(navigate1)
+         //                           val navigate1 = Intent(this@Driver3, No_result::class.java)
+          //                          startActivity(navigate1)
                                 },
                                 shape = RoundedCornerShape(20.dp),
                                 colors = ButtonDefaults.outlinedButtonColors(

@@ -48,18 +48,18 @@ class DBHelper {
                 Log.w(TAG, "Error getting user by id", e)
             }
 
-        return returnedDocuments
+//        return returnedDocuments
     }
 
-    // retrieve a single user based on id and call the callback on user data
-    fun getUser(userID: String, callback: (data: Map<String, Any?>) -> Unit) {
-        db.collection("users").document(userID)
-            .get()
-            .addOnSuccessListener { document -> callback(document.data!!) }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "Error getting user by id", e)
-            }
-    }
+//    // retrieve a single user based on id and call the callback on user data
+//    fun getUser(userID: String, callback: (data: Map<String, Any?>) -> Unit) {
+//        db.collection("users").document(userID)
+//            .get()
+//            .addOnSuccessListener { document -> callback(document.data!!) }
+//            .addOnFailureListener { e ->
+//                Log.w(TAG, "Error getting user by id", e)
+//            }
+//    }
 
     fun searchOrders(
         from: String,
