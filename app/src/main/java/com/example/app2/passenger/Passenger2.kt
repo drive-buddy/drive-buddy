@@ -98,6 +98,7 @@ class Passenger2 : ComponentActivity() {
                         if(validateData(name, surname, gender, birthDate, phoneNr)){
 
                             val dbEntry : DBHelper = DBHelper()
+
                             dbEntry.addUser(userHashMap)
 
                             val navigate1 = Intent(this@Passenger2, SignUpProcess::class.java)

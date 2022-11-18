@@ -3,8 +3,6 @@ package com.example.app2.helperfiles
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -19,31 +17,20 @@ import androidx.compose.ui.unit.sp
 import com.example.app2.R
 
 data class Infos(
-   val price: String,
-   val date: String,
-   val time: String,
-   val from: String,
-   val to: String,
-   val name: String,
-   val surname: String,
-   val carModel: String,
-   val license: String,
-   val nrOfSeats: String
+    val price: String? = "",
+    val date: String? = null,
+    val time: String? = null,
+    val from: String? = "",
+    val to: String? = "",
+    val name: String? = "",
+    val surname: String? = "",
+    val carModel: String? = null,
+    val license: String? = null,
+    val nrOfSeats: String? = ""
 )
-
-@Composable
-fun InfoList(infoss: List<Infos>) {
-    LazyColumn(
-    ) {
-        items(infoss) { info ->
-            InfoRow(info)
-        }
-    }
-}
-
-val infoss = listOf(
-    Infos("price", "date", "time", "From", "To", "Name", "Surname", "Car model", "License", "Nr")
-)
+//val infoss = listOf(
+//    Infos("price", "date", "time", "From", "To", "Name", "Surname", "Car model", "License", "Nr")
+//)
 
 @Composable
 fun InfoRow(info: Infos) {
@@ -70,7 +57,7 @@ fun InfoRow(info: Infos) {
                 )
                 {
                     Text(
-                        info.price,
+                        text = info.price!! + " lei",
                         color = Color.Black,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.W700
@@ -84,7 +71,7 @@ fun InfoRow(info: Infos) {
                         )
                         Spacer(Modifier.width(10.dp))
                         Text(
-                            info.nrOfSeats,
+                            info.nrOfSeats!!,
                             color = Color.Black,
                             fontSize = 18.sp,
                             fontWeight = FontWeight.W700
@@ -101,7 +88,7 @@ fun InfoRow(info: Infos) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        info.date,
+                        info.date!!,
                         modifier = Modifier.padding(3.dp),
                         color = Color.Black,
                         fontSize = 12.sp,
@@ -114,7 +101,7 @@ fun InfoRow(info: Infos) {
                             .width(1.dp)
                     )
                     Text(
-                        info.time,
+                        text = info.time!!,
                         modifier = Modifier.padding(3.dp),
                         color = Color.Black,
                         fontSize = 12.sp,
@@ -140,14 +127,14 @@ fun InfoRow(info: Infos) {
                         verticalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            info.from,
+                            info.from!!,
                             color = Color.Black,
                             fontSize = 18.sp,
                             fontWeight = FontWeight.W700,
                             modifier = Modifier.padding(10.dp)
                         )
                         Text(
-                            info.to,
+                            info.to!!,
                             color = Color.Black,
                             fontSize = 18.sp,
                             fontWeight = FontWeight.W700,
@@ -167,68 +154,70 @@ fun InfoRow(info: Infos) {
                     )
                     Row() {
                         Text(
-                            info.name,
+                            info.name!!,
                             modifier = Modifier.padding(horizontal = 3.dp),
                             color = Color.Black,
                             fontSize = 13.sp,
                             fontWeight = FontWeight.W700
                         )
                         Text(
-                            info.surname,
+                            info.surname!!,
                             color = Color.Black,
                             fontSize = 13.sp,
                             fontWeight = FontWeight.W700,
                         )
                     }
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            info.carModel,
-                            modifier = Modifier.padding(3.dp),
-                            color = Color.Black,
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.W700,
-                        )
-                        Divider(
-                            color = Color.Black,
-                            modifier = Modifier
-                                .height(12.dp)
-                                .width(1.dp)
-                        )
-                        Text(
-                            info.license,
-                            modifier = Modifier.padding(3.dp),
-                            color = Color.Black,
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.W700,
-                        )
+                    if (info.carModel != null) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                info.carModel!!,
+                                modifier = Modifier.padding(3.dp),
+                                color = Color.Black,
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.W700,
+                            )
+                            Divider(
+                                color = Color.Black,
+                                modifier = Modifier
+                                    .height(12.dp)
+                                    .width(1.dp)
+                            )
+                            Text(
+                                info.license!!,
+                                modifier = Modifier.padding(3.dp),
+                                color = Color.Black,
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.W700,
+                            )
+                        }
                     }
                 }
             }
         }
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.Bottom
-            )
-            {
-                Button(
-                    onClick = {/**/},
-                    modifier = Modifier
-                        .height(40.dp)
-                        .width(150.dp),
-                    shape = RoundedCornerShape(20.dp),
-                    colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFFEE5252))
-                ) {
-                    Text(
-                        text = "Book",
-                        fontFamily = FontFamily.SansSerif,
-                        fontWeight = FontWeight.ExtraBold,
-                        fontSize = 20.sp,
-                        color = Color(0xFFFFFFFF)
-                    )
-                }
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.Bottom
+        )
+        {
+            Button(
+                onClick = {/**/},
+                modifier = Modifier
+                    .height(40.dp)
+                    .width(150.dp)
+                    .offset(y = (-10).dp),
+                shape = RoundedCornerShape(20.dp),
+                colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFFEE5252))
+            ) {
+                Text(
+                    text = "Book",
+                    fontFamily = FontFamily.SansSerif,
+                    fontWeight = FontWeight.ExtraBold,
+                    fontSize = 20.sp,
+                    color = Color(0xFFFFFFFF)
+                )
             }
-
+        }
     }
 }

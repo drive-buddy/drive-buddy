@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import com.example.app2.helperfiles.DBHelper
+import com.example.app2.rides.AvailableRides
 import com.example.app2.signin.Sign_in
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -37,7 +38,7 @@ class MainActivity : ComponentActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isComplete) {
                         // Signed in, launch the  activity
-                        val navigate1 = Intent(this@MainActivity, No_result::class.java)
+                        val navigate1 = Intent(this@MainActivity, AvailableRides::class.java)
 
                         startActivity(navigate1)
                         finish()
@@ -70,7 +71,7 @@ class MainActivity : ComponentActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isComplete) {
                         // Signed in, launch the  activity
-                        val navigate1 = Intent(this@MainActivity, No_result::class.java)
+                        val navigate1 = Intent(this@MainActivity, AvailableRides::class.java)
 
                         startActivity(navigate1)
                         finish()
