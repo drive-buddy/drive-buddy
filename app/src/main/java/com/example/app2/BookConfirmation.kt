@@ -77,31 +77,6 @@ fun ConfirmationContent(){
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start
     ) {
-//        Text(
-//            buildAnnotatedString {
-//                withStyle(style = ParagraphStyle(lineHeight = 30.sp)) {
-//                    withStyle(style = SpanStyle(
-//                        color = Color.Black,
-//                        fontSize = 30.sp,
-//                        fontWeight = FontWeight.ExtraBold,
-//                        baselineShift = BaselineShift(3f))
-//                    ) {
-//                        append("Book\n")
-//                    }
-//                    withStyle(
-//                        style = SpanStyle(
-//                            fontWeight = FontWeight.ExtraBold,
-//                            fontSize = 30.sp,
-//                            color = Color(0xFFEE5252),
-//                            baselineShift = BaselineShift(1f),
-//
-//                            )
-//                    ) {
-//                        append("Confirmation\n")
-//                    }
-//                }
-//            }
-//        )
         Text(
             text = "Book",
             fontSize = 30.sp,
@@ -163,6 +138,7 @@ fun ConfirmationContent(){
         }
     }
 }
+
 @Composable
 fun CardRide() {
     Card(
@@ -261,26 +237,26 @@ fun CardRide() {
                                 .size(70.dp)
                                 .clip(CircleShape)
                         )
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth(0.5f)
-                                .height(15.dp)
-                                .background(
-                                    brush = Brush.horizontalGradient(listOf(Gray, Black)),
-                                    shape = RoundedCornerShape(20.dp)
-                                ),
-                        ){
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.Center,
-                            ){
-                                Icon(imageVector = Icons.Default.Star, contentDescription = "Rank")
-                                Text(text = "Rank",
-                                    fontSize = 10.sp)
-                            }
-
-                        }
+//                        Box(
+//                            modifier = Modifier
+//                                .fillMaxWidth(0.5f)
+//                                .height(15.dp)
+//                                .background(
+//                                    brush = Brush.horizontalGradient(listOf(Gray, Black)),
+//                                    shape = RoundedCornerShape(20.dp)
+//                                ),
+//                        ){
+//                            Row(
+//                                modifier = Modifier.fillMaxWidth(),
+//                                verticalAlignment = Alignment.CenterVertically,
+//                                horizontalArrangement = Arrangement.Center,
+//                            ){
+//                                Icon(imageVector = Icons.Default.Star, contentDescription = "Rank")
+//                                Text(text = "Rank",
+//                                    fontSize = 10.sp)
+//                            }
+//
+//                        }
                         Text(
                             text = "Name Surname",
                             fontSize = 15.sp,
