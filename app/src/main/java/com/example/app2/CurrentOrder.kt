@@ -40,7 +40,7 @@ class CurrentOrder : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             App2_2Theme {
-                CurrentOrderTopBar()
+                CurrentOrderContent()
             }
         }
     }
@@ -48,7 +48,7 @@ class CurrentOrder : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CurrentOrderTopBar() {
+fun CurrentOrderContent() {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -234,29 +234,29 @@ fun CardOrder() {
                                 .size(70.dp)
                                 .clip(CircleShape)
                         )
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth(0.5f)
-                                .height(15.dp)
-                                .background(
-                                    brush = Brush.horizontalGradient(listOf(Color.Gray, Black)),
-                                    shape = RoundedCornerShape(20.dp)
-                                ),
-                        ){
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.Center,
-                            ){
-                                androidx.compose.material.Icon(
-                                    imageVector = Icons.Default.Star,
-                                    contentDescription = "Rank"
-                                )
-                                Text(text = "Rank",
-                                    fontSize = 10.sp)
-                            }
-
-                        }
+//                        Box(
+//                            modifier = Modifier
+//                                .fillMaxWidth(0.5f)
+//                                .height(15.dp)
+//                                .background(
+//                                    brush = Brush.horizontalGradient(listOf(Color.Gray, Black)),
+//                                    shape = RoundedCornerShape(20.dp)
+//                                ),
+//                        ){
+//                            Row(
+//                                modifier = Modifier.fillMaxWidth(),
+//                                verticalAlignment = Alignment.CenterVertically,
+//                                horizontalArrangement = Arrangement.Center,
+//                            ){
+//                                androidx.compose.material.Icon(
+//                                    imageVector = Icons.Default.Star,
+//                                    contentDescription = "Rank"
+//                                )
+//                                Text(text = "Rank",
+//                                    fontSize = 10.sp)
+//                            }
+//
+//                        }
                         Text(
                             text = "Name Surname",
                             fontSize = 15.sp,
@@ -412,6 +412,6 @@ fun CardOrder() {
 @Composable
 fun DefaultPreview3() {
     App2_2Theme {
-        CurrentOrderTopBar()
+        CurrentOrderContent()
     }
 }
