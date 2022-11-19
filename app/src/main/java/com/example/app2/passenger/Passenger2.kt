@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import com.example.app2.helperfiles.DBHelper
 import com.example.app2.PrettyBar
 import com.example.app2.R
+import com.example.app2.helperfiles.Content
 import com.example.app2.signup.SignUpProcess
 import com.example.app2.ui.theme.App2_2Theme
 
@@ -98,6 +99,7 @@ class Passenger2 : ComponentActivity() {
                         if(validateData(name, surname, gender, birthDate, phoneNr)){
 
                             val dbEntry : DBHelper = DBHelper()
+
                             dbEntry.addUser(userHashMap)
 
                             val navigate1 = Intent(this@Passenger2, SignUpProcess::class.java)
@@ -128,51 +130,8 @@ class Passenger2 : ComponentActivity() {
                             )
                         }
 
-                        Column(
-                            modifier = Modifier
-                                .padding(horizontal = 30.dp, vertical = 10.dp)
-                                .fillMaxWidth(),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Image(painter = painterResource(id = R.drawable.im2),
-                                contentDescription = "Person",
-                                modifier = Modifier
-                                    .size(100.dp))
-                        }
-                        Row (
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            horizontalArrangement = Arrangement.Center
-
-                        )
-                        {
-                            Button(
-                                onClick = { /* TO DO */ },
-                                modifier = Modifier
-                                    .size(16.dp),
-                                shape = CircleShape,
-                                contentPadding = PaddingValues(0.dp),
-                                colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFFEE5252))
-                            ) {
-                                Icon(
-                                    Icons.Default.Add,
-                                    modifier = Modifier.size(200.dp),
-                                    contentDescription = "add",
-                                    tint = Color.White
-                                )
-
-                            }
-                            Text(
-                                text = "Add photo",
-                                fontSize = 13.sp,
-                                fontFamily = FontFamily.SansSerif,
-                                fontWeight = FontWeight.ExtraBold,
-                                color = Color(0xFF888686),
-                                modifier = Modifier
-                                    .offset(x = 10.dp)
-                            )
-                        }
-                        Spacer(Modifier.height(10.dp))
+                        Spacer(Modifier.height(15.dp))
+                        Content()
                         // COLUMN FOR USER INFO INPUT
                         Column(
                             modifier = Modifier
@@ -303,7 +262,7 @@ class Passenger2 : ComponentActivity() {
                         ) {
                             Text(
                                 text = "Back",
-                                fontSize = 30.sp,
+                                fontSize = 25.sp,
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.ExtraBold,
                                 color = Color(0xFFFFFFFF)
@@ -323,7 +282,7 @@ class Passenger2 : ComponentActivity() {
                                 text = "Next",
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.ExtraBold,
-                                fontSize = 30.sp,
+                                fontSize = 25.sp,
                                 color = Color(0xFFFFFFFF)
                             )
                         }
