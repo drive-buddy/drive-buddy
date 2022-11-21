@@ -91,7 +91,7 @@ class Schedule_ride: ComponentActivity() {
                         price: String
                     ){
                         if(validateData(from, to, date, time, nrOfSeats, price)){
-                            val dbEntry : DBHelper = DBHelper()
+                            val dbEntry : DBHelper = DBHelper(null)
                             val userEmail : String = dbEntry.getCurrentUser()
                             var userInfo : Map<String, Any?> = HashMap<String, Any>()
                             dbEntry.getUser(userEmail) {

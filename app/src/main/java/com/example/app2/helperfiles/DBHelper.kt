@@ -1,5 +1,6 @@
 package com.example.app2.helperfiles
 
+import android.content.SharedPreferences
 import android.util.Log
 import com.example.app2.rides.RidesViewModel
 import com.google.firebase.auth.ktx.auth
@@ -11,6 +12,11 @@ import java.util.Date
 class DBHelper {
     private var TAG: String? = "DB"
     var db: FirebaseFirestore = Firebase.firestore
+    var prefs: SharedPreferences?
+
+    constructor(prefs: SharedPreferences?) {
+        this.prefs = prefs
+    }
 
     //    CREATE
     fun addUser(data: HashMap<String, String?>) {
@@ -41,7 +47,7 @@ class DBHelper {
     }
 
     //    READ
-    fun getDocumentsAll(collection: String, callback: (data: QuerySnapshot) -> Unit){
+    fun getDocumentsAll(collection: String, callback: (data: QuerySnapshot) -> Unit) {
         db.collection(collection)
             .limit(50)
             .get()
@@ -51,6 +57,33 @@ class DBHelper {
     }
 
     // retrieve a single user based on id and call the callback on user data
+    fun getUser(userID: String,
+                callback: (data: Map<String, Any?>) -> Unit,
+                storeAsGlobalState: Boolean = false) {
+        db.collection("users").document(userID)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    if (storeAsGlobalState) {
+                        val userData: MutableMap<String, Any>? = document.data
+
+                        if (userData != null) {
+                            for ((key, value) in prefs!!.all) {
+                                prefs!!.edit().remove(key.toString()).commit()
+                            }
+
+                            for ((key, value) in userData) {
+                                prefs?.edit()?.putString(key.toString(), value.toString())
+                                    ?.commit()
+                            }
+                        }
+                    }
+
+                    callback(document.data as Map<String, Any?>)
+                }
+            }
+    }
+
     fun getIdByEmail(email: String, callback: (data: String) -> Unit) {
         db
             .collection("users")

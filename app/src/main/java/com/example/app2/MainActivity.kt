@@ -1,7 +1,10 @@
 package com.example.app2
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import com.example.app2.helperfiles.DBHelper
 import com.example.app2.rides.AvailableRides
@@ -11,13 +14,17 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class MainActivity : ComponentActivity() {
-    var db: DBHelper = DBHelper()
+    lateinit var prefs: SharedPreferences
+    lateinit var db: DBHelper
     // Firebase instance variables
     private lateinit var auth: FirebaseAuth
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        prefs = this.getSharedPreferences("com.example.app2", Context.MODE_PRIVATE)
+        db = DBHelper(prefs)
 
         // Initialize Firebase Auth and check if the user is signed in
         auth = Firebase.auth

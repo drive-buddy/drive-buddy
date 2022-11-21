@@ -87,7 +87,7 @@ class Driver3 : ComponentActivity() {
                                     text = "Continue",
                                     fontFamily = FontFamily.SansSerif,
                                     fontWeight = FontWeight.ExtraBold,
-                                    fontSize = 30.sp,
+                                    fontSize = 25.sp,
                                     color = Color(0xFFFFFFFF)
                                 )
                             }

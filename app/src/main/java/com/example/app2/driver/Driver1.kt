@@ -287,7 +287,7 @@ class Driver1 : ComponentActivity() {
                         ) {
                             Text(
                                 text = "Back",
-                                fontSize = 30.sp,
+                                fontSize = 25.sp,
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.ExtraBold,
                                 color = Color(0xFFFFFFFF)
@@ -326,7 +326,7 @@ class Driver1 : ComponentActivity() {
                                 text = "Next",
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.ExtraBold,
-                                fontSize = 30.sp,
+                                fontSize = 25.sp,
                                 color = Color(0xFFFFFFFF)
                             )
                         }
