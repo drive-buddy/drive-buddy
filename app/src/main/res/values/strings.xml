@@ -24,4 +24,9 @@
     <!--    <string name="your_web_client_id">843204761137-64rjdjo0hguftpomodbpmhhlh06p3htr.apps.googleusercontent.com</string>-->
     <string name="your_web_client_id">843204761137-oisskld76m360t4gkijcnqip62c0pq2l.apps.googleusercontent.com</string>
     <string name="title_activity_example">Example</string>
+    <string name="search">Search</string>
+    <string name="search_icon">Search Icon</string>
+    <string name="close_icon">Close</string>
+    <string name="title_activity_available_rides">Available Rides</string>
+    <string name="title_activity_profile">Profile</string>
 </resources>

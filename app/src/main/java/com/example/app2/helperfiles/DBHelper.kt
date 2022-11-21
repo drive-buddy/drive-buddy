@@ -2,6 +2,7 @@ package com.example.app2.helperfiles
 
 import android.content.SharedPreferences
 import android.util.Log
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -17,12 +18,20 @@ class DBHelper {
     }
 
     //    CREATE
-    public fun addUser(data: HashMap<String, String?>) {
+    fun addUser(data: HashMap<String, String?>) {
         addDocument("users", data)
     }
 
-    public fun addOrder(data: HashMap<String, String?>) {
+    fun addOrder(data: HashMap<String, String?>) {
         addDocument("orders", data)
+    }
+
+    fun addPassengerRequest(data: HashMap<String, String?>) {
+        addDocument("passengerRequests", data)
+    }
+
+    fun addDriverOffer(data: HashMap<String, String?>) {
+        addDocument("driverOffers", data)
     }
 
     private fun addDocument(collection: String, data: Any) {
@@ -37,12 +46,13 @@ class DBHelper {
     }
 
     //    READ
-    fun getDocumentsAll(collection: String, callback: (data: QuerySnapshot) -> Unit){
+    fun getDocumentsAll(collection: String, callback: (data: QuerySnapshot) -> Unit) {
         db.collection(collection)
             .limit(50)
             .get()
             .addOnSuccessListener { result -> callback(result) }
-            .addOnFailureListener { e -> Log.w(TAG, "Error getting documents.", e) }
+            .addOnFailureListener { e -> Log.w(TAG, "Error getting documents.", e)
+        }
     }
 
     // retrieve a single user based on id and call the callback on user data
@@ -54,7 +64,7 @@ class DBHelper {
             .addOnSuccessListener { document ->
                 if (document != null) {
                     if (storeAsGlobalState) {
-                        val userData: MutableMap<String, Any>? =  document.data
+                        val userData: MutableMap<String, Any>? = document.data
 
                         if (userData != null) {
                             for ((key, value) in prefs!!.all) {
@@ -71,9 +81,67 @@ class DBHelper {
                     callback(document.data as Map<String, Any?>)
                 }
             }
+    }
+
+    fun getIdByEmail(email: String, callback: (data: String) -> Unit) {
+        db
+            .collection("users")
+//            .document(userID)
+            .whereEqualTo("email", email)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (documents != null) {
+                    for (document in documents) {
+                        Log.i(TAG, "${document.id} => ${document.data}")
+                        callback.invoke(document.id as String)
+                    }
+                }
+                else
+                {
+                    Log.e(TAG, "document null")
+                }
+            }
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error getting user by id", e)
             }
+    }
+
+    // retrieve a single user based on id and call the callback on user data
+    fun getUser(email: String, callback: (data: Map<String, Any?>) -> Unit) {
+        db
+            .collection("users")
+//            .document(userID)
+            .whereEqualTo("email", email)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (documents != null) {
+                    for (document in documents) {
+                        Log.i(TAG, "${document.id} => ${document.data}")
+                        callback.invoke(document.data as Map<String, Any?>)
+                    }
+                }
+                else
+                {
+                    Log.e(TAG, "document null")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error getting user by id", e)
+            }
+    }
+
+    // get currently connected user
+    fun getCurrentUser(): String {
+        val user = Firebase.auth
+        var userEmail : String = ""
+        if (user.currentUser !== null) {
+            userEmail = user.currentUser!!.email.toString()
+            Log.i(TAG, userEmail);
+        }
+        else {
+            Log.i(TAG, "user is null in getCurrentUser()");
+        }
+        return (userEmail);
     }
 
     fun searchOrders(
@@ -113,7 +181,6 @@ class DBHelper {
     }
 
     fun getOrders(
-        callback: (data: QuerySnapshot) -> Unit,
         from: String? = null,
         to: String? = null,
         date: Date? = null,
@@ -121,7 +188,8 @@ class DBHelper {
         isSmoking: Boolean? = null,
         allowsPets: Boolean? = null,
         allowsLuggage: Boolean? = null,
-        limit: Int = 20
+        limit: Int = 20,
+        callback: (data: QuerySnapshot) -> Unit,
     ) {
         // create the query
         val driversRef = db.collection("orders")
@@ -150,7 +218,7 @@ class DBHelper {
 
         // execute the query
         query.get()
-            .addOnSuccessListener { documents -> callback(documents) }
+            .addOnSuccessListener { documents -> callback.invoke(documents) }
             .addOnFailureListener { e -> Log.w(TAG, "Error getting orders.", e) }
     }
 

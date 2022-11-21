@@ -8,6 +8,7 @@
         tools:node="remove" />
 
     <application
+        android:name=".rides.ProductsApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -22,6 +23,15 @@
             android:exported="false"
             android:label="@string/title_activity_schedule_ride"
             android:theme="@style/Theme.App2_2">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".rides.AvailableRides"
+            android:exported="false"
+            android:label="@string/title_activity_available_rides"
+            android:theme="@style/Theme.App2">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

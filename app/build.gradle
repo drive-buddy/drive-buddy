@@ -3,6 +3,9 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 
     id 'com.google.gms.google-services'
+    id "org.jetbrains.kotlin.kapt"
+    id 'com.google.dagger.hilt.android'
+
 }
 
 android {
@@ -29,8 +32,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -51,16 +54,17 @@ android {
 dependencies {
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
-    implementation 'androidx.activity:activity-compose:1.6.0'
+    implementation 'androidx.activity:activity-compose:1.6.1'
     implementation "androidx.compose.ui:ui:$compose_ui_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
-    implementation 'androidx.compose.material:material:1.2.1'
-    implementation 'androidx.compose.ui:ui-text-google-fonts:1.3.0-rc01'
-    implementation 'androidx.compose.material3:material3:1.0.0-rc01'
+    implementation 'androidx.compose.material:material:1.3.1'
+    implementation 'androidx.compose.ui:ui-text-google-fonts:1.4.0-alpha02'
+    implementation 'androidx.compose.material3:material3:1.1.0-alpha02'
     implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'org.chromium.net:cronet-embedded:106.5249.126'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
@@ -68,18 +72,32 @@ dependencies {
 //    authentication packages
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.android.gms:play-services-auth:20.3.0'
-    implementation 'com.facebook.android:facebook-login:latest.release'
+    implementation 'com.facebook.android:facebook-login:15.1.0'
 
     // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation platform('com.google.firebase:firebase-bom:30.5.0')
+    implementation platform('com.google.firebase:firebase-bom:31.0.3')
     implementation 'com.google.firebase:firebase-firestore-ktx'
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")
 
+
+    implementation('com.google.dagger:hilt-android:2.44.2')
+    kapt('com.google.dagger:hilt-android-compiler:2.44.2')
+//    kapt("groupId:artifactId")
+
     //icons
 //        implementation "androidx.compose.material:material-icons-extended:$compose_version"
 
+    //coil
+    implementation("io.coil-kt:coil-compose:1.4.0")
 
 }
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
+}
+
+apply plugin: 'com.google.gms.google-services'

@@ -58,9 +58,11 @@ class SignUpProcess : ComponentActivity() {
                     }
                     else
                     {
+                        var docId : String = ""
                         Log.i("ABOBa", userEmail)
                         Log.i("ABOBa", userPassword)
                         createAccount(userEmail = userEmail, userPassword = userPassword)
+
                         when (userType)
                         {
                             "passenger" -> {

@@ -2,14 +2,13 @@ package com.example.app2
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -83,7 +82,7 @@ class Schedule_ride: ComponentActivity() {
                                 && validateTime && validateNrOfSeats && validatePrice
                     }
 
-                    fun register(
+                    fun registerRide(
                         from: String,
                         to: String,
                         date: String,
@@ -93,8 +92,28 @@ class Schedule_ride: ComponentActivity() {
                     ){
                         if(validateData(from, to, date, time, nrOfSeats, price)){
                             val dbEntry : DBHelper = DBHelper(null)
+                            val userEmail : String = dbEntry.getCurrentUser()
+                            var userInfo : Map<String, Any?> = HashMap<String, Any>()
+                            dbEntry.getUser(userEmail) {
+                                document ->
+                                userInfo = document
+                                if (userInfo["type"] == "passenger")
+                                {
+                                    dbEntry.addPassengerRequest(result)
+                                }
+                                else if (userInfo["type"] == "driver")
+                                {
+                                    dbEntry.addDriverOffer(result)
+                                }
+                                else
+                                {
+                                    Log.e("error", "type not defined")
+                                    Log.i("info2", userInfo.toString())
+                                }
+                            }
+                            userInfo.forEach { (key, value) -> Log.i("info","$key = $value") }
                             result = (userHashMap + filterHashMap) as HashMap<String, String?>
-                            dbEntry.addOrder(result)
+
                             val navigate1 = Intent(this@Schedule_ride, No_result::class.java)
                             startActivity(navigate1)
                         }
@@ -197,40 +216,39 @@ class Schedule_ride: ComponentActivity() {
                             Spacer(Modifier.height(10.dp))
 
                             Row(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
+                                modifier = Modifier,
+//                                    .fillMaxWidth(),
 //                                    .padding(horizontal = 30.dp, vertical = 20.dp),
-                                horizontalArrangement = Arrangement.Start,
-                                verticalAlignment = Alignment.CenterVertically
+                                horizontalArrangement = Arrangement.SpaceBetween,
+//                                verticalAlignment = Alignment.CenterVertically
                             )
                             {
-                                Button(
-                                    onClick = {/**/ },
-                                    shape = RoundedCornerShape(5.dp),
-                                    contentPadding = PaddingValues(0.dp),
-                                    colors = ButtonDefaults.outlinedButtonColors(
-                                        backgroundColor = Color(
-                                            0xFFEE5252
-                                        )
-                                    ),
-                                    modifier = Modifier
-                                        .height(40.dp)
-                                        .width(40.dp)
-                                ) {
-                                    Icon(
-                                        Icons.Default.Person,
-                                        modifier = Modifier.fillMaxSize(),
-                                        contentDescription = "Person",
-                                        tint = Color.White
-                                    )
-                                }
-                                Spacer(Modifier.width(3.dp))
+//                                Button(
+//                                    onClick = {/**/ },
+//                                    shape = RoundedCornerShape(5.dp),
+//                                    contentPadding = PaddingValues(0.dp),
+//                                    colors = ButtonDefaults.outlinedButtonColors(
+//                                        backgroundColor = Color(
+//                                            0xFFEE5252
+//                                        )
+//                                    ),
+//                                    modifier = Modifier
+//                                        .height(40.dp)
+//                                        .width(40.dp)
+//                                ) {
+//                                    Icon(
+//                                        Icons.Default.Person,
+//                                        modifier = Modifier.fillMaxSize(),
+//                                        contentDescription = "Person",
+//                                        tint = Color.White
+//                                    )
+//                                }
+//                                Spacer(Modifier.width(3.dp))
                                 PrettyBar(
                                     modifier = Modifier
                                         .height(90.dp)
-                                        .width(130.dp),
-
-                                    type = "Nr of seats",
+                                        .width(160.dp),
+                                    type = "🧑 Nr of seats",
                                     hint = "2",
                                     activeVariable = nrOfSeats,
                                     onVarChange = {
@@ -250,7 +268,8 @@ class Schedule_ride: ComponentActivity() {
                                 PrettyBar(
                                     modifier = Modifier
                                         .height(90.dp)
-                                        .width(150.dp),
+                                        .width(160.dp),
+//                                        .width(150.dp),
 
                                     type = "Price",
                                     hint = "20 lei",
@@ -303,7 +322,7 @@ class Schedule_ride: ComponentActivity() {
                         }
                         Button(
                             onClick = {
-                                register(
+                                registerRide(
                                     destinationFrom,
                                     destinationTo,
                                     date,
