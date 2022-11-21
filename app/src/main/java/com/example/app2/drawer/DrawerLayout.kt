@@ -1,5 +1,6 @@
 package com.example.app2.drawer
 
+import android.content.SharedPreferences
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
@@ -9,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.Color
 import com.example.app2.*
+import com.example.app2.helperfiles.DBHelper
 import kotlinx.coroutines.launch
 
 @Composable
@@ -69,11 +71,18 @@ fun DrawerLayout(
                         title = "Support",
                         icon = Icons.Default.Info
                     ),
+                    MenuItem(
+                        id = "signout",
+                        title = "Sign Out",
+                        icon = Icons.Default.Info
+                    ),
                 ),
                 onItemClick = {
-//                                    when(it.id){
-//                                        "settings" -> navigateToSettingsScreen
-//                                    }
+                    val dbEntry : DBHelper = DBHelper()
+
+                    when(it.id){
+                        "signout" -> dbEntry.signout()
+                    }
                     println("Clicked on ${it.title}")
                 }
             )

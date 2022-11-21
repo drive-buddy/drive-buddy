@@ -251,31 +251,34 @@ class AvailableRides : ComponentActivity() {
 //    }
 //}
 
-@Singleton
 class RidesRepository @Inject constructor(
-    private val queryRidesByName: Query
 ) {
-    suspend fun getInfoFromFirestore(): DataOrException<List<Infos>, Exception> {
+    suspend fun getInfoFromFirestore(type : String): DataOrException<List<Infos>, Exception> {
         val dataOrException = DataOrException<List<Infos>, Exception>()
         try {
-            dataOrException.data = queryRidesByName.get().await().map { document ->
-                document.toObject(Infos::class.java)
+//            Log.e("here", "you here?$type")
+            if (type == "passenger") {
+                dataOrException.data = queryRidesForPassenger().get().await().map { document ->
+                    document.toObject(Infos::class.java)
+                }
+            } else {
+                dataOrException.data = queryRidesForDriver().get().await().map { document ->
+                    document.toObject(Infos::class.java)
+                }
             }
+
         } catch (e: FirebaseFirestoreException) {
             dataOrException.e = e
         }
         return dataOrException
     }
-}
 
+    private suspend fun queryRidesForPassenger() = FirebaseFirestore.getInstance()
+        .collection("driverOffers")
+        .orderBy("to", Query.Direction.ASCENDING)
 
-@Module
-@InstallIn(SingletonComponent::class)
-object AppModule {
-    @Provides
-    @Singleton
-    fun provideQueryRidesByName() = FirebaseFirestore.getInstance()
-        .collection("orders")
+    private suspend fun queryRidesForDriver() = FirebaseFirestore.getInstance()
+        .collection("passengerRequests")
         .orderBy("to", Query.Direction.ASCENDING)
 }
 
@@ -292,13 +295,17 @@ class RidesViewModel @Inject constructor(
     )
 
     init {
-        getRides()
+        val DBEntry : DBHelper = DBHelper()
+        DBEntry.getUser(DBEntry.getCurrentUser()) {
+            it ->
+            getRides(it["type"] as String)
+        }
     }
 
-    private fun getRides() {
+    private fun getRides(type : String) {
         viewModelScope.launch {
             loading.value = true
-            data.value = repository.getInfoFromFirestore()
+            data.value = repository.getInfoFromFirestore(type)
             loading.value = false
         }
     }

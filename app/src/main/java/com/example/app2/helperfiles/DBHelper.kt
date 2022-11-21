@@ -1,6 +1,7 @@
 package com.example.app2.helperfiles
 
 import android.util.Log
+import com.example.app2.rides.RidesViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
@@ -109,6 +110,11 @@ class DBHelper {
             Log.i(TAG, "user is null in getCurrentUser()");
         }
         return (userEmail);
+    }
+
+    // sign out
+    fun signout() {
+        Firebase.auth.signOut()
     }
 
     fun searchOrders(
