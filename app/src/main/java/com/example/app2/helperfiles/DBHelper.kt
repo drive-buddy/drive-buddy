@@ -14,7 +14,7 @@ class DBHelper {
     var db: FirebaseFirestore = Firebase.firestore
     var prefs: SharedPreferences?
 
-    constructor(prefs: SharedPreferences?) {
+    constructor(prefs: SharedPreferences? = null) {
         this.prefs = prefs
     }
 
