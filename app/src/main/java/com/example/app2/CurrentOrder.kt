@@ -1,29 +1,31 @@
 package com.example.app2
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Card
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.*
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
@@ -33,118 +35,113 @@ import androidx.compose.ui.unit.sp
 import com.example.app2.ui.theme.App2_2Theme
 import com.example.app2.ui.theme.Black
 
-import androidx.compose.foundation.layout.size
-
-
-class BookConfirmation : ComponentActivity() {
+class CurrentOrder : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             App2_2Theme {
-                TopBar()
+                CurrentOrderContent()
             }
         }
     }
 }
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar() {
+fun CurrentOrderContent() {
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = " ")
+                    androidx.compose.material3.Text(
+                        " "
+                    )
                 },
+                Modifier.background(Color.Gray),
                 navigationIcon = {
-                    IconButton(onClick = {}) {
-                        Icon(Icons.Filled.Menu, "menuIcon")
+                    IconButton(onClick = { /* doSomething() */ }) {
+                        Icon(
+                            imageVector = Icons.Filled.Menu,
+                            contentDescription = "Menu",
+                            tint = Color.White
+                        )
                     }
                 },
-                backgroundColor = Color.White,
-                contentColor = Color(0xFFEE5252),
-                elevation = 10.dp
+                actions = {
+                    IconButton(onClick = { /* doSomething() */ }) {
+                        Icon(
+                            imageVector = Icons.Filled.ArrowBack,
+                            contentDescription = "Go Back",
+                            tint = Color(0xFFEE5252),
+                            modifier = Modifier
+                                .size(30.dp)
+                                .background(color = Color.White,shape = CircleShape)
+                                .border(1.dp, Color.White, shape = CircleShape),
+                        )
+                    }
+                },
+                backgroundColor = Color(0xFFEE5252)
             )
-        }, content = { ConfirmationContent() })
-}
-
-@Composable
-fun ConfirmationContent(){
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.Start
-    ) {
-        Text(
-            text = "Book",
-            fontSize = 30.sp,
-            color = Color.Black,
-            fontFamily = FontFamily.SansSerif,
-            fontWeight = FontWeight.ExtraBold,
-            modifier = Modifier
-                .padding(30.dp,0.dp)
-        )
-        Text(
-            text = "Confirmation",
-            fontSize = 30.sp,
-            color = Color(0xFFEE5252),
-            fontFamily = FontFamily.SansSerif,
-            fontWeight = FontWeight.ExtraBold,
-            modifier = Modifier
-                .padding(30.dp, 0.dp)
-        )
-        CardRide()
-
-        Row(
-            Modifier.fillMaxSize().padding(20.dp, 1.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween) {
-
-            Button(
-                onClick = {},
+        },
+        content = {
+            Column(
                 modifier = Modifier
-                    .height(50.dp)
-                    .width(140.dp),
-                shape = RoundedCornerShape(20.dp),
-                colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFFEE5252))
+                    .padding(it)
+                    .fillMaxSize()
+                    .background(Color(0xFFEE5252)),
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    text = "Cancel",
-                    fontSize = 20.sp,
+                Text("Current",
+                    color = Color.Black,
+                    fontSize = 30.sp,
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.ExtraBold,
-                    color = Color(0xFFFFFFFF)
-                )
-            }
-
-            Button(
-                onClick = {},
-                modifier = Modifier
-                    .height(50.dp)
-                    .width(140.dp),
-                shape = RoundedCornerShape(20.dp),
-                colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFFEE5252))
-            ) {
-                Text(
-                    text = "Confirm",
-                    fontSize = 20.sp,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(20.dp, 10.dp, 0.dp,0.dp))
+                Text("Order",
+                    color = Color.White,
+                    fontSize = 30.sp,
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.ExtraBold,
-                    color = Color(0xFFFFFFFF)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(20.dp, 0.dp)
                 )
+
+                CardOrder()
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                androidx.compose.material.Button(
+                    onClick = {},
+                    modifier = Modifier
+                        .height(50.dp)
+                        .width(140.dp)
+                        .padding(0.dp),
+                    shape = RoundedCornerShape(20.dp),
+                    colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.White)
+                ) {
+                    Text(
+                        text = "Cancel",
+                        fontSize = 20.sp,
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.ExtraBold,
+                        color = Color(0xFFEE5252)
+                    )
+                }
             }
         }
-    }
+    )
 }
 
 @Composable
-fun CardRide() {
+fun CardOrder() {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .fillMaxHeight(0.85f)
+            .fillMaxHeight(0.88f)
             .padding(20.dp, 0.dp)
             .clickable { },
         elevation = 10.dp,
@@ -184,7 +181,7 @@ fun CardRide() {
                                 drawCircle(color = Color(0xFFEE5252))
                             })
                             Spacer(modifier = Modifier.height(15.dp))
-                            Divider(
+                            androidx.compose.material.Divider(
                                 color = Color.Black,
                                 modifier = Modifier
                                     .fillMaxHeight(0.025f)
@@ -242,7 +239,7 @@ fun CardRide() {
 //                                .fillMaxWidth(0.5f)
 //                                .height(15.dp)
 //                                .background(
-//                                    brush = Brush.horizontalGradient(listOf(Gray, Black)),
+//                                    brush = Brush.horizontalGradient(listOf(Color.Gray, Black)),
 //                                    shape = RoundedCornerShape(20.dp)
 //                                ),
 //                        ){
@@ -251,7 +248,10 @@ fun CardRide() {
 //                                verticalAlignment = Alignment.CenterVertically,
 //                                horizontalArrangement = Arrangement.Center,
 //                            ){
-//                                Icon(imageVector = Icons.Default.Star, contentDescription = "Rank")
+//                                androidx.compose.material.Icon(
+//                                    imageVector = Icons.Default.Star,
+//                                    contentDescription = "Rank"
+//                                )
 //                                Text(text = "Rank",
 //                                    fontSize = 10.sp)
 //                            }
@@ -275,42 +275,9 @@ fun CardRide() {
                 }
             }
             Column {
-                Row {
-                    Column {
-                        Text(
-                            text = "Date",
-                            fontSize = 15.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.Black,
-                            modifier = Modifier
-                                .offset(0.dp, 10.dp)
-                        )
-                        Card(
-                            Modifier
-                                .size(width = 160.dp, height = 30.dp)
-                                .offset(0.dp, 20.dp),
-                            backgroundColor = Color.LightGray) {
-                            // Card content
-                        }
-                    }
-                    Spacer(modifier = Modifier.width(20.dp))
-                    Card(
-                        Modifier
-                            .size(width = 180.dp, height = 30.dp)
-                            .offset(0.dp, 42.dp),
-                        backgroundColor = Color.LightGray
-                    ) {
-                        // Card content
-                    }
-
-                }
-
-                Spacer(modifier = Modifier.height(10.dp))
-
                 Column {
                     Text(
-                        text = "Nr of seats",
+                        text = "Car model",
                         fontSize = 15.sp,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Bold,
@@ -320,28 +287,7 @@ fun CardRide() {
                     )
                     Card(
                         Modifier
-                            .size(width = 160.dp, height = 30.dp)
-                            .offset(0.dp, 20.dp),
-                        backgroundColor = Color.LightGray
-                    ) {
-                        // Card content
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(10.dp))
-                Column {
-                    Text(
-                        text = "Card/Cash",
-                        fontSize = 15.sp,
-                        fontFamily = FontFamily.SansSerif,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black,
-                        modifier = Modifier
-                            .offset(0.dp, 15.dp)
-                    )
-                    Card(
-                        Modifier
-                            .size(width = 360.dp, height = 30.dp)
+                            .size(width = 360.dp, height = 35.dp)
                             .offset(0.dp, 20.dp),
                         backgroundColor = Color.LightGray
                     ) {
@@ -353,7 +299,7 @@ fun CardRide() {
 
                 Column {
                     Text(
-                        text = "Notes",
+                        text = "Number",
                         fontSize = 15.sp,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Bold,
@@ -363,7 +309,51 @@ fun CardRide() {
                     )
                     Card(
                         Modifier
-                            .size(width = 360.dp, height = 55.dp)
+                            .size(width = 360.dp, height = 35.dp)
+                            .offset(0.dp, 20.dp),
+                        backgroundColor = Color.LightGray
+                    ) {
+                        // Card content
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Column {
+                    Text(
+                        text = "Years of Experience",
+                        fontSize = 15.sp,
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black,
+                        modifier = Modifier
+                            .offset(0.dp, 15.dp)
+                    )
+                    Card(
+                        Modifier
+                            .size(width = 360.dp, height = 35.dp)
+                            .offset(0.dp, 20.dp),
+                        backgroundColor = Color.LightGray
+                    ) {
+                        // Card content
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Column {
+                    Text(
+                        text = "Nr. of rides",
+                        fontSize = 15.sp,
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black,
+                        modifier = Modifier
+                            .offset(0.dp, 15.dp)
+                    )
+                    Card(
+                        Modifier
+                            .size(width = 160.dp, height = 35.dp)
                             .offset(0.dp, 20.dp),
                         backgroundColor = Color.LightGray
                     ) {
@@ -381,7 +371,7 @@ fun CardRide() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    painter = painterResource(R.drawable.smoking_round), // smoking_no_round | smoking_round
+                    painter = painterResource(R.drawable.smoking_no_round), // smoking_no_round | smoking_round
                     contentDescription = "Smoking / No Smoking",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -417,10 +407,11 @@ fun CardRide() {
     }
 }
 
+
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview2() {
+fun DefaultPreview3() {
     App2_2Theme {
-        TopBar()
+        CurrentOrderContent()
     }
 }

@@ -1,3 +1,5 @@
+@file:Suppress("OPT_IN_IS_NOT_ENABLED")
+
 package com.example.app2
 
 import android.os.Bundle
@@ -44,7 +46,7 @@ class RideConfirmation : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             App2_2Theme {
-                TopBarContent()
+                AppTopBar()
             }
         }
     }
@@ -52,7 +54,7 @@ class RideConfirmation : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBarContent() {
+fun AppTopBar() {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -162,7 +164,8 @@ fun TopBarContent() {
                     }
                 }
             }
-        })
+        }
+    )
 }
 @Composable
 fun CardRideDetails() {
@@ -292,31 +295,31 @@ fun MoreAvailableRides() {
                                 .size(70.dp)
                                 .clip(CircleShape)
                         )
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth(0.5f)
-                                .height(15.dp)
-                                .background(
-                                    brush = Brush.horizontalGradient(listOf(Color.Gray, Black)),
-                                    shape = RoundedCornerShape(20.dp)
-                                ),
-                        ) {
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.Center,
-                            ) {
-                                androidx.compose.material.Icon(
-                                    imageVector = Icons.Default.Star,
-                                    contentDescription = "Rank"
-                                )
-                                Text(
-                                    text = "Rank",
-                                    fontSize = 10.sp
-                                )
-                            }
-
-                        }
+//                        Box(
+//                            modifier = Modifier
+//                                .fillMaxWidth(0.5f)
+//                                .height(15.dp)
+//                                .background(
+//                                    brush = Brush.horizontalGradient(listOf(Color.Gray, Black)),
+//                                    shape = RoundedCornerShape(20.dp)
+//                                ),
+//                        ) {
+//                            Row(
+//                                modifier = Modifier.fillMaxWidth(),
+//                                verticalAlignment = Alignment.CenterVertically,
+//                                horizontalArrangement = Arrangement.Center,
+//                            ) {
+//                                androidx.compose.material.Icon(
+//                                    imageVector = Icons.Default.Star,
+//                                    contentDescription = "Rank"
+//                                )
+//                                Text(
+//                                    text = "Rank",
+//                                    fontSize = 10.sp
+//                                )
+//                            }
+//
+//                        }
                         Text(
                             text = "Name Surname",
                             fontSize = 15.sp,
@@ -361,6 +364,6 @@ fun MoreAvailableRides() {
 @Composable
 fun DefaultPreview() {
     App2_2Theme {
-        TopBarContent()
+        AppTopBar()
     }
 }
