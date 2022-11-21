@@ -121,7 +121,7 @@ class Driver2 : ComponentActivity() {
                     ){
                         if(validateData(name, surname, gender, birthDate,
                                 phoneNr, carModel, carPlate, yearOfExp)){
-                            val dbEntry: DBHelper = DBHelper()
+                            val dbEntry: DBHelper = DBHelper(null)
 
                             dbEntry.addUser(userHashMap)
 

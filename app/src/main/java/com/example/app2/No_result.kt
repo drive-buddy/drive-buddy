@@ -26,7 +26,7 @@ import com.example.app2.ui.theme.Grey
 import kotlinx.coroutines.launch
 
 class No_result : ComponentActivity() {
-    var db: DBHelper = DBHelper()
+    var db: DBHelper = DBHelper(null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

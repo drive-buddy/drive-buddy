@@ -1,5 +1,6 @@
 package com.example.app2.helperfiles
 
+import android.content.SharedPreferences
 import android.util.Log
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
@@ -9,6 +10,11 @@ import java.util.Date
 class DBHelper {
     private var TAG: String? = "DB"
     var db: FirebaseFirestore = Firebase.firestore
+    var prefs: SharedPreferences?
+
+    constructor(prefs: SharedPreferences?) {
+        this.prefs = prefs
+    }
 
     //    CREATE
     public fun addUser(data: HashMap<String, String?>) {
@@ -40,12 +46,30 @@ class DBHelper {
     }
 
     // retrieve a single user based on id and call the callback on user data
-    fun getUser(userID: String, callback: (data: Map<String, Any?>) -> Unit) {
+    fun getUser(userID: String,
+                callback: (data: Map<String, Any?>) -> Unit,
+                storeAsGlobalState: Boolean = false) {
         db.collection("users").document(userID)
             .get()
             .addOnSuccessListener { document ->
-                if (document != null)
+                if (document != null) {
+                    if (storeAsGlobalState) {
+                        val userData: MutableMap<String, Any>? =  document.data
+
+                        if (userData != null) {
+                            for ((key, value) in prefs!!.all) {
+                                prefs!!.edit().remove(key.toString()).commit()
+                            }
+
+                            for ((key, value) in userData) {
+                                prefs?.edit()?.putString(key.toString(), value.toString())
+                                    ?.commit()
+                            }
+                        }
+                    }
+
                     callback(document.data as Map<String, Any?>)
+                }
             }
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error getting user by id", e)

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -93,7 +92,7 @@ class Schedule_ride: ComponentActivity() {
                         price: String
                     ){
                         if(validateData(from, to, date, time, nrOfSeats, price)){
-                            val dbEntry : DBHelper = DBHelper()
+                            val dbEntry : DBHelper = DBHelper(null)
                             result = (userHashMap + filterHashMap) as HashMap<String, String?>
                             dbEntry.addOrder(result)
                             val navigate1 = Intent(this@Schedule_ride, No_result::class.java)
