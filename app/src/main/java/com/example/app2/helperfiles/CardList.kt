@@ -63,7 +63,7 @@ fun InfoRow(
 ) {
     Card(
         modifier = Modifier
-            .height(270.dp)
+            .height(300.dp)
             .width(400.dp)
             .padding(vertical = 10.dp, horizontal = 40.dp),
         shape = RoundedCornerShape(10)
@@ -185,13 +185,13 @@ fun InfoRow(
                             user.userFirstName!!,
                             modifier = Modifier.padding(horizontal = 3.dp),
                             color = Color.Black,
-                            fontSize = 13.sp,
+                            fontSize = 15.sp,
                             fontWeight = FontWeight.W700
                         )
                         Text(
                             user.userLastName!!,
                             color = Color.Black,
-                            fontSize = 13.sp,
+                            fontSize = 15.sp,
                             fontWeight = FontWeight.W700,
                         )
                     }
@@ -203,20 +203,18 @@ fun InfoRow(
                                 text = user.carModel!!,
                                 modifier = Modifier.padding(3.dp),
                                 color = Color.Black,
-                                fontSize = 12.sp,
+                                fontSize = 10.sp,
                                 fontWeight = FontWeight.W700,
                             )
-                            Divider(
-                                color = Color.Black,
-                                modifier = Modifier
-                                    .height(12.dp)
-                                    .width(1.dp)
-                            )
+                        }
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
                             Text(
                                 text = user.carNumber!!,
                                 modifier = Modifier.padding(3.dp),
                                 color = Color.Black,
-                                fontSize = 12.sp,
+                                fontSize = 10.sp,
                                 fontWeight = FontWeight.W700,
                             )
                         }
