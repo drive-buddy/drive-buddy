@@ -25,8 +25,8 @@ import com.example.app2.helperfiles.FilterList
 import com.example.app2.helperfiles.filterss
 import com.example.app2.rides.AvailableRides
 import com.example.app2.ui.theme.App2_2Theme
+import com.google.firebase.Timestamp
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import java.util.*
 import kotlin.collections.HashMap
 
 class Schedule_ride: ComponentActivity() {
@@ -39,21 +39,21 @@ class Schedule_ride: ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    val userHashMap: HashMap<String, String?> = HashMap<String, String?>()
+                    val userHashMap: HashMap<String, Any?> = HashMap<String, Any?>()
                     var filterHashMap: HashMap<String, String?> = HashMap<String, String?>()
                     var result: HashMap<String, Any?> = HashMap<String, Any?>()
 
                     var destinationFrom by rememberSaveable { mutableStateOf("") }
                     var destinationTo by rememberSaveable { mutableStateOf("") }
-                    var date by rememberSaveable { mutableStateOf("") }
-                    var time by rememberSaveable { mutableStateOf("") }
+                    var date: Long? by rememberSaveable { mutableStateOf(null) }
+                    var time: Long? by rememberSaveable { mutableStateOf(null) }
                     var nrOfSeats by rememberSaveable { mutableStateOf("") }
                     var price by rememberSaveable { mutableStateOf("") }
 
                     var validateDestFrom by rememberSaveable { mutableStateOf(true) }
                     var validateDestTo by rememberSaveable { mutableStateOf(true) }
-                    var validateDate by rememberSaveable { mutableStateOf(true) }
-                    var validateTime by rememberSaveable { mutableStateOf(true) }
+                    val validateDate by rememberSaveable { mutableStateOf(true) }
+                    val validateTime by rememberSaveable { mutableStateOf(true) }
                     var validateNrOfSeats by rememberSaveable { mutableStateOf(true) }
                     var validatePrice by rememberSaveable { mutableStateOf(true) }
 
@@ -67,8 +67,8 @@ class Schedule_ride: ComponentActivity() {
                     fun validateData(
                         from: String,
                         to: String,
-                        date: String,
-                        time: String,
+//                        date: String,
+//                        time: String,
                         nrOfSeats: String,
                         price: String
                     ): Boolean{
@@ -92,12 +92,12 @@ class Schedule_ride: ComponentActivity() {
                     fun registerRide(
                         from: String,
                         to: String,
-                        date: String,
-                        time: String,
+                        date: Long?,
+                        time: Long?,
                         nrOfSeats: String,
-                        price: String
+                        price: String,
                     ){
-                        if(validateData(from, to, date, time, nrOfSeats, price)){
+                        if(validateData(from, to, nrOfSeats, price)){
                             val dbEntry : DBHelper = DBHelper(null)
                             val userEmail : String = dbEntry.getCurrentUser()
                             var userInfo : Map<String, Any?> = HashMap<String, Any>()
@@ -106,6 +106,17 @@ class Schedule_ride: ComponentActivity() {
 
                             userInfo.forEach { (key, value) -> Log.i("info","$key = $value") }
                             result = (userHashMap + filterHashMap) as HashMap<String, Any?>
+
+//                            date.
+                            result["date"] = Timestamp(date!! + time!!, 0)
+                            result.remove("time")
+
+                            val tmp : Int = (result["nrOfSeats"] as String).toInt()
+                            result.remove("nrOfSeats")
+                            result["nrOfSeats"] = tmp
+                            val tmp2 : Int = (result["price"] as String).toInt()
+                            result.remove("price")
+                            result["price"] = tmp2
 
                             dbEntry.getUser(userEmail) {
                                 document ->
@@ -231,8 +242,8 @@ class Schedule_ride: ComponentActivity() {
                                     errorState = validateTime
                                 )
                             }
-                            userHashMap["date"] = date.trim()
-                            userHashMap["time"] = time.trim()
+                            userHashMap["date"] = date.toString()
+                            userHashMap["time"] = time.toString()
 
                             Spacer(Modifier.height(10.dp))
 
@@ -282,7 +293,7 @@ class Schedule_ride: ComponentActivity() {
                                     showError = !validateNrOfSeats
                                 )
 
-                                userHashMap["nrOfSeats"] = nrOfSeats.trim()
+                                userHashMap["nrOfSeats"] = nrOfSeats
 
                                 Spacer(Modifier.width(10.dp))
 
@@ -304,7 +315,7 @@ class Schedule_ride: ComponentActivity() {
                                     ),
                                     showError = !validatePrice
                                 )
-                                userHashMap["price"] = price.trim()
+                                userHashMap["price"] = price
 
                             }
                             Spacer(Modifier.height(10.dp))
@@ -349,7 +360,8 @@ class Schedule_ride: ComponentActivity() {
                                     date,
                                     time,
                                     nrOfSeats,
-                                    price)
+                                    price
+                                )
                             },
                             modifier = Modifier
                                 .height(50.dp)

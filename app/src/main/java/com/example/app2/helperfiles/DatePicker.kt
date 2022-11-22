@@ -15,6 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.google.firebase.Timestamp
+import java.text.DateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -23,7 +25,7 @@ import java.util.*
 fun ShowDatePicker(
     messageError: String,
     errorState: Boolean
-): String{
+): Long? {
     val context = LocalContext.current
 
     val year: Int
@@ -41,28 +43,23 @@ fun ShowDatePicker(
     calendar.time = Date()
 
     val date = remember { mutableStateOf("") }
+    val otherDate = remember { mutableStateOf("") }
 
     val datePickerDialog = DatePickerDialog(
         context, { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
             if(dayOfMonth < 10 && (month+1) < 10) {
                 date.value = "0$dayOfMonth-0${month + 1}-$year"
-                tmp = "$year-$month-$dayOfMonth"
-
             }
             else if(dayOfMonth < 10){
                 date.value = "0$dayOfMonth-${month + 1}-$year"
-                tmp = "$year-$month-$dayOfMonth"
-
             }
             else if(month < 10){
                 date.value = "$dayOfMonth-0${month + 1}-$year"
-                tmp = "$year-$month-$dayOfMonth"
             }
             else{
                 date.value = "$dayOfMonth-${month + 1}-$year"
-                tmp = "$year-$month-$dayOfMonth"
-
             }
+            otherDate.value = "$year-${month + 1}-$dayOfMonth"
         }, year, month, day
     )
     Button(onClick = { datePickerDialog.show() },
@@ -101,16 +98,15 @@ fun ShowDatePicker(
 //    val tmp = date
     if (date.value != "")
     {
-        val datew = LocalDate.now()
-        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-        val text = datew.format(formatter)
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val text = otherDate.value.format(formatter)
         val parsedDate = LocalDate.parse(text, formatter)
-//        val formatter = DateTimeFormatter.ofPattern("dd-M-yyyy", Locale.ENGLISH)
-//        val localDate = LocalDate.parse(date.value)
-//    val dateFormat = SimpleDateFormat(pattern = "DD-MM-yyyy", locale = Locale.US)
-//    val varTime : Date = dateFormat.parse(date.value) as Date
-        Log.i("DatePicker", tmp)
+//        Log.i("DatePicker", (parsedDate.toEpochDay() * 24 * 60 * 60).toString())
+//        Log.i("DatePicker",
+//            Timestamp((parsedDate.toEpochDay() * 24 * 60 * 60).toLong(), 0).toDate().toString()
+//        )
+        return (parsedDate.toEpochDay() * 24 * 60 * 60.toLong() - 2 * 60 * 60)
     }
 
-    return date.value
+    return null
 }

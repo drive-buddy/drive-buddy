@@ -52,7 +52,7 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
 
-class PassengerBookRide : ComponentActivity() {
+class DriverBookRide : ComponentActivity() {
     private val sharedViewModel: SharedViewModel by viewModels()
 
 
@@ -69,25 +69,22 @@ class PassengerBookRide : ComponentActivity() {
 
                     }
 //                    val rideId : String? = intent.getStringExtra("info")
-                    val rideId = intent.getStringExtra("rideId")
-                    val driver = intent.getStringExtra("driver")
-                    val passenger1 = intent.getStringExtra("passenger1")
-                    val passenger2 = intent.getStringExtra("passenger2")
-                    val passenger3 = intent.getStringExtra("passenger3")
+                    val rideID = intent.getStringExtra("rideId")
+
+                    dbEntry.getPassengerRideInfo(rideID = rideID!!) { it ->
+                        it["driver"] = userEmail
+                        dbEntry.addDriverOffer(it)
+                        dbEntry.removePassengerRequest(rideID)
+                    }
+//                    val driver = intent.getStringExtra("driver")
+//                    val passenger1 = intent.getStringExtra("passenger1")
+//                    val passenger2 = intent.getStringExtra("passenger2")
+//                    val passenger3 = intent.getStringExtra("passenger3")
 //                    var spot : Int = 1
 //                    while (spot <= 3) {
 //                        spot += 1
 //                    }
-                    if (passenger1 == "") {
-                        dbEntry.addPassengerToRide(rideId!!, 1, userEmail)
-                    } else if (passenger2 == "") {
-                        dbEntry.addPassengerToRide(rideId!!, 2, userEmail)
-                    } else if (passenger3 == "") {
-                        dbEntry.addPassengerToRide(rideId!!, 3, userEmail)
-                    } else {
-                        Log.e("Booking Ride", "No available seats")
-                    }
-                    Text("hello world")
+                    Text("hello driver")
                 }
             }
         }

@@ -83,6 +83,26 @@ class DBHelper {
             }
     }
 
+    // retrieve a single user based on id and call the callback on user data
+    fun getPassengerRideInfo(rideID: String,
+                callback: (data: HashMap<String, Any?>) -> Unit) {
+        db.collection("passengerRequests")
+            .document(rideID)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    callback.invoke(document.data as HashMap<String, Any?>)
+                }
+            }
+    }
+
+    // retrieve a single user based on id and call the callback on user data
+    fun removePassengerRequest(rideID: String) {
+        db.collection("passengerRequests")
+            .document(rideID)
+            .delete()
+    }
+
     fun getIdByEmail(email: String, callback: (data: String) -> Unit) {
         db
             .collection("users")
@@ -310,7 +330,22 @@ class DBHelper {
     }
 
     // UPDATE
-    fun addPassengerToRide(rideId: String, passengerId: String) {
+    fun addPassengerToRide(rideId: String, spot : Int, passengerEmail: String) {
+        val ride: DocumentReference = db.collection("driverOffers").document(rideId)
+
+        ride.get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+//                    val passengerRef: DocumentReference = db.collection("users").document(passengerId)
+
+                    ride.update("passenger$spot", passengerEmail)
+                }
+            }
+            .addOnFailureListener { e -> Log.w(TAG, "Error getting order by id.", e) }
+    }
+
+    // UPDATE
+    fun driverAcceptRide(rideId: String, passengerId: String) {
         val ride: DocumentReference = db.collection("orders").document(rideId)
 
         ride.get()

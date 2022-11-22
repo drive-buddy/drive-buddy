@@ -34,6 +34,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.app2.Schedule_ride
 import com.example.app2.drawer.DrawerLayout
 import com.example.app2.helperfiles.*
+import com.example.app2.rides.booking.DriverBookRide
 import com.example.app2.rides.booking.PassengerBookRide
 import com.example.app2.ui.theme.App2Theme
 import com.google.firebase.firestore.FirebaseFirestore
@@ -95,12 +96,22 @@ class AvailableRides : ComponentActivity() {
                                         if (document["type"] == "passenger")
                                         {
                                             val navigate = Intent(this@AvailableRides, PassengerBookRide::class.java)
-                                            navigate.putExtra("info", it)
+                                            navigate.putExtra("rideId", it.id)
+//                                            navigate.putExtra("driver", it.driver)
+                                            navigate.putExtra("passenger1", it.passenger1)
+                                            navigate.putExtra("passenger2", it.passenger2)
+                                            navigate.putExtra("passenger3", it.passenger3)
                                             startActivity(navigate)
                                             finish()
                                         }
-                                        else if (document["type"] == "driver")
-                                        {}
+                                        else if (document["type"] == "driver") {
+                                            val navigate = Intent(this@AvailableRides, DriverBookRide::class.java)
+                                            navigate.putExtra("rideId", it.id)
+//                                            navigate.putExtra("driver", it.driver)
+//                                            navigate.putExtra("passenger1", it.passenger1)
+                                            startActivity(navigate)
+                                            finish()
+                                        }
                                     }
                                 }
                             }

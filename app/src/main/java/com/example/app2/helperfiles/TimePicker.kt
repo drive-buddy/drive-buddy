@@ -1,6 +1,7 @@
 package com.example.app2
 
 import android.app.TimePickerDialog
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -14,13 +15,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Composable
 fun ShowTimePicker(
     messageError: String,
     errorState: Boolean
-): String{
+): Long? {
     val Context = LocalContext.current
 
     val calendar = Calendar.getInstance()
@@ -28,6 +31,9 @@ fun ShowTimePicker(
     val Minute = calendar[Calendar.MINUTE]
 
     val time = remember { mutableStateOf("") }
+    val otherTimeHour = remember { mutableStateOf("") }
+    val otherTimeMinute = remember { mutableStateOf("") }
+
 
     val timePickerDialog = TimePickerDialog(
         Context,
@@ -44,6 +50,8 @@ fun ShowTimePicker(
             else{
                 time.value = "$Hour:$Minute"
             }
+            otherTimeHour.value = Hour.toString()
+            otherTimeMinute.value = Hour.toString()
         }, Hour, Minute, true
     )
 
@@ -75,5 +83,20 @@ fun ShowTimePicker(
         errorMessage = messageError,
         showError = !errorState
     )
-    return time.value
+
+    if (time.value != "")
+    {
+//        val formatter = DateTimeFormatter.ofPattern("HH:mm")
+//        val text = time.value.format(formatter)
+//        val parsedDate = LocalDate.parse(text, formatter)
+        Log.i("DatePicker", (otherTimeHour.value.toLong() * 60 * 60 + otherTimeMinute.value.toLong() * 60).toString())
+//        Log.i("DatePicker",
+//            Timestamp((parsedDate.toEpochDay() * 24 * 60 * 60).toLong(), 0).toDate().toString()
+//        )
+//        return parsedDate.toEpochDay() * 24 * 60 * 60.toLong()
+        return (otherTimeHour.value.toLong() * 60 * 60 + otherTimeMinute.value.toLong() * 60)
+    }
+
+    return null
+//    return time.value
 }
