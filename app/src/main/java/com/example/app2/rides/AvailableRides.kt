@@ -138,14 +138,26 @@ class AvailableRides : ComponentActivity() {
         }
     }
 
-    fun getCorrectUser(driver : Infos, users : List<User>?) : User {
-        Log.i("Simion", driver.toString())
-        users?.forEach() {
-            if (it.email == driver.driver)
-            {
-                return (it)
+    fun getCorrectUser(data : Infos, users : List<User>?) : User {
+        Log.i("Simion", data.toString())
+        Log.i("Simion2", users.toString())
+        // its for passenger
+        if (data.driver == "") {
+            users?.forEach() {
+                if (it.email == data.passenger1)
+                {
+                    return (it)
+                }
+            }
+        } else {
+            users?.forEach() {
+                if (it.email == data.driver)
+                {
+                    return (it)
+                }
             }
         }
+
         return (User())
     }
 
@@ -200,12 +212,12 @@ class RidesRepository @Inject constructor(
         val dataOrException = DataOrException<List<Infos>, List<User>, Exception>()
 //        var users = listOf<User>()
         try {
+            dataOrException.user = getUserInfo().get().await().map { document ->
+                document.toObject(User::class.java)
+            }
             if (type == "passenger") {
                 dataOrException.data = queryRidesForPassenger().get().await().map { document ->
                     document.toObject(Infos::class.java)
-                }
-                dataOrException.user = getUserInfoForPassenger().get().await().map { document ->
-                    document.toObject(User::class.java)
                 }
 //                Log.i("users", users.toString())
             } else {
@@ -224,7 +236,7 @@ class RidesRepository @Inject constructor(
         .collection("driverOffers")
         .orderBy("to", Query.Direction.ASCENDING)
 
-    private suspend fun getUserInfoForPassenger() = FirebaseFirestore.getInstance()
+    private suspend fun getUserInfo() = FirebaseFirestore.getInstance()
         .collection("users")
 //        .whereEqualTo("email", email)
         .orderBy("email", Query.Direction.ASCENDING)

@@ -54,7 +54,7 @@ class Driver2 : ComponentActivity() {
                     var birthDate by rememberSaveable { mutableStateOf("") }
                     var phoneNr by rememberSaveable { mutableStateOf("") }
                     var carModel by rememberSaveable { mutableStateOf("") }
-                    var carPlate by rememberSaveable { mutableStateOf("") }
+                    var carNumber by rememberSaveable { mutableStateOf("") }
                     var yearOfExp by rememberSaveable { mutableStateOf("") }
 
                     var validateName by rememberSaveable { mutableStateOf(true) }
@@ -63,7 +63,7 @@ class Driver2 : ComponentActivity() {
                     var validateBirthDate by rememberSaveable { mutableStateOf(true) }
                     var validatePhoneNr by rememberSaveable { mutableStateOf(true) }
                     var validateCarModel by rememberSaveable { mutableStateOf(true) }
-                    var validateCarPlate by rememberSaveable { mutableStateOf(true) }
+                    var validateCarNumber by rememberSaveable { mutableStateOf(true) }
                     var validateYearOfExp by rememberSaveable { mutableStateOf(true) }
 
                     val validateNameError = "Please input a valid name"
@@ -72,7 +72,7 @@ class Driver2 : ComponentActivity() {
                     val validateBirthDateError = "Please input birth date in required form"
                     val validatePhoneNrError = "Please input a valid phone number"
                     val validateCarModelError = "Please input a valid car model"
-                    val validateCarPlateError = "Please input a valid car plate"
+                    val validateCarNumberError = "Please input a valid car plate"
                     val validateYearOfExpError = "Please input years of experience"
 
                     fun validateData(name: String,
@@ -81,7 +81,7 @@ class Driver2 : ComponentActivity() {
                                      birthDate: String,
                                      phoneNr: String,
                                      carModel: String,
-                                     carPlate: String,
+                                     carNumber: String,
                                      yearOfExp: String): Boolean{
 
                         val genderRegex = "(?=.*[MF]).{1,}".toRegex()
@@ -89,7 +89,7 @@ class Driver2 : ComponentActivity() {
                         val birthDateRegex = ("(0[1-9]|1\\d|2\\d|3[01])\\/" +
                                 "(0[1-9]|1[0-2])\\/(19|20)\\d{2}").toRegex()
 
-//                        val carPlateRegex = ("(^[A-Z]{2}[0-9]{2}\\s?[A-Z]{3})).toRegex()
+//                        val carNumberRegex = ("(^[A-Z]{2}[0-9]{2}\\s?[A-Z]{3})).toRegex()
 
                         val yearOfExpRegex = "(?=.*[0-9]).{1,}".toRegex()
 
@@ -100,14 +100,14 @@ class Driver2 : ComponentActivity() {
                         validateBirthDate = birthDateRegex.matches(birthDate)
                         validatePhoneNr = Patterns.PHONE.matcher(phoneNr).matches()
                         validateCarModel = carModel.isNotBlank()
-                        validateCarPlate = carPlate.isNotBlank()
-//                        validateCarPlate = carPlateRegex.matches(carPlate)
+                        validateCarNumber = carNumber.isNotBlank()
+//                        validatecarNumber = carNumberRegex.matches(carNumber)
 //                        Need to find a suitable Regex
                         validateYearOfExp = yearOfExpRegex.matches(yearOfExp)
 
                         return validateName && validateSurname && validateGender
                                 && validateBirthDate && validatePhoneNr && validateCarModel
-                                && validateCarPlate && validateYearOfExp
+                                && validateCarNumber && validateYearOfExp
                     }
 
                     fun register(
@@ -117,11 +117,11 @@ class Driver2 : ComponentActivity() {
                         birthDate: String,
                         phoneNr: String,
                         carModel: String,
-                        carPlate: String,
+                        carNumber: String,
                         yearOfExp: String
                     ){
                         if(validateData(name, surname, gender, birthDate,
-                                phoneNr, carModel, carPlate, yearOfExp)){
+                                phoneNr, carModel, carNumber, yearOfExp)){
                             val dbEntry: DBHelper = DBHelper(null)
 
                             dbEntry.addUser(userHashMap)
@@ -291,13 +291,15 @@ class Driver2 : ComponentActivity() {
 
                                 type = "Car Licence Plate",
                                 hint = "ABC 123",
-                                activeVariable = carPlate,
+                                activeVariable = carNumber,
                                 onVarChange = {
-                                    carPlate = it
+                                    carNumber = it
                                 },
-                                errorMessage = validateCarPlateError,
-                                showError = !validateCarPlate
+                                errorMessage = validateCarNumberError,
+                                showError = !validateCarNumber
                             )
+
+                            userHashMap["carNumber"] = carNumber.trim()
 
                             Spacer(Modifier.height(15.dp))
 
@@ -357,7 +359,7 @@ class Driver2 : ComponentActivity() {
                         Button(
                             onClick = {
                                 register(name, surname, gender, birthDate,
-                                    phoneNr, carModel, carPlate, yearOfExp)
+                                    phoneNr, carModel, carNumber, yearOfExp)
                             },
                             modifier = Modifier
                                 .height(50.dp)

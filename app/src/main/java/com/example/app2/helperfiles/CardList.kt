@@ -58,7 +58,6 @@ data class User(
 fun InfoRow(
     info: Infos,
     user: User,
-    type : String = "passenger",
     buttonBehavior: (info : Infos) -> Unit,
 ) {
     Card(
