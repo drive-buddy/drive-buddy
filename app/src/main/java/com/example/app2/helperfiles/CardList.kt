@@ -15,25 +15,52 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.app2.R
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.DocumentId
+import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 data class Infos(
-    val price: String? = "",
-    val date: String? = null,
-    val time: String? = null,
+    @DocumentId
+    val id : String? = "",
     val from: String? = "",
     val to: String? = "",
-    val name: String? = "",
-    val surname: String? = "",
-    val carModel: String? = null,
-    val license: String? = null,
-    val nrOfSeats: String? = ""
-)
+    val date: Timestamp? = null,
+    val nrOfSeats: Int? = null,
+    val price: Int? = null,
+    val driver: String? = "",
+    val passenger1: String? = "",
+    val passenger2: String? = "",
+    val passenger3: String? = "",
+) : java.io.Serializable
+
+data class User(
+    @DocumentId
+    val id : String? = "",
+    val userFirstName: String? = "",
+    val userLastName: String? = "",
+    val email: String? = "",
+    val carModel: String? = "",
+    val carNumber: String? = "",
+    val userPhoneNumber: String? = "",
+    val yearsOfExp: String? = "",
+
+) : java.io.Serializable
 //val infoss = listOf(
 //    Infos("price", "date", "time", "From", "To", "Name", "Surname", "Car model", "License", "Nr")
 //)
 
 @Composable
-fun InfoRow(info: Infos) {
+fun InfoRow(
+    info: Infos,
+    user: User,
+    type : String = "passenger",
+    buttonBehavior: (info : Infos) -> Unit,
+) {
     Card(
         modifier = Modifier
             .height(270.dp)
@@ -57,7 +84,7 @@ fun InfoRow(info: Infos) {
                 )
                 {
                     Text(
-                        text = info.price!! + " lei",
+                        text = info.price!!.toString() + " lei",
                         color = Color.Black,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.W700
@@ -71,7 +98,7 @@ fun InfoRow(info: Infos) {
                         )
                         Spacer(Modifier.width(10.dp))
                         Text(
-                            info.nrOfSeats!!,
+                            text = info.nrOfSeats!!.toString(),
                             color = Color.Black,
                             fontSize = 18.sp,
                             fontWeight = FontWeight.W700
@@ -87,26 +114,27 @@ fun InfoRow(info: Infos) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+                    val tmp = info.date!!.toDate()
                     Text(
-                        info.date!!,
+                        text = tmp.toString(),
                         modifier = Modifier.padding(3.dp),
                         color = Color.Black,
                         fontSize = 12.sp,
                         fontWeight = FontWeight.W700,
                     )
-                    Divider(
-                        color = Color.Black,
-                        modifier = Modifier
-                            .height(12.dp)
-                            .width(1.dp)
-                    )
-                    Text(
-                        text = info.time!!,
-                        modifier = Modifier.padding(3.dp),
-                        color = Color.Black,
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.W700,
-                    )
+//                    Divider(
+//                        color = Color.Black,
+//                        modifier = Modifier
+//                            .height(12.dp)
+//                            .width(1.dp)
+//                    )
+//                    Text(
+//                        text = info.time!!,
+//                        modifier = Modifier.padding(3.dp),
+//                        color = Color.Black,
+//                        fontSize = 12.sp,
+//                        fontWeight = FontWeight.W700,
+//                    )
                 }
             }
             Row(
@@ -154,25 +182,25 @@ fun InfoRow(info: Infos) {
                     )
                     Row() {
                         Text(
-                            info.name!!,
+                            user.userFirstName!!,
                             modifier = Modifier.padding(horizontal = 3.dp),
                             color = Color.Black,
                             fontSize = 13.sp,
                             fontWeight = FontWeight.W700
                         )
                         Text(
-                            info.surname!!,
+                            user.userLastName!!,
                             color = Color.Black,
                             fontSize = 13.sp,
                             fontWeight = FontWeight.W700,
                         )
                     }
-                    if (info.carModel != null) {
+                    if (info.driver != "") {
                         Row(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                info.carModel!!,
+                                text = user.carModel!!,
                                 modifier = Modifier.padding(3.dp),
                                 color = Color.Black,
                                 fontSize = 12.sp,
@@ -185,7 +213,7 @@ fun InfoRow(info: Infos) {
                                     .width(1.dp)
                             )
                             Text(
-                                info.license!!,
+                                text = user.carNumber!!,
                                 modifier = Modifier.padding(3.dp),
                                 color = Color.Black,
                                 fontSize = 12.sp,
@@ -202,7 +230,7 @@ fun InfoRow(info: Infos) {
         )
         {
             Button(
-                onClick = {/**/},
+                onClick = { buttonBehavior(info) },
                 modifier = Modifier
                     .height(40.dp)
                     .width(150.dp)

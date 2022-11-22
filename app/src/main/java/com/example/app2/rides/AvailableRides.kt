@@ -3,11 +3,13 @@ package com.example.app2.rides
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -32,21 +34,18 @@ import androidx.lifecycle.viewModelScope
 import com.example.app2.Schedule_ride
 import com.example.app2.drawer.DrawerLayout
 import com.example.app2.helperfiles.*
+import com.example.app2.rides.booking.PassengerBookRide
 import com.example.app2.ui.theme.App2Theme
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.Query
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.components.SingletonComponent
+import gen._base._base_java__assetres.srcjar.R.id.info
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
-import javax.inject.Singleton
 
 @AndroidEntryPoint
 @ExperimentalCoroutinesApi
@@ -87,7 +86,23 @@ class AvailableRides : ComponentActivity() {
                                         .offset(1.dp, 1.dp)
                                 )
                                 val dataOrException = viewModel.data.value
-                                InfoList(dataOrException)
+
+                                InfoList(dataOrException) {
+                                    val dbEntry : DBHelper = DBHelper(null)
+                                    val userEmail : String = dbEntry.getCurrentUser()
+                                    Log.i("infoAR", it.toString())
+                                    dbEntry.getUser(userEmail) { document ->
+                                        if (document["type"] == "passenger")
+                                        {
+                                            val navigate = Intent(this@AvailableRides, PassengerBookRide::class.java)
+                                            navigate.putExtra("info", it)
+                                            startActivity(navigate)
+                                            finish()
+                                        }
+                                        else if (document["type"] == "driver")
+                                        {}
+                                    }
+                                }
                             }
                         },
                         floatingActionButtonFun = {
@@ -112,21 +127,42 @@ class AvailableRides : ComponentActivity() {
         }
     }
 
+    fun getCorrectUser(driver : Infos, users : List<User>?) : User {
+        Log.i("Simion", driver.toString())
+        users?.forEach() {
+            if (it.email == driver.driver)
+            {
+                return (it)
+            }
+        }
+        return (User())
+    }
+
     @Composable
-    fun InfoList(dataOrException: DataOrException<List<Infos>, Exception>) {
+    fun InfoList(
+        dataOrException: DataOrException<List<Infos>, List<User>, Exception>,
+        buttonBehavior: (info : Infos) -> Unit,
+    ) {
         val items = dataOrException.data
+        val users : List<User>? = dataOrException.user
+//        var userData : List<Map<String, Any?>> = listOf()
+
+//        val dbEntry : DBHelper = DBHelper(null)
+        Log.d("Simion", users.toString())
 
         items?.let {
             LazyColumn(state = rememberLazyListState()) {
                 items(items)
                 { data ->
-                    Log.d("CardList", "HomeList: add data $data")
-                    InfoRow(
-                        data
-                    )
+                        Log.d("CardList", "HomeList: add data $data")
+                        InfoRow(
+                            info = data,
+                            user = getCorrectUser(data, users),
+                            buttonBehavior = buttonBehavior,
+                        )
+                    }
                 }
             }
-        }
         val e = dataOrException.e
         e?.let {
             Text(
@@ -147,120 +183,20 @@ class AvailableRides : ComponentActivity() {
     }
 }
 
-//class AvailableRides : ComponentActivity() {
-//
-//    private val sharedViewModel: SharedViewModel by viewModels()
-//
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContent {
-//            App2Theme {
-//                Surface(
-//                    modifier = Modifier.fillMaxSize(),
-//                ) {
-//                    // A surface container using the 'background' color from the theme
-//                    val searchAppBarState: SearchAppBarState by sharedViewModel.searchAppBarState
-//                    val searchTextState: String by sharedViewModel.searchTextState
-////                    AvailableRides(
-////                        sharedViewModel = sharedViewModel,
-////                        searchAppBarState = searchAppBarState,
-////                        searchTextState = searchTextState
-////                    )
-//                    DrawerLayout(
-//                        contentFun = {
-//                            Column(modifier = Modifier
-////                                .padding(2.dp)
-////                                .verticalScroll(rememberScrollState())
-//                            ) {
-//                                Text(
-//                                    text = "Available Rides:",
-//                                    fontSize = 28.sp,
-//                                    fontFamily = FontFamily.SansSerif,
-//                                    fontWeight = FontWeight.SemiBold,
-//                                    color = Color.White,
-//                                    modifier = Modifier
-//                                        .padding(top = 20.dp, start = 30.dp)
-//                                        .offset(1.dp, 1.dp)
-//                                )
-//                                var userRides2 : MutableList<Infos> = mutableListOf()
-//
-////                                userRides2 = callUpdateRide()
-//                                userRides2 = mutableListOf(
-//                                    Infos("price", "date", "time", "From", "To", "Name", "Surname", "Car model", "License", "Nr"),
-//                                    Infos("price", "date", "time", "From", "To", "Name", "Surname", "Car model", "License", "Nr"),
-//                                    Infos("price", "date", "time", "From", "To", "Name", "Surname", "Car model", "License", "Nr"),
-//                                    Infos("price", "date", "time", "From", "To", "Name", "Surname", "Car model", "License", "Nr")
-//
-//                                )
-//                                InfoList(userRides2)
-//                                Log.i("opa2", userRides2.toString())
-//
-//                                val context = LocalContext.current
-//
-//
-//
-////                                InfoList(infoss = userRides2)
-//                            }
-//
-//                        },
-//                        floatingActionButtonFun = {
-//                            Button(onClick = {
-//                                val navigate = Intent(this@AvailableRides, Schedule_ride::class.java)
-//                                startActivity(navigate)
-//                            },
-//                                modifier = Modifier.size(70.dp),
-//                                shape = CircleShape,
-//                                border = BorderStroke(2.dp, Color.White),
-//                            ) {
-//                                Icon(
-//                                    Icons.Default.Add,
-//                                    modifier = Modifier.fillMaxSize(),
-//                                    contentDescription = "add",
-//                                    tint = Color.White)
-//                            }
-//                        }
-//                    )
-//                }
-//            }
-//        }
-//    }
-//
-//    @Composable
-//    fun callUpdateRide(): MutableList<Infos> {
-//        var userRides2 : MutableList<Infos> = mutableListOf()
-//
-//        Log.i("bbbb", "hello??")
-////        InfoList(infoss = userRides2)
-//
-//        prepareRides(
-//
-//            object : PrepareRidesCallback {
-//                override fun OnCompleted(tasks: List<Infos>): MutableList<Infos> {
-//
-//                    userRides2 = tasks as MutableList<Infos>
-//
-//                    Log.i("opa", userRides2.toString())
-//                    return (userRides2)
-//                }
-//            }
-//        )
-//        Log.i("bbbb", "hello??")
-//        return (userRides2)
-//
-//    }
-//}
-
 class RidesRepository @Inject constructor(
 ) {
-    suspend fun getInfoFromFirestore(type : String): DataOrException<List<Infos>, Exception> {
-        val dataOrException = DataOrException<List<Infos>, Exception>()
+    suspend fun getInfoFromFirestore(type : String): DataOrException<List<Infos>, List<User>, Exception> {
+        val dataOrException = DataOrException<List<Infos>, List<User>, Exception>()
+//        var users = listOf<User>()
         try {
-//            Log.e("here", "you here?$type")
             if (type == "passenger") {
                 dataOrException.data = queryRidesForPassenger().get().await().map { document ->
                     document.toObject(Infos::class.java)
                 }
+                dataOrException.user = getUserInfoForPassenger().get().await().map { document ->
+                    document.toObject(User::class.java)
+                }
+//                Log.i("users", users.toString())
             } else {
                 dataOrException.data = queryRidesForDriver().get().await().map { document ->
                     document.toObject(Infos::class.java)
@@ -277,6 +213,11 @@ class RidesRepository @Inject constructor(
         .collection("driverOffers")
         .orderBy("to", Query.Direction.ASCENDING)
 
+    private suspend fun getUserInfoForPassenger() = FirebaseFirestore.getInstance()
+        .collection("users")
+//        .whereEqualTo("email", email)
+        .orderBy("email", Query.Direction.ASCENDING)
+
     private suspend fun queryRidesForDriver() = FirebaseFirestore.getInstance()
         .collection("passengerRequests")
         .orderBy("to", Query.Direction.ASCENDING)
@@ -287,8 +228,9 @@ class RidesViewModel @Inject constructor(
     private val repository: RidesRepository
 ): ViewModel() {
     var loading = mutableStateOf(false)
-    val data: MutableState<DataOrException<List<Infos>, Exception>> = mutableStateOf(
+    val data: MutableState<DataOrException<List<Infos>, List<User>, Exception>> = mutableStateOf(
         DataOrException(
+            listOf(),
             listOf(),
             Exception("")
         )
@@ -317,7 +259,16 @@ fun CircularProgressBar(
     isDisplayed: Boolean
 ) {
     if (isDisplayed) {
-        CircularProgressIndicator()
+        Card(modifier = Modifier
+            .background(color = Color.Transparent),
+        ){
+            CircularProgressIndicator(modifier = Modifier
+                .background(color = Color.Transparent)
+                .width(100.dp)
+                .height(100.dp),
+                color = Color.Red,
+                strokeWidth = 2.dp)
+        }
     }
 }
 

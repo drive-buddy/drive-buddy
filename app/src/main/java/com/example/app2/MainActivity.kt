@@ -12,6 +12,7 @@ import com.example.app2.signin.Sign_in
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 class MainActivity : ComponentActivity() {
     lateinit var prefs: SharedPreferences
@@ -20,6 +21,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var auth: FirebaseAuth
 
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -60,6 +62,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     public override fun onStart() {
         super.onStart()
         // Check if user is signed in.

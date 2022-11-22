@@ -2,7 +2,6 @@ package com.example.app2.helperfiles
 
 import android.content.SharedPreferences
 import android.util.Log
-import com.example.app2.rides.RidesViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
@@ -27,11 +26,11 @@ class DBHelper {
         addDocument("orders", data)
     }
 
-    fun addPassengerRequest(data: HashMap<String, String?>) {
+    fun addPassengerRequest(data: HashMap<String, Any?>) {
         addDocument("passengerRequests", data)
     }
 
-    fun addDriverOffer(data: HashMap<String, String?>) {
+    fun addDriverOffer(data: HashMap<String, Any?>) {
         addDocument("driverOffers", data)
     }
 

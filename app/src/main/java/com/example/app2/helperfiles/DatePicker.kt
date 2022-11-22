@@ -1,28 +1,22 @@
 package com.example.app2
 
 import android.app.DatePickerDialog
-import android.content.Intent
-import android.os.Bundle
+import android.util.Log
 import android.widget.DatePicker
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Lock
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Composable
@@ -36,6 +30,8 @@ fun ShowDatePicker(
     val month: Int
     val day: Int
 
+    var tmp : String = ""
+
     val calendar = Calendar.getInstance()
 
     year = calendar.get(Calendar.YEAR)
@@ -47,19 +43,25 @@ fun ShowDatePicker(
     val date = remember { mutableStateOf("") }
 
     val datePickerDialog = DatePickerDialog(
-        context,
-        { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+        context, { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
             if(dayOfMonth < 10 && (month+1) < 10) {
-                date.value = "0$dayOfMonth/0${month + 1}/$year"
+                date.value = "0$dayOfMonth-0${month + 1}-$year"
+                tmp = "$year-$month-$dayOfMonth"
+
             }
             else if(dayOfMonth < 10){
-                date.value = "0$dayOfMonth/${month + 1}/$year"
+                date.value = "0$dayOfMonth-${month + 1}-$year"
+                tmp = "$year-$month-$dayOfMonth"
+
             }
             else if(month < 10){
-                date.value = "$dayOfMonth/0${month + 1}/$year"
+                date.value = "$dayOfMonth-0${month + 1}-$year"
+                tmp = "$year-$month-$dayOfMonth"
             }
             else{
-                date.value = "$dayOfMonth/${month + 1}/$year"
+                date.value = "$dayOfMonth-${month + 1}-$year"
+                tmp = "$year-$month-$dayOfMonth"
+
             }
         }, year, month, day
     )
@@ -95,5 +97,20 @@ fun ShowDatePicker(
         errorMessage = messageError,
         showError = !errorState
     )
+
+//    val tmp = date
+    if (date.value != "")
+    {
+        val datew = LocalDate.now()
+        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        val text = datew.format(formatter)
+        val parsedDate = LocalDate.parse(text, formatter)
+//        val formatter = DateTimeFormatter.ofPattern("dd-M-yyyy", Locale.ENGLISH)
+//        val localDate = LocalDate.parse(date.value)
+//    val dateFormat = SimpleDateFormat(pattern = "DD-MM-yyyy", locale = Locale.US)
+//    val varTime : Date = dateFormat.parse(date.value) as Date
+        Log.i("DatePicker", tmp)
+    }
+
     return date.value
 }

@@ -23,9 +23,14 @@ import androidx.compose.ui.text.input.KeyboardType
 import com.example.app2.helperfiles.DBHelper
 import com.example.app2.helperfiles.FilterList
 import com.example.app2.helperfiles.filterss
+import com.example.app2.rides.AvailableRides
 import com.example.app2.ui.theme.App2_2Theme
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import java.util.*
+import kotlin.collections.HashMap
 
 class Schedule_ride: ComponentActivity() {
+    @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -36,7 +41,7 @@ class Schedule_ride: ComponentActivity() {
                 ) {
                     val userHashMap: HashMap<String, String?> = HashMap<String, String?>()
                     var filterHashMap: HashMap<String, String?> = HashMap<String, String?>()
-                    var result: HashMap<String, String?> = HashMap<String, String?>()
+                    var result: HashMap<String, Any?> = HashMap<String, Any?>()
 
                     var destinationFrom by rememberSaveable { mutableStateOf("") }
                     var destinationTo by rememberSaveable { mutableStateOf("") }
@@ -59,27 +64,29 @@ class Schedule_ride: ComponentActivity() {
                     val nrOfSeatsError = "Please input a valid nr of seats"
                     val priceError = "Please input a valid price"
 
-                    fun validateData(from: String,
-                                     to: String,
-                                     date: String,
-                                     time: String,
-                                     nrOfSeats: String,
-                                     price: String): Boolean{
+                    fun validateData(
+                        from: String,
+                        to: String,
+                        date: String,
+                        time: String,
+                        nrOfSeats: String,
+                        price: String
+                    ): Boolean{
 
-                        val dateRegex = ("(0[1-9]|1\\d|2\\d|3[01])\\/" +
-                                "(0[1-9]|1[0-2])\\/(19|20)\\d{2}").toRegex()
-
-                        val timeRegex = ("([01][0-9]|2[0-3]):([0-5][0-9])").toRegex()
+//                        val dateRegex = ("(0[1-9]|1\\d|2\\d|3[01])\\/" +
+//                                "(0[1-9]|1[0-2])\\/(19|20)\\d{2}").toRegex()
+//
+//                        val timeRegex = ("([01][0-9]|2[0-3]):([0-5][0-9])").toRegex()
 
                         validateDestFrom = from.isNotBlank()
                         validateDestTo = to.isNotBlank()
-                        validateDate = dateRegex.matches(date)
-                        validateTime = timeRegex.matches(time)
+//                        validateDate = dateRegex.matches(date)
+//                        validateTime = timeRegex.matches(time)
                         validateNrOfSeats = nrOfSeats.isNotBlank()
                         validatePrice = price.isNotBlank()
 
-                        return validateDestFrom && validateDestTo && validateDate
-                                && validateTime && validateNrOfSeats && validatePrice
+                        return validateDestFrom && validateDestTo
+                                && validateNrOfSeats && validatePrice
                     }
 
                     fun registerRide(
@@ -94,15 +101,30 @@ class Schedule_ride: ComponentActivity() {
                             val dbEntry : DBHelper = DBHelper(null)
                             val userEmail : String = dbEntry.getCurrentUser()
                             var userInfo : Map<String, Any?> = HashMap<String, Any>()
+//                            var dateTime : Date = Date(date)
+
+
+                            userInfo.forEach { (key, value) -> Log.i("info","$key = $value") }
+                            result = (userHashMap + filterHashMap) as HashMap<String, Any?>
+
                             dbEntry.getUser(userEmail) {
                                 document ->
                                 userInfo = document
+
                                 if (userInfo["type"] == "passenger")
                                 {
+                                    result["driver"] = ""
+                                    result["passenger1"] = userInfo["email"] as String?
+                                    result["passenger2"] = ""
+                                    result["passenger3"] = ""
                                     dbEntry.addPassengerRequest(result)
                                 }
                                 else if (userInfo["type"] == "driver")
                                 {
+                                    result["driver"] = userInfo["email"] as String?
+                                    result["passenger1"] = ""
+                                    result["passenger2"] = ""
+                                    result["passenger3"] = ""
                                     dbEntry.addDriverOffer(result)
                                 }
                                 else
@@ -111,11 +133,10 @@ class Schedule_ride: ComponentActivity() {
                                     Log.i("info2", userInfo.toString())
                                 }
                             }
-                            userInfo.forEach { (key, value) -> Log.i("info","$key = $value") }
-                            result = (userHashMap + filterHashMap) as HashMap<String, String?>
 
-                            val navigate1 = Intent(this@Schedule_ride, No_result::class.java)
+                            val navigate1 = Intent(this@Schedule_ride, AvailableRides::class.java)
                             startActivity(navigate1)
+                            finish()
                         }
                     }
 
@@ -301,7 +322,7 @@ class Schedule_ride: ComponentActivity() {
                     {
                         Button(
                             onClick = {
-                                val navigate = Intent(this@Schedule_ride, No_result::class.java)
+                                val navigate = Intent(this@Schedule_ride, AvailableRides::class.java)
                                 startActivity(navigate)
                             },
                             modifier = Modifier

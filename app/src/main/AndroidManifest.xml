@@ -46,6 +46,15 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".rides.booking.PassengerBookRide"
+            android:exported="false"
+            android:label="@string/title_activity_passenger_book_ride"
+            android:theme="@style/Theme.App2">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".signin.SignInProcess"
             android:exported="false"
             android:label="@string/title_activity_sign_in_process"

@@ -44,7 +44,7 @@ fun ShowTimePicker(
             else{
                 time.value = "$Hour:$Minute"
             }
-        }, Hour, Minute, false
+        }, Hour, Minute, true
     )
 
     Button(onClick = { timePickerDialog.show() },
