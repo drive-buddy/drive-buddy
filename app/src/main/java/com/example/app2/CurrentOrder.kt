@@ -202,7 +202,7 @@ class CurrentOrder : ComponentActivity() {
                     Column {
                         Text(
                             "Price: ${info.price} lei",
-                            fontSize = 20.sp,
+                            fontSize = 18.sp,
                             fontFamily = FontFamily.SansSerif,
                             fontWeight = FontWeight.Bold,
                             color = Color.Black,
@@ -262,7 +262,7 @@ class CurrentOrder : ComponentActivity() {
                         }
                     }
 
-                    Spacer(modifier = Modifier.width(100.dp))
+                    Spacer(modifier = Modifier.width(55.dp))
 
                     Column {
                         Column(
@@ -335,16 +335,19 @@ class CurrentOrder : ComponentActivity() {
                                 .offset(0.dp, 20.dp),
                             backgroundColor = Color.LightGray
                         ) {
-                            Text(
-                                text = "${user1.carModel}",
-                            fontSize = 15.sp,
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.Black,
-                            modifier = Modifier
-                                .offset(0.dp, 15.dp)
-                            )
-                            // Card content
+                            Column(
+                                modifier = Modifier.fillMaxSize(),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center
+                            ) {
+                                Text(
+                                    text = "${user1.carModel}",
+                                    fontSize = 15.sp, fontFamily = FontFamily.SansSerif,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Color.Black
+                                )
+                                // Card content
+                            }
                         }
                     }
 
@@ -362,20 +365,24 @@ class CurrentOrder : ComponentActivity() {
                         )
                         Card(
                             Modifier
-                                .size(width = 360.dp, height = 35.dp)
+                                .size(width = 360.dp, height = 30.dp)
                                 .offset(0.dp, 20.dp),
                             backgroundColor = Color.LightGray
                         ) {
-                            Text(
-                                text = "${user1.carNumber}",
-                                fontSize = 15.sp,
-                                fontFamily = FontFamily.SansSerif,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.Black,
-                                modifier = Modifier
-                                    .offset(0.dp, 15.dp)
-                            )
-                            // Card content
+                            Column(
+                                modifier = Modifier.fillMaxSize(),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center
+                            ) {
+                                Text(
+                                    text = "${user1.carNumber}",
+                                    fontSize = 15.sp,
+                                    fontFamily = FontFamily.SansSerif,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Color.Black
+                                )
+                                // Card content
+                            }
                         }
                     }
 
@@ -393,20 +400,24 @@ class CurrentOrder : ComponentActivity() {
                         )
                         Card(
                             Modifier
-                                .size(width = 360.dp, height = 35.dp)
+                                .size(width = 360.dp, height = 30.dp)
                                 .offset(0.dp, 20.dp),
                             backgroundColor = Color.LightGray
                         ) {
-                            Text(
-                                text = "${user1.yearOfExp} years",
-                                fontSize = 15.sp,
-                                fontFamily = FontFamily.SansSerif,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.Black,
-                                modifier = Modifier
-                                    .offset(0.dp, 15.dp)
-                            )
-                            // Card content
+                            Column(
+                                modifier = Modifier.fillMaxSize(),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center
+                            ) {
+                                Text(
+                                    text = "${user1.yearOfExp} years",
+                                    fontSize = 15.sp,
+                                    fontFamily = FontFamily.SansSerif,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Color.Black
+                                )
+                                // Card content
+                            }
                         }
                     }
 
@@ -423,25 +434,27 @@ class CurrentOrder : ComponentActivity() {
                                 .offset(0.dp, 15.dp)
                         )
                         Card(
-
                             Modifier
-                                .size(width = 160.dp, height = 35.dp)
+                                .size(width = 160.dp, height = 30.dp)
                                 .offset(0.dp, 20.dp),
                             backgroundColor = Color.LightGray
                         ) {
-                            Text(
-                                text = "${info.nrOfSeats}",
-                                fontSize = 15.sp,
-                                fontFamily = FontFamily.SansSerif,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.Black,
-                                modifier = Modifier
-                                    .offset(0.dp, 15.dp)
-                            )
-                            // Card content
+                            Column(
+                                modifier = Modifier.fillMaxSize(),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center
+                            ) {
+                                Text(
+                                    text = "${info.nrOfSeats}",
+                                    fontSize = 15.sp,
+                                    fontFamily = FontFamily.SansSerif,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Color.Black
+                                )
+                                // Card content
+                            }
                         }
                     }
-
                 }
 
                 Spacer(modifier = Modifier.height(15.dp))
@@ -456,9 +469,9 @@ class CurrentOrder : ComponentActivity() {
                         contentDescription = "Smoking / No Smoking",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
-                            .size(80.dp)
+                            .size(70.dp)
                             .background(Color.White)
-                            .clip(CircleShape) // clip to the circle shape
+                            .clip(CircleShape)
                             .border(3.dp, color = Color(0xFFEE5252), CircleShape)
                     )
 
@@ -467,9 +480,9 @@ class CurrentOrder : ComponentActivity() {
                         contentDescription = "Pet | No Pet",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
-                            .size(80.dp)
+                            .size(70.dp)
                             .background(Color.White)
-                            .clip(CircleShape) // clip to the circle shape
+                            .clip(CircleShape)
                             .border(3.dp, color = Color(0xFFEE5252), CircleShape)
                     )
 
@@ -478,9 +491,9 @@ class CurrentOrder : ComponentActivity() {
                         contentDescription = "Luggage | No Luggage",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
-                            .size(80.dp)
+                            .size(70.dp)
                             .background(Color.White)
-                            .clip(CircleShape) // clip to the circle shape
+                            .clip(CircleShape)
                             .border(3.dp, color = Color(0xFFEE5252), CircleShape)
                     )
                 }
