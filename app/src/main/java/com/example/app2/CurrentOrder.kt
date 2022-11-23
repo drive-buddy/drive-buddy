@@ -331,7 +331,7 @@ class CurrentOrder : ComponentActivity() {
                         )
                         Card(
                             Modifier
-                                .size(width = 360.dp, height = 35.dp)
+                                .size(width = 360.dp, height = 30.dp)
                                 .offset(0.dp, 20.dp),
                             backgroundColor = Color.LightGray
                         ) {
