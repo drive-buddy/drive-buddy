@@ -11,11 +11,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import com.example.app2.No_result
+import com.example.app2.rides.AvailableRides
 import com.example.app2.ui.theme.App2Theme
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 class SignInProcess : ComponentActivity() {
 
@@ -82,6 +83,7 @@ class SignInProcess : ComponentActivity() {
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     private fun signIn(userEmail : String, userPassword : String)
     {
         auth.signInWithEmailAndPassword(userEmail, userPassword)
@@ -91,7 +93,7 @@ class SignInProcess : ComponentActivity() {
                     Log.i(ContentValues.TAG, "signInWithEmail:success")
                     val user = auth.currentUser
 //                    updateUI(user)
-                    val navigate1 = Intent(this@SignInProcess, No_result::class.java)
+                    val navigate1 = Intent(this@SignInProcess, AvailableRides::class.java)
                     startActivity(navigate1)
                     finish()
                 } else {

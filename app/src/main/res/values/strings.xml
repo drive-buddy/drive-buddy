@@ -2,6 +2,7 @@
     <string name="app_name">Drive Buddy</string>
     <string name="title_activity_find">Find</string>
     <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_activity_ride_confirmation">MainActivity2</string>
     <string name="title_activity_choose">Choose</string>
     <string name="title_current_order">Current order</string>
     <string name="title_activity_driver1">Driver1</string>

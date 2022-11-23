@@ -177,6 +177,15 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+<!--        <activity-->
+<!--            android:name=".RideConfirmation"-->
+<!--            android:exported="false"-->
+<!--            android:label="@string/title_activity_ride_confirmation"-->
+<!--            android:theme="@style/Theme.App2">-->
+<!--            <meta-data-->
+<!--                android:name="android.app.lib_name"-->
+<!--                android:value="" />-->
+<!--        </activity>-->
         <activity
             android:name=".MainActivity"
             android:exported="true"

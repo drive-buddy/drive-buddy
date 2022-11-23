@@ -102,6 +102,9 @@ class CurrentOrder : ComponentActivity() {
                         && viewModel.data.value.user!!.isNotEmpty()) {
                         CardOrder(viewModel.data.value.data!!, viewModel.data.value.user!!)
 
+                    } else if (viewModel.data.value.data != null
+                        && viewModel.data.value.user!!.isEmpty()) {
+                        CardOrder(viewModel.data.value.data!!, listOf(User()))
                     }
 
                     Spacer(modifier = Modifier.height(20.dp))
@@ -395,7 +398,7 @@ class CurrentOrder : ComponentActivity() {
                             backgroundColor = Color.LightGray
                         ) {
                             Text(
-                                text = "${user1.yearsOfExp}",
+                                text = "${user1.yearOfExp} years",
                                 fontSize = 15.sp,
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.Bold,
@@ -491,12 +494,16 @@ class CurrentOrderRepository @Inject constructor(
     suspend fun getInfoFromFirestore(type : String, activeOrderID : String):
             CurrentOrderData<Infos, List<User>> {
         val allInfo = CurrentOrderData<Infos, List<User>>()
-        allInfo.user = getUserInfo("dimadriver@gmail.com").get().await().map { document ->
-            document.toObject(User::class.java)
-        }
+
         allInfo.data = findRide(activeOrderID).get().await().toObject(Infos::class.java)
+        Log.i("allData1", allInfo.data.toString())
         if (allInfo.data == null) {
             allInfo.data = findRide2(activeOrderID).get().await().toObject(Infos::class.java)
+        }
+        Log.i("allData2", allInfo.data.toString())
+
+        allInfo.user = getUserInfo(allInfo.data?.driver.toString()).get().await().map { document ->
+            document.toObject(User::class.java)
         }
         return allInfo
     }
@@ -536,7 +543,8 @@ class CurrentOrderViewModel @Inject constructor(
         val DBEntry : DBHelper = DBHelper()
         DBEntry.getUser(DBEntry.getCurrentUser()) {
                 it ->
-            getRides(it["type"] as String, it["activeOrderID"] as String)
+            if (it["activeOrderID"] != null)
+                getRides(it["type"] as String, it["activeOrderID"] as String)
         }
     }
 

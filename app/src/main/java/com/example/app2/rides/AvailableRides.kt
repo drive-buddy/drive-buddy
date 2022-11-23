@@ -100,14 +100,16 @@ class AvailableRides : ComponentActivity() {
                                             navigate.putExtra("passenger1", it.passenger1)
                                             navigate.putExtra("passenger2", it.passenger2)
                                             navigate.putExtra("passenger3", it.passenger3)
+                                            navigate.putExtra("date", it.date?.toDate().toString())
+                                            navigate.putExtra("nrOfSeats", it.nrOfSeats.toString())
                                             startActivity(navigate)
                                             finish()
                                         }
                                         else if (document["type"] == "driver") {
                                             val navigate = Intent(this@AvailableRides, DriverBookRide::class.java)
                                             navigate.putExtra("rideId", it.id)
-//                                            navigate.putExtra("driver", it.driver)
-//                                            navigate.putExtra("passenger1", it.passenger1)
+                                            navigate.putExtra("date", it.date?.toDate().toString())
+                                            navigate.putExtra("nrOfSeats", it.nrOfSeats.toString())
                                             startActivity(navigate)
                                             finish()
                                         }
@@ -138,8 +140,6 @@ class AvailableRides : ComponentActivity() {
     }
 
     fun getCorrectUser(data : Infos, users : List<User>?) : User {
-        Log.i("Simion", data.toString())
-        Log.i("Simion2", users.toString())
         // its for passenger
         if (data.driver == "") {
             users?.forEach() {

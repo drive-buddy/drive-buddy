@@ -11,11 +11,13 @@ import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -32,6 +34,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.app2.CardRideDetails
+import com.example.app2.MoreAvailableRides
 import com.example.app2.Schedule_ride
 import com.example.app2.drawer.DrawerLayout
 import com.example.app2.helperfiles.*
@@ -79,17 +83,119 @@ class DriverBookRide : ComponentActivity() {
                         }
                         dbEntry.removePassengerRequest(rideID)
                     }
-//                    val driver = intent.getStringExtra("driver")
-//                    val passenger1 = intent.getStringExtra("passenger1")
-//                    val passenger2 = intent.getStringExtra("passenger2")
-//                    val passenger3 = intent.getStringExtra("passenger3")
-//                    var spot : Int = 1
-//                    while (spot <= 3) {
-//                        spot += 1
-//                    }
-                    Text("hello driver")
+                    val date : String? = intent.getStringExtra("date")
+                    val nrOfSeats : String? = intent.getStringExtra("nrOfSeats")
+                    DrawerLayout(localContext = this,
+                        contentFun = {
+                        Column(
+                            modifier = Modifier
+                                .padding(it)
+                                .fillMaxSize()
+                                .background(Color(0xFFEE5252)),
+                            verticalArrangement = Arrangement.Top,
+                            horizontalAlignment = Alignment.Start
+                        ) {
+                            Text("Ride Successfully",
+                                color = Color.Black,
+                                fontSize = 25.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(20.dp, 20.dp, 0.dp,0.dp))
+                            Text("Booked!",
+                                color = Color.White,
+                                fontSize = 25.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(20.dp, 0.dp))
+                            CardRideDetails2(date = date!!, nrOfSeats = nrOfSeats!!)
+                            Card(
+                                modifier = Modifier
+                                    .fillMaxWidth(0.8f)
+                                    .size(30.dp)
+                                    .padding(20.dp, 0.dp),
+                                elevation = 10.dp,
+                                shape = RoundedCornerShape(20.dp)
+                            ) { Text("More available rides:",
+                                color = Color.Black,
+                                fontSize = 20.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(20.dp, 0.dp)
+                                ,
+                            ) }
+                            LazyColumn(
+                                modifier = Modifier
+                                    .fillMaxSize(),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Top
+                            ) {
+                                // Add a single item
+                                item {
+                                    MoreAvailableRides()
+                                }
+
+                                // Add 5 items
+                                items(5) {
+                                    MoreAvailableRides()
+                                }
+
+                                item {
+                                    Text(text = "No more available rides")
+                                }
+                            }
+                        }
+                    })
+//                    Text("hello driver")
                 }
             }
         }
+    }
+}
+
+@Composable
+fun CardRideDetails2(showError : Boolean = false, date : String = "", nrOfSeats : String = "") {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .size(180.dp)
+            .padding(20.dp)
+            .fillMaxWidth()
+            .clickable { },
+        elevation = 10.dp,
+        shape = RoundedCornerShape(20.dp)
+    ) {
+        if (showError) {
+            Text(
+                text = "Sorry, but all the seats are taken.\n" +
+                        "Try another ride.",
+                color = Color(0xFFEE5252),
+                fontSize = 20.sp,
+                fontFamily = FontFamily.SansSerif,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(20.dp)
+            )
+        } else {
+            Text(
+                text = "You have booked a ride \n" +
+                        "for $date.\n" +
+                        "$nrOfSeats seats have been reserved",
+                color = Color(0xFFEE5252),
+                fontSize = 20.sp,
+                fontFamily = FontFamily.SansSerif,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(20.dp)
+            )
+        }
+
     }
 }
