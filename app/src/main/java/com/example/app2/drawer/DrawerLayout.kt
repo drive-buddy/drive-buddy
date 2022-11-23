@@ -1,6 +1,7 @@
 package com.example.app2.drawer
 
-import android.content.SharedPreferences
+import android.content.Context
+import android.content.Intent
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
@@ -9,14 +10,17 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.core.content.ContextCompat.startActivity
 import com.example.app2.*
 import com.example.app2.helperfiles.DBHelper
 import kotlinx.coroutines.launch
 
 @Composable
 fun DrawerLayout(
-    floatingActionButtonFun : @Composable () -> Unit = {},
-    contentFun : @Composable (PaddingValues) -> Unit,
+    localContext: Context? = null,
+    floatingActionButtonFun: @Composable () -> Unit = {},
+    contentFun: @Composable (PaddingValues) -> Unit,
 ){
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
@@ -81,6 +85,10 @@ fun DrawerLayout(
                     val dbEntry : DBHelper = DBHelper()
 
                     when(it.id){
+                        "current ride" -> {
+                            val navigate = Intent(localContext, CurrentOrder::class.java)
+                            localContext?.startActivity(navigate)
+                        }
                         "signout" -> dbEntry.signout()
                     }
                     println("Clicked on ${it.title}")

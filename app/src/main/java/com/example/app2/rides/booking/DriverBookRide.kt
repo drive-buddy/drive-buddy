@@ -73,7 +73,10 @@ class DriverBookRide : ComponentActivity() {
 
                     dbEntry.getPassengerRideInfo(rideID = rideID!!) { it ->
                         it["driver"] = userEmail
-                        dbEntry.addDriverOffer(it)
+                        dbEntry.addDriverOffer(it) { newRideID ->
+                            dbEntry.setCurrentOrder(userEmail, newRideID)
+                            dbEntry.setCurrentOrder(it["passenger1"] as String, newRideID)
+                        }
                         dbEntry.removePassengerRequest(rideID)
                     }
 //                    val driver = intent.getStringExtra("driver")

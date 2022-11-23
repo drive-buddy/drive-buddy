@@ -36,7 +36,8 @@ class No_result : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
-                    DrawerLayout(contentFun = {
+                    DrawerLayout(
+                        contentFun = {
                             padding ->
                         Box(modifier = Modifier
                             .absolutePadding(

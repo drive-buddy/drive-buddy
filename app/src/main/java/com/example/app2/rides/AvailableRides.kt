@@ -3,7 +3,6 @@ package com.example.app2.rides
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -42,7 +41,6 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.Query
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
-import gen._base._base_java__assetres.srcjar.R.id.info
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -71,6 +69,7 @@ class AvailableRides : ComponentActivity() {
 //                        searchTextState = searchTextState
 //                    )
                     DrawerLayout(
+                        localContext = this,
                         contentFun = {
                             Column(modifier = Modifier
 //                                .padding(2.dp)
@@ -294,101 +293,3 @@ fun CircularProgressBar(
         }
     }
 }
-
-//interface PrepareRidesCallback {
-//    fun OnCompleted(tasks: List<Infos>) : MutableList<Infos>
-//}
-//
-//fun prepareRides(callback: PrepareRidesCallback) {
-//    val dbEntry : DBHelper = DBHelper()
-//    val userEmail : String = dbEntry.getCurrentUser()
-//    var userInfo : Map<String, Any?> = HashMap<String, Any>()
-//    var userRides : MutableList<Infos> = mutableListOf()
-//    dbEntry.getUser(userEmail) {
-//            document ->
-//        userInfo = document
-//        if (userInfo["type"] == "passenger")
-//        {
-//            dbEntry.getOrders() { orders ->
-//                callback.OnCompleted(processOrders(orders))
-//            }
-//        }
-//        else if (userInfo["type"] == "driver")
-//        {
-////            dbEntry.addDriverOffer(result)
-//        }
-//        else
-//        {
-//            Log.e("error", "type not defined")
-//            Log.i("info2", userInfo.toString())
-//        }
-//    }
-//}
-//fun processOrders(orders: QuerySnapshot): MutableList<Infos> {
-//    val userRides : MutableList<Infos> = mutableListOf()
-//
-//    for (entry in orders.documents) {
-//        userRides.add(
-//            Infos(
-////                          date = entry.data?.entries["date"] as String?,
-//                price = entry.data?.get("price") as String?,
-////                            time = entryData["time"] as String?,
-//                from = entry.data?.get("from") as String?,
-//                to = entry.data?.get("to") as String?,
-//                nrOfSeats = entry.data?.get("nrOfSeats") as String?,
-//                name = "test",
-//                surname = "test",
-//                carModel = "test",
-//                license = "test",
-//            )
-//        )
-//        Log.i("test", "${entry.data?.entries!!}")
-//    }
-//    Log.i("here1", "$userRides")
-//    return (userRides)
-//}
-//
-//@Composable
-//fun AvailableRides(
-//    sharedViewModel: SharedViewModel,
-//    searchAppBarState: SearchAppBarState,
-//    searchTextState: String
-//) {
-////    Scaffold(topBar = {
-////        CustomTopAppBar(
-////            sharedViewModel = sharedViewModel,
-////            searchAppBarState = searchAppBarState,
-////            searchTextState = searchTextState
-////        )
-////    },
-////    content = {
-////        padding ->
-//////        InfoList(infoss)
-////    }
-////    )
-//    DrawerLayout(contentFun = {
-//        Text(
-//            text = "Available Rides:",
-//            fontSize = 28.sp,
-//            fontFamily = FontFamily.SansSerif,
-//            fontWeight = FontWeight.SemiBold,
-//            color = Color.White,
-//            modifier = Modifier
-//                .padding(top = 20.dp, start = 30.dp)
-//                .fillMaxWidth(0.5f)
-//                .offset(1.dp, 1.dp)
-//        )
-//    })
-////    Surface(
-////        modifier = Modifier
-////            .fillMaxWidth()
-////            .offset(0.dp, 81.dp)
-////            .fillMaxHeight(),
-////        color = Color(0xFFEE5252),
-////    ) {
-////
-////
-////        LazyColumnDemo()
-////    }
-//
-//}

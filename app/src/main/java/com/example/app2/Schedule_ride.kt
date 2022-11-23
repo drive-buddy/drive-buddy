@@ -128,7 +128,9 @@ class Schedule_ride: ComponentActivity() {
                                     result["passenger1"] = userInfo["email"] as String?
                                     result["passenger2"] = ""
                                     result["passenger3"] = ""
-                                    dbEntry.addPassengerRequest(result)
+                                    dbEntry.addPassengerRequest(result) {
+                                        dbEntry.setCurrentOrder(userEmail, it)
+                                    }
                                 }
                                 else if (userInfo["type"] == "driver")
                                 {
@@ -136,7 +138,9 @@ class Schedule_ride: ComponentActivity() {
                                     result["passenger1"] = ""
                                     result["passenger2"] = ""
                                     result["passenger3"] = ""
-                                    dbEntry.addDriverOffer(result)
+                                    dbEntry.addDriverOffer(result) {
+                                        dbEntry.setCurrentOrder(userEmail, it)
+                                    }
                                 }
                                 else
                                 {

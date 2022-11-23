@@ -19,26 +19,27 @@ class DBHelper {
 
     //    CREATE
     fun addUser(data: HashMap<String, String?>) {
-        addDocument("users", data)
+        addDocument("users", data) {}
     }
 
     fun addOrder(data: HashMap<String, String?>) {
-        addDocument("orders", data)
+        addDocument("orders", data) { }
     }
 
-    fun addPassengerRequest(data: HashMap<String, Any?>) {
-        addDocument("passengerRequests", data)
+    fun addPassengerRequest(data: HashMap<String, Any?>, callback: (String) -> Unit) {
+        addDocument("passengerRequests", data) { callback.invoke(it) }
     }
 
-    fun addDriverOffer(data: HashMap<String, Any?>) {
-        addDocument("driverOffers", data)
+    fun addDriverOffer(data: HashMap<String, Any?>, callback: (String) -> Unit) {
+        addDocument("driverOffers", data) { callback.invoke(it) }
     }
 
-    private fun addDocument(collection: String, data: Any) {
+    private fun addDocument(collection: String, data: Any, callback: (String) -> Unit) {
         db.collection(collection)
             .add(data)
             .addOnSuccessListener { documentReference ->
                 Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                    callback.invoke(documentReference.id).toString()
             }
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error adding document", e)
@@ -92,6 +93,25 @@ class DBHelper {
             .addOnSuccessListener { document ->
                 if (document != null) {
                     callback.invoke(document.data as HashMap<String, Any?>)
+                }
+            }
+    }
+
+    // set as active order
+    fun setCurrentOrder(userEmail: String, rideID : String) {
+        db
+            .collection("users")
+            .whereEqualTo("email", userEmail)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (documents != null) {
+                    for (document in documents) {
+                        db.collection("users")
+                            .document(document.id)
+                            .update("activeOrderID", rideID)
+
+                        Log.i(TAG, "${document.id} => ${document.data}")
+                    }
                 }
             }
     }
@@ -330,8 +350,10 @@ class DBHelper {
     }
 
     // UPDATE
-    fun addPassengerToRide(rideId: String, spot : Int, passengerEmail: String) {
-        val ride: DocumentReference = db.collection("driverOffers").document(rideId)
+    fun addPassengerToRide(rideID: String, spot : Int, passengerEmail: String) {
+        val ride: DocumentReference = db.collection("driverOffers").document(rideID)
+
+        setCurrentOrder(userEmail = passengerEmail, rideID = rideID)
 
         ride.get()
             .addOnSuccessListener { document ->
