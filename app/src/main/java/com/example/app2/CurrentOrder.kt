@@ -202,7 +202,7 @@ class CurrentOrder : ComponentActivity() {
                     Column {
                         Text(
                             "Price: ${info.price} lei",
-                            fontSize = 18.sp,
+                            fontSize = 20.sp,
                             fontFamily = FontFamily.SansSerif,
                             fontWeight = FontWeight.Bold,
                             color = Color.Black,
@@ -221,7 +221,7 @@ class CurrentOrder : ComponentActivity() {
 
                         Row {
                             Column {
-                                Canvas(modifier = Modifier.size(10.dp), onDraw = {
+                                Canvas(modifier = Modifier.size(10.dp).offset(0.dp,5.dp), onDraw = {
                                     drawCircle(color = Color(0xFFEE5252))
                                 })
                                 Spacer(modifier = Modifier.height(15.dp))
@@ -240,7 +240,8 @@ class CurrentOrder : ComponentActivity() {
 
                             Column {
                                 Text(
-                                    text = "${info.from}",
+                                    //text = "${info.from}",
+                                    text = "dfafefa",
                                     fontSize = 15.sp,
                                     fontFamily = FontFamily.SansSerif,
                                     fontWeight = FontWeight.Bold,
@@ -250,19 +251,21 @@ class CurrentOrder : ComponentActivity() {
                                 )
                                 Spacer(modifier = Modifier.height(10.dp))
                                 Text(
-                                    text = "${info.to}",
+                            //        text = "${info.to}",
+                                    text = "aaaaaaaaaaaa",
+
                                     fontSize = 15.sp,
                                     fontFamily = FontFamily.SansSerif,
                                     fontWeight = FontWeight.Bold,
                                     color = Color.Black,
                                     modifier = Modifier
-                                        .offset(10.dp, 0.dp)
+                                        .offset(10.dp, 5.dp)
                                 )
                             }
                         }
                     }
 
-                    Spacer(modifier = Modifier.width(55.dp))
+                    Spacer(modifier = Modifier.width(50.dp))
 
                     Column {
                         Column(
@@ -336,8 +339,10 @@ class CurrentOrder : ComponentActivity() {
                             backgroundColor = Color.LightGray
                         ) {
                             Column(
-                                modifier = Modifier.fillMaxSize(),
-                                horizontalAlignment = Alignment.CenterHorizontally,
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(20.dp,0.dp),
+                                horizontalAlignment = Alignment.Start,
                                 verticalArrangement = Arrangement.Center
                             ) {
                                 Text(
@@ -370,8 +375,10 @@ class CurrentOrder : ComponentActivity() {
                             backgroundColor = Color.LightGray
                         ) {
                             Column(
-                                modifier = Modifier.fillMaxSize(),
-                                horizontalAlignment = Alignment.CenterHorizontally,
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(20.dp,0.dp),
+                                horizontalAlignment = Alignment.Start,
                                 verticalArrangement = Arrangement.Center
                             ) {
                                 Text(
@@ -405,8 +412,10 @@ class CurrentOrder : ComponentActivity() {
                             backgroundColor = Color.LightGray
                         ) {
                             Column(
-                                modifier = Modifier.fillMaxSize(),
-                                horizontalAlignment = Alignment.CenterHorizontally,
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(20.dp,0.dp),
+                                horizontalAlignment = Alignment.Start,
                                 verticalArrangement = Arrangement.Center
                             ) {
                                 Text(
@@ -440,8 +449,10 @@ class CurrentOrder : ComponentActivity() {
                             backgroundColor = Color.LightGray
                         ) {
                             Column(
-                                modifier = Modifier.fillMaxSize(),
-                                horizontalAlignment = Alignment.CenterHorizontally,
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(20.dp,0.dp),
+                                horizontalAlignment = Alignment.Start,
                                 verticalArrangement = Arrangement.Center
                             ) {
                                 Text(
