@@ -14,8 +14,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat.startActivity
 import com.example.app2.*
 import com.example.app2.helperfiles.DBHelper
+import com.example.app2.rides.AvailableRides
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @Composable
 fun DrawerLayout(
     localContext: Context? = null,
@@ -85,11 +88,19 @@ fun DrawerLayout(
                     val dbEntry : DBHelper = DBHelper()
 
                     when(it.id){
+                        "home" -> {
+                            val navigate = Intent(localContext, AvailableRides::class.java)
+                            localContext?.startActivity(navigate)
+                        }
                         "current ride" -> {
                             val navigate = Intent(localContext, CurrentOrder::class.java)
                             localContext?.startActivity(navigate)
                         }
-                        "signout" -> dbEntry.signout()
+                        "signout" -> {
+                            dbEntry.signout()
+                            val navigate = Intent(localContext, StartPage::class.java)
+                            localContext?.startActivity(navigate)
+                        }
                     }
                     println("Clicked on ${it.title}")
                 }
