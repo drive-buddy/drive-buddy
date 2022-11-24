@@ -246,8 +246,7 @@ class CurrentOrder : ComponentActivity() {
 
                             Column {
                                 Text(
-                                    //text = "${info.from}",
-                                    text = "dfafefa",
+                                    text = "${info.from}",
                                     fontSize = 15.sp,
                                     fontFamily = FontFamily.SansSerif,
                                     fontWeight = FontWeight.Bold,
@@ -257,9 +256,7 @@ class CurrentOrder : ComponentActivity() {
                                 )
                                 Spacer(modifier = Modifier.height(10.dp))
                                 Text(
-                            //        text = "${info.to}",
-                                    text = "aaaaaaaaaaaa",
-
+                                    text = "${info.to}",
                                     fontSize = 15.sp,
                                     fontFamily = FontFamily.SansSerif,
                                     fontWeight = FontWeight.Bold,
