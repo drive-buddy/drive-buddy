@@ -107,6 +107,12 @@ class CurrentOrder : ComponentActivity() {
                         CardOrder(viewModel.data.value.data!!, listOf(User()))
                     }
 
+                    val dbEntry = DBHelper(null)
+                    val userEmail = dbEntry.getCurrentUser()
+                    dbEntry.getUser(userEmail) { document ->
+                        Log.i("CurrentOrder", document["userPhoneNumber"] as String)
+                    }
+
                     Spacer(modifier = Modifier.height(20.dp))
 
                     androidx.compose.material.Button(

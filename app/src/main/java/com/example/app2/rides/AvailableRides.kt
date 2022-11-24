@@ -281,15 +281,15 @@ fun CircularProgressBar(
     isDisplayed: Boolean
 ) {
     if (isDisplayed) {
-        Card(modifier = Modifier
-            .background(color = Color.Transparent),
+        Box(modifier = Modifier
+//            .background(color = Color.Transparent),
         ){
             CircularProgressIndicator(modifier = Modifier
                 .background(color = Color.Transparent)
                 .width(100.dp)
                 .height(100.dp),
-                color = Color.Red,
-                strokeWidth = 2.dp)
+                color = Color.White,
+                strokeWidth = 10.dp)
         }
     }
 }

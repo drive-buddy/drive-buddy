@@ -70,9 +70,7 @@ class PassengerBookRide : ComponentActivity() {
                     var showError : Boolean = false
                     val dbEntry : DBHelper = DBHelper(null)
                     val userEmail : String = dbEntry.getCurrentUser()
-                    dbEntry.getUser(userEmail) { document ->
 
-                    }
 //                    val rideId : String? = intent.getStringExtra("info")
                     val rideId = intent.getStringExtra("rideId")
                     val driver = intent.getStringExtra("driver")
