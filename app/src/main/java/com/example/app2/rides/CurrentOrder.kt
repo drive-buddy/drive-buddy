@@ -225,47 +225,97 @@ class CurrentOrder : ComponentActivity() {
 
                         Spacer(modifier = Modifier.height(10.dp))
 
-                        Row {
-                            Column {
-                                Canvas(modifier = Modifier.size(10.dp).offset(0.dp,5.dp), onDraw = {
-                                    drawCircle(color = Color(0xFFEE5252))
-                                })
-                                Spacer(modifier = Modifier.height(15.dp))
-                                androidx.compose.material.Divider(
-                                    color = Color.Black,
+                        Column() {
+                            Row() {
+                                Canvas(
                                     modifier = Modifier
-                                        .fillMaxHeight(0.025f)
-                                        .width(2.dp)
-                                        .offset(4.dp, 0.dp)
-                                )
-                                Spacer(modifier = Modifier.height(10.dp))
-                                Canvas(modifier = Modifier.size(10.dp), onDraw = {
+                                        .size(10.dp)
+                                        .offset(0.dp,7.dp),
+                                    onDraw = {
                                     drawCircle(color = Color(0xFFEE5252))
-                                })
-                            }
-
-                            Column {
+                                    }
+                                )
+                                Spacer(modifier = Modifier.width(10.dp))
                                 Text(
                                     text = "${info.from}",
                                     fontSize = 15.sp,
                                     fontFamily = FontFamily.SansSerif,
                                     fontWeight = FontWeight.Bold,
-                                    color = Color.Black,
-                                    modifier = Modifier
-                                        .offset(10.dp, 0.dp)
+                                    color = Color.Black
                                 )
-                                Spacer(modifier = Modifier.height(10.dp))
+
+
+                            }
+                            androidx.compose.material.Divider(
+                                color = Color.Black,
+                                modifier = Modifier
+                                    .fillMaxHeight(0.03f)
+                                    .width(2.dp)
+                                    .offset(4.dp, 7.dp)
+                            )
+                            Spacer(modifier = Modifier.height(10.dp))
+
+                            Row {
+                                Canvas(
+                                    modifier = Modifier
+                                        .size(10.dp)
+                                        .offset(0.dp,7.dp),
+                                    onDraw = {
+                                    drawCircle(color = Color(0xFFEE5252))
+                                    }
+                                )
+                                Spacer(modifier = Modifier.width(10.dp))
                                 Text(
                                     text = "${info.to}",
                                     fontSize = 15.sp,
                                     fontFamily = FontFamily.SansSerif,
                                     fontWeight = FontWeight.Bold,
-                                    color = Color.Black,
-                                    modifier = Modifier
-                                        .offset(10.dp, 5.dp)
+                                    color = Color.Black
                                 )
                             }
                         }
+
+//                        Row {
+//                            Column {
+//                                Canvas(modifier = Modifier.size(10.dp).offset(0.dp,5.dp), onDraw = {
+//                                    drawCircle(color = Color(0xFFEE5252))
+//                                })
+//                                Spacer(modifier = Modifier.height(15.dp))
+//                                androidx.compose.material.Divider(
+//                                    color = Color.Black,
+//                                    modifier = Modifier
+//                                        .fillMaxHeight(0.025f)
+//                                        .width(2.dp)
+//                                        .offset(4.dp, 0.dp)
+//                                )
+//                                Spacer(modifier = Modifier.height(10.dp))
+//                                Canvas(modifier = Modifier.size(10.dp), onDraw = {
+//                                    drawCircle(color = Color(0xFFEE5252))
+//                                })
+//                            }
+//
+//                            Column {
+//                                Text(
+//                                    text = "${info.from}",
+//                                    fontSize = 15.sp,
+//                                    fontFamily = FontFamily.SansSerif,
+//                                    fontWeight = FontWeight.Bold,
+//                                    color = Color.Black,
+//                                    modifier = Modifier
+//                                        .offset(10.dp, 0.dp)
+//                                )
+//                                Spacer(modifier = Modifier.height(10.dp))
+//                                Text(
+//                                    text = "${info.to}",
+//                                    fontSize = 15.sp,
+//                                    fontFamily = FontFamily.SansSerif,
+//                                    fontWeight = FontWeight.Bold,
+//                                    color = Color.Black,
+//                                    modifier = Modifier
+//                                        .offset(10.dp, 5.dp)
+//                                )
+//                            }
+//                        }
                     }
 
                     Spacer(modifier = Modifier.width(50.dp))
@@ -344,7 +394,7 @@ class CurrentOrder : ComponentActivity() {
                             Column(
                                 modifier = Modifier
                                     .fillMaxSize()
-                                    .padding(20.dp,0.dp),
+                                    .padding(20.dp, 0.dp),
                                 horizontalAlignment = Alignment.Start,
                                 verticalArrangement = Arrangement.Center
                             ) {
@@ -380,7 +430,7 @@ class CurrentOrder : ComponentActivity() {
                             Column(
                                 modifier = Modifier
                                     .fillMaxSize()
-                                    .padding(20.dp,0.dp),
+                                    .padding(20.dp, 0.dp),
                                 horizontalAlignment = Alignment.Start,
                                 verticalArrangement = Arrangement.Center
                             ) {
@@ -417,7 +467,7 @@ class CurrentOrder : ComponentActivity() {
                             Column(
                                 modifier = Modifier
                                     .fillMaxSize()
-                                    .padding(20.dp,0.dp),
+                                    .padding(20.dp, 0.dp),
                                 horizontalAlignment = Alignment.Start,
                                 verticalArrangement = Arrangement.Center
                             ) {
@@ -454,7 +504,7 @@ class CurrentOrder : ComponentActivity() {
                             Column(
                                 modifier = Modifier
                                     .fillMaxSize()
-                                    .padding(20.dp,0.dp),
+                                    .padding(20.dp, 0.dp),
                                 horizontalAlignment = Alignment.Start,
                                 verticalArrangement = Arrangement.Center
                             ) {
