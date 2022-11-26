@@ -225,29 +225,26 @@ class CurrentOrder : ComponentActivity() {
 
                         Spacer(modifier = Modifier.height(10.dp))
 
-                        Row {
-                            Column {
-                                Canvas(modifier = Modifier.size(10.dp).offset(0.dp,5.dp), onDraw = {
-                                    drawCircle(color = Color(0xFFEE5252))
-                                })
-                                Spacer(modifier = Modifier.height(15.dp))
-                                androidx.compose.material.Divider(
-                                    color = Color.Black,
-                                    modifier = Modifier
-                                        .fillMaxHeight(0.025f)
-                                        .width(2.dp)
-                                        .offset(4.dp, 0.dp)
-                                )
-                                Spacer(modifier = Modifier.height(10.dp))
-                                Canvas(modifier = Modifier.size(10.dp), onDraw = {
-                                    drawCircle(color = Color(0xFFEE5252))
-                                })
-                            }
+                        Column {
+                            Canvas(modifier = Modifier.size(10.dp).offset(0.dp,5.dp), onDraw = {
+                                drawCircle(color = Color(0xFFEE5252))
+                            })
+                            Spacer(modifier = Modifier.height(15.dp))
+                            androidx.compose.material.Divider(
+                                color = Color.Black,
+                                modifier = Modifier
+                                    .fillMaxHeight(0.025f)
+                                    .width(2.dp)
+                                    .offset(4.dp, 0.dp)
+                            )
+                            Spacer(modifier = Modifier.height(10.dp))
+                            Canvas(modifier = Modifier.size(10.dp), onDraw = {
+                                drawCircle(color = Color(0xFFEE5252))
+                            })
 
                             Column {
                                 Text(
-                                    //text = "${info.from}",
-                                    text = "dfafefa",
+                                    text = "${info.from}",
                                     fontSize = 15.sp,
                                     fontFamily = FontFamily.SansSerif,
                                     fontWeight = FontWeight.Bold,
@@ -257,9 +254,7 @@ class CurrentOrder : ComponentActivity() {
                                 )
                                 Spacer(modifier = Modifier.height(10.dp))
                                 Text(
-                            //        text = "${info.to}",
-                                    text = "aaaaaaaaaaaa",
-
+                                    text = "${info.to}",
                                     fontSize = 15.sp,
                                     fontFamily = FontFamily.SansSerif,
                                     fontWeight = FontWeight.Bold,
@@ -311,15 +306,22 @@ class CurrentOrder : ComponentActivity() {
 //
 //                        }
                             Text(
-                                text = "${user1.userFirstName} ${user1.userLastName}",
+                                text = "${user1.userFirstName}",
                                 fontSize = 15.sp,
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.Bold,
                                 color = Color.Black
                             )
                             Text(
-                                text = "Car model | Nr",
+                                text = "${user1.userSurname}",
                                 fontSize = 15.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.Black
+                            )
+                            Text(
+                                text = "${user1.userPhoneNumber}",
+                                fontSize = 12.sp,
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.Bold,
                                 color = Color.Black
