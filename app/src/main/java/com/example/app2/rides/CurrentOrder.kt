@@ -528,38 +528,80 @@ class CurrentOrder : ComponentActivity() {
                     horizontalArrangement = Arrangement.SpaceAround ,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Image(
-                        painter = painterResource(R.drawable.smoking_no_round), // smoking_no_round | smoking_round
-                        contentDescription = "Smoking / No Smoking",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(70.dp)
-                            .background(Color.White)
-                            .clip(CircleShape)
-                            .border(3.dp, color = Color(0xFFEE5252), CircleShape)
-                    )
+                    val isSmoking: Boolean = true
+                    if (isSmoking) {
+                        Image(
+                            painter = painterResource(R.drawable.smoking_round), // Smoking allowed
+                            contentDescription = "Smoking / No Smoking",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(70.dp)
+                                .background(Color.White)
+                                .clip(CircleShape)
+                                .border(3.dp, color = Color(0xFFEE5252), CircleShape)
+                        )
+                    } else {
+                        Image(
+                            painter = painterResource(R.drawable.smoking_no_round), // Smoking not allowed
+                            contentDescription = "Smoking / No Smoking",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(70.dp)
+                                .background(Color.White)
+                                .clip(CircleShape)
+                                .border(3.dp, color = Color(0xFFEE5252), CircleShape)
+                        )
+                    }
 
-                    Image(
-                        painter = painterResource(R.drawable.pet_no_round), // pet_no_round | pet_round
-                        contentDescription = "Pet | No Pet",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(70.dp)
-                            .background(Color.White)
-                            .clip(CircleShape)
-                            .border(3.dp, color = Color(0xFFEE5252), CircleShape)
-                    )
+                    val allowsPets: Boolean = false
+                    if (allowsPets){
+                        Image(
+                            painter = painterResource(R.drawable.pet_round), // pet_no_round | pet_round
+                            contentDescription = "Pet | No Pet",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(70.dp)
+                                .background(Color.White)
+                                .clip(CircleShape)
+                                .border(3.dp, color = Color(0xFFEE5252), CircleShape)
+                        )
+                    } else {
+                        Image(
+                            painter = painterResource(R.drawable.pet_no_round),
+                            contentDescription = "Pet | No Pet",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(70.dp)
+                                .background(Color.White)
+                                .clip(CircleShape)
+                                .border(3.dp, color = Color(0xFFEE5252), CircleShape)
+                        )
+                    }
 
-                    Image(
-                        painter = painterResource(R.drawable.luggage_round), // luggage_round | luggage_no_round
-                        contentDescription = "Luggage | No Luggage",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(70.dp)
-                            .background(Color.White)
-                            .clip(CircleShape)
-                            .border(3.dp, color = Color(0xFFEE5252), CircleShape)
-                    )
+                    val allowsLuggage: Boolean = true
+                    if (allowsLuggage) {
+                        Image(
+                            painter = painterResource(R.drawable.luggage_round), // luggage_round | luggage_no_round
+                            contentDescription = "Luggage | No Luggage",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(70.dp)
+                                .background(Color.White)
+                                .clip(CircleShape)
+                                .border(3.dp, color = Color(0xFFEE5252), CircleShape)
+                        )
+                    } else {
+                        Image(
+                            painter = painterResource(R.drawable.luggage_no_round),
+                            contentDescription = "Smoking / No Smoking",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(70.dp)
+                                .background(Color.White)
+                                .clip(CircleShape)
+                                .border(3.dp, color = Color(0xFFEE5252), CircleShape)
+                        )
+                    }
                 }
             }
         }
