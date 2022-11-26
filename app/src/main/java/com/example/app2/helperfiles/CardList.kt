@@ -53,9 +53,6 @@ data class User(
     val yearOfExp: String? = "",
 
 ) : java.io.Serializable
-//val infoss = listOf(
-//    Infos("price", "date", "time", "From", "To", "Name", "Surname", "Car model", "License", "Nr")
-//)
 
 @Composable
 fun InfoRow(
@@ -124,19 +121,6 @@ fun InfoRow(
                         fontSize = 12.sp,
                         fontWeight = FontWeight.W700,
                     )
-//                    Divider(
-//                        color = Color.Black,
-//                        modifier = Modifier
-//                            .height(12.dp)
-//                            .width(1.dp)
-//                    )
-//                    Text(
-//                        text = info.time!!,
-//                        modifier = Modifier.padding(3.dp),
-//                        color = Color.Black,
-//                        fontSize = 12.sp,
-//                        fontWeight = FontWeight.W700,
-//                    )
                 }
             }
             Row(
