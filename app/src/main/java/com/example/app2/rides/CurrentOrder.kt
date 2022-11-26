@@ -246,8 +246,8 @@ class CurrentOrder : ComponentActivity() {
 
                             Column {
                                 Text(
-                                    text = "${info.from}",
-//                                    text = "dfafefa",
+                                    //text = "${info.from}",
+                                    text = "dfafefa",
                                     fontSize = 15.sp,
                                     fontFamily = FontFamily.SansSerif,
                                     fontWeight = FontWeight.Bold,
@@ -257,9 +257,9 @@ class CurrentOrder : ComponentActivity() {
                                 )
                                 Spacer(modifier = Modifier.height(10.dp))
                                 Text(
-                                    text = "${info.to}",
-//                                    text = "aaaaaaaaaaaa",
-//
+                            //        text = "${info.to}",
+                                    text = "aaaaaaaaaaaa",
+
                                     fontSize = 15.sp,
                                     fontFamily = FontFamily.SansSerif,
                                     fontWeight = FontWeight.Bold,
@@ -311,22 +311,15 @@ class CurrentOrder : ComponentActivity() {
 //
 //                        }
                             Text(
-                                text = "${user1.userFirstName}",
-                                fontSize = 14.sp,
+                                text = "${user1.userFirstName} ${user1.userLastName}",
+                                fontSize = 15.sp,
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.Bold,
                                 color = Color.Black
                             )
                             Text(
-                                text = "${user1.userSurname}",
-                                fontSize = 14.sp,
-                                fontFamily = FontFamily.SansSerif,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.Black
-                            )
-                            Text(
-                                text = "${user1.userPhoneNumber}",
-                                fontSize = 12.sp,
+                                text = "Car model | Nr",
+                                fontSize = 15.sp,
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.Bold,
                                 color = Color.Black
