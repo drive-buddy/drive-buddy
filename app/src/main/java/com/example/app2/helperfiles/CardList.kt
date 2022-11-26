@@ -36,6 +36,9 @@ data class Infos(
     val passenger1: String? = "",
     val passenger2: String? = "",
     val passenger3: String? = "",
+    val animals: String? = "",
+    val smoking: String? = "",
+    val luggage: String? = "",
 ) : java.io.Serializable
 
 data class User(

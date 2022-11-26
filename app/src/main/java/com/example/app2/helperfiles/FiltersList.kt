@@ -23,9 +23,9 @@ import androidx.compose.ui.unit.sp
 data class Filters(val name: String)
 
 val filterss = listOf(
-    Filters("Smoking"),
-    Filters("Animals"),
-    Filters("Luggage"),
+    Filters("smoking"),
+    Filters("animals"),
+    Filters("luggage"),
 )
 
 @Composable
