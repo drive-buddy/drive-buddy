@@ -42,7 +42,7 @@ data class User(
     @DocumentId
     val id : String? = "",
     val userFirstName: String? = "",
-    val userLastName: String? = "",
+    val userSurname: String? = "",
     val email: String? = "",
     val carModel: String? = "",
     val carNumber: String? = "",
@@ -179,7 +179,7 @@ fun InfoRow(
                         modifier = Modifier
                             .size(60.dp)
                     )
-                    Row() {
+                    Column() {
                         Text(
                             user.userFirstName!!,
                             modifier = Modifier.padding(horizontal = 3.dp),
@@ -188,7 +188,7 @@ fun InfoRow(
                             fontWeight = FontWeight.W700
                         )
                         Text(
-                            user.userLastName!!,
+                            user.userSurname!!,
                             color = Color.Black,
                             fontSize = 15.sp,
                             fontWeight = FontWeight.W700,

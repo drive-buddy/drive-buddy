@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.BorderStroke
@@ -17,10 +18,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -46,20 +44,28 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
 @ExperimentalCoroutinesApi
 class AvailableRides : ComponentActivity() {
     private val viewModel: RidesViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by viewModels()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            var backPressedCount by remember { mutableStateOf(0) }
+            BackHandler { backPressedCount++ }
             App2Theme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
+
+
+//                    val dispatcher = LocalOnBackPressedDispatcherOwner.current!!.onBackPressedDispatcher
+
+
+
                     // A surface container using the 'background' color from the theme
                     val searchAppBarState: SearchAppBarState by sharedViewModel.searchAppBarState
                     val searchTextState: String by sharedViewModel.searchTextState
@@ -86,6 +92,10 @@ class AvailableRides : ComponentActivity() {
                                         .offset(1.dp, 1.dp)
                                 )
                                 val dataOrException = viewModel.data.value
+
+//                                Button(onClick = { dispatcher.onBackPressed() }) {
+//                                    Text("Press Back count $backPressedCount")
+//                                }
 
                                 InfoList(dataOrException) {
                                     val dbEntry : DBHelper = DBHelper(null)
@@ -243,6 +253,10 @@ class RidesRepository @Inject constructor(
     private suspend fun queryRidesForDriver() = FirebaseFirestore.getInstance()
         .collection("passengerRequests")
         .orderBy("to", Query.Direction.ASCENDING)
+}
+
+@Composable
+fun BackHandler(enabled: Boolean = true, onBack: () -> Unit): Unit {
 }
 
 @HiltViewModel
