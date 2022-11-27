@@ -69,11 +69,6 @@ fun DrawerLayout(
                         icon = Icons.Default.LocationOn
                     ),
                     MenuItem(
-                        id = "help",
-                        title = "Help",
-                        icon = Icons.Default.Settings
-                    ),
-                    MenuItem(
                         id = "support",
                         title = "Support",
                         icon = Icons.Default.Info
@@ -81,7 +76,7 @@ fun DrawerLayout(
                     MenuItem(
                         id = "signout",
                         title = "Sign Out",
-                        icon = Icons.Default.Info
+                        icon = Icons.Default.ExitToApp
                     ),
                 ),
                 onItemClick = {
@@ -94,6 +89,10 @@ fun DrawerLayout(
                         }
                         "current ride" -> {
                             val navigate = Intent(localContext, CurrentOrder::class.java)
+                            localContext?.startActivity(navigate)
+                        }
+                        "support" -> {
+                            val navigate = Intent(localContext, SendEmail::class.java)
                             localContext?.startActivity(navigate)
                         }
                         "signout" -> {

@@ -168,6 +168,17 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <activity
+            android:name=".drawer.SendEmail"
+            android:exported="false"
+            android:label="SendEmail"
+            android:theme="@style/Theme.App2">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
         <activity
             android:name=".signin.Sign_in"
             android:exported="false"
