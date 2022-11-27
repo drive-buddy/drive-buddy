@@ -528,8 +528,7 @@ class CurrentOrder : ComponentActivity() {
                     horizontalArrangement = Arrangement.SpaceAround ,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    val isSmoking: Boolean = true
-                    if (isSmoking) {
+                    if (info.smoking == "true") {
                         Image(
                             painter = painterResource(R.drawable.smoking_round), // Smoking allowed
                             contentDescription = "Smoking / No Smoking",
@@ -552,9 +551,7 @@ class CurrentOrder : ComponentActivity() {
                                 .border(3.dp, color = Color(0xFFEE5252), CircleShape)
                         )
                     }
-
-                    val allowsPets: Boolean = false
-                    if (allowsPets){
+                    if (info.animals == "true"){
                         Image(
                             painter = painterResource(R.drawable.pet_round), // pet_no_round | pet_round
                             contentDescription = "Pet | No Pet",
@@ -577,9 +574,7 @@ class CurrentOrder : ComponentActivity() {
                                 .border(3.dp, color = Color(0xFFEE5252), CircleShape)
                         )
                     }
-
-                    val allowsLuggage: Boolean = true
-                    if (allowsLuggage) {
+                    if (info.luggage == "true") {
                         Image(
                             painter = painterResource(R.drawable.luggage_round), // luggage_round | luggage_no_round
                             contentDescription = "Luggage | No Luggage",
