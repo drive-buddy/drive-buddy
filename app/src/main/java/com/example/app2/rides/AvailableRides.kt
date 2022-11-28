@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.BorderStroke
@@ -33,7 +32,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.app2.R
-import com.example.app2.Schedule_ride
+import com.example.app2.ScheduleRide
 import com.example.app2.drawer.DrawerLayout
 import com.example.app2.helperfiles.*
 import com.example.app2.rides.booking.DriverBookRide
@@ -135,7 +134,7 @@ class AvailableRides : ComponentActivity() {
                         },
                         floatingActionButtonFun = {
                             Button(onClick = {
-                                val navigate = Intent(this@AvailableRides, Schedule_ride::class.java)
+                                val navigate = Intent(this@AvailableRides, ScheduleRide::class.java)
                                 startActivity(navigate)
                             },
                                 modifier = Modifier.size(70.dp),
@@ -234,7 +233,7 @@ class AvailableRides : ComponentActivity() {
         ) {
 
             Column(modifier = Modifier
-                .padding(horizontal = 40.dp, vertical = 145.dp)
+                .padding(horizontal = 40.dp, vertical = 145.dp),
             ) {
 
                 Text(

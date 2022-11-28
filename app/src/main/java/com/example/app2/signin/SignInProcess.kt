@@ -39,7 +39,7 @@ class SignInProcess : ComponentActivity() {
 
                     if (userEmail.isEmpty() || userPassword.isEmpty())
                     {
-                        val navigate1 = Intent(this@SignInProcess, Sign_in::class.java)
+                        val navigate1 = Intent(this@SignInProcess, SignIn::class.java)
                         navigate1.putExtra("signIn_error", "One or more fields are empty")
                         startActivity(navigate1)
                         finish()
@@ -69,7 +69,7 @@ class SignInProcess : ComponentActivity() {
 
                     if (userEmail.isEmpty() || userPassword.isEmpty())
                     {
-                        val navigate1 = Intent(this@SignInProcess, Sign_in::class.java)
+                        val navigate1 = Intent(this@SignInProcess, SignIn::class.java)
                         navigate1.putExtra("signIn_error", "ABOBA: One or more fields is empty.")
                         startActivity(navigate1)
                         finish()
@@ -103,7 +103,7 @@ class SignInProcess : ComponentActivity() {
                         Toast.LENGTH_SHORT).show()
 //                    updateUI(null)
                     // ERROR
-                    val navigate1 = Intent(this@SignInProcess, Sign_in::class.java)
+                    val navigate1 = Intent(this@SignInProcess, SignIn::class.java)
                     val errorMsg : String = task.exception.toString()
                     navigate1.putExtra("signIn_error", errorMsg)
                     startActivity(navigate1)

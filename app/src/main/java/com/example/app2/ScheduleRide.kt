@@ -29,7 +29,7 @@ import com.google.firebase.Timestamp
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlin.collections.HashMap
 
-class Schedule_ride: ComponentActivity() {
+class ScheduleRide: ComponentActivity() {
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -149,7 +149,7 @@ class Schedule_ride: ComponentActivity() {
                                 }
                             }
 
-                            val navigate1 = Intent(this@Schedule_ride, AvailableRides::class.java)
+                            val navigate1 = Intent(this@ScheduleRide, AvailableRides::class.java)
                             startActivity(navigate1)
                             finish()
                         }
@@ -337,7 +337,7 @@ class Schedule_ride: ComponentActivity() {
                     {
                         Button(
                             onClick = {
-                                val navigate = Intent(this@Schedule_ride, AvailableRides::class.java)
+                                val navigate = Intent(this@ScheduleRide, AvailableRides::class.java)
                                 startActivity(navigate)
                             },
                             modifier = Modifier

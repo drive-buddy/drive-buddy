@@ -7,16 +7,14 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.app2.signin.Sign_in
+import com.example.app2.signin.SignIn
 import com.example.app2.signup.Choose
 import com.example.app2.ui.theme.App2Theme
 
@@ -77,7 +75,7 @@ class StartPage : ComponentActivity() {
                             }
                             Button(
                                 onClick = {
-                                    val navigate1 = Intent(this@StartPage, Sign_in::class.java)
+                                    val navigate1 = Intent(this@StartPage, SignIn::class.java)
                                     startActivity(navigate1)
                                 },
                                 shape = RoundedCornerShape(20.dp)

@@ -29,7 +29,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import com.example.app2.PrettyBar
 import com.example.app2.R
 
-class Sign_in : ComponentActivity() {
+class SignIn : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
@@ -203,7 +203,7 @@ class Sign_in : ComponentActivity() {
                         {
                             Button(
                                 onClick = {
-                                    val navigate1 = Intent(this@Sign_in, SignInProcess::class.java)
+                                    val navigate1 = Intent(this@SignIn, SignInProcess::class.java)
 
                                     navigate1.putExtra("email", userHashMap["email"])
                                     navigate1.putExtra("password", userHashMap["password"])
@@ -244,7 +244,7 @@ class Sign_in : ComponentActivity() {
 
                             Button(
                                 onClick = {
-                                        val navigate1 = Intent(this@Sign_in, SignInFacebook::class.java)
+                                        val navigate1 = Intent(this@SignIn, SignInFacebook::class.java)
 
                                         startActivity(navigate1)
                                         finish()
@@ -270,7 +270,7 @@ class Sign_in : ComponentActivity() {
                             }
                             Button(
                                 onClick = {
-                                        val navigate1 = Intent(this@Sign_in, SignInGoogle::class.java)
+                                        val navigate1 = Intent(this@SignIn, SignInGoogle::class.java)
 
 
                                         startActivity(navigate1)

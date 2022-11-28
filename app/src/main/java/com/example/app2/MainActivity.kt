@@ -4,11 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import com.example.app2.helperfiles.DBHelper
 import com.example.app2.rides.AvailableRides
-import com.example.app2.signin.Sign_in
+import com.example.app2.signin.SignIn
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -53,7 +52,7 @@ class MainActivity : ComponentActivity() {
                         finish()
                     } else {
                         // Signed in, launch the  activity
-                        val navigate1 = Intent(this@MainActivity, Sign_in::class.java)
+                        val navigate1 = Intent(this@MainActivity, SignIn::class.java)
 
                         startActivity(navigate1)
                         finish()
@@ -87,7 +86,7 @@ class MainActivity : ComponentActivity() {
                         finish()
                     } else {
                         // Signed in, launch the  activity
-                        val navigate1 = Intent(this@MainActivity, Sign_in::class.java)
+                        val navigate1 = Intent(this@MainActivity, SignIn::class.java)
 
                         startActivity(navigate1)
                         finish()
