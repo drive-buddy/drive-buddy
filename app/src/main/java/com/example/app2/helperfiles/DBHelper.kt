@@ -366,6 +366,34 @@ class DBHelper {
             .addOnFailureListener { e -> Log.w(TAG, "Error getting order by id.", e) }
     }
 
+    // REMOVE
+    fun removePassengerFromRide(collectionID: String, rideID: String, spot : Int, passengerEmail: String) {
+        val ride: DocumentReference = db.collection(collectionID).document(rideID)
+
+        setCurrentOrder(userEmail = passengerEmail, "")
+
+        ride.get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    ride.update("passenger$spot", "")
+                }
+            }
+            .addOnFailureListener { e -> Log.w(TAG, "Error getting order by id.", e) }
+    }
+
+    // REMOVE ORDER
+    fun removeOrder(collectionID: String, rideID: String) {
+        val ride: DocumentReference = db.collection(collectionID).document(rideID)
+
+        ride.get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    ride.delete()
+                }
+            }
+            .addOnFailureListener { e -> Log.w(TAG, "Error getting order by id.", e) }
+    }
+
     // UPDATE
     fun driverAcceptRide(rideId: String, passengerId: String) {
         val ride: DocumentReference = db.collection("orders").document(rideId)

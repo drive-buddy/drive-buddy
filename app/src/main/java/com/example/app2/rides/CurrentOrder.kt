@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -95,46 +96,59 @@ class CurrentOrder : ComponentActivity() {
                             .padding(20.dp, 0.dp)
                     )
 
-//                    val tmp = viewModel.data.value.user
+                    if (viewModel.data.value.data?.id?.isNotEmpty() == true) {
+                        if (viewModel.data.value.user!!.isNotEmpty()) {
+                            CardOrder(viewModel.data.value.data!!, viewModel.data.value.user!!)
+                        } else {
+                            CardOrder(viewModel.data.value.data!!, listOf(User()))
+                        }
+                        Log.i("CurrentRideInfo", viewModel.data.value.data.toString())
 
-                    Log.i("myUsers", viewModel.data.value.user!!.toString())
-                    if (viewModel.data.value.data != null
-                        && viewModel.data.value.user!!.isNotEmpty()) {
-                        CardOrder(viewModel.data.value.data!!, viewModel.data.value.user!!)
+                        Spacer(modifier = Modifier.height(20.dp))
 
-                    } else if (viewModel.data.value.data != null
-                        && viewModel.data.value.user!!.isEmpty()) {
-                        CardOrder(viewModel.data.value.data!!, listOf(User()))
-                    }
+                        androidx.compose.material.Button(
+                            onClick = {
+                                val dbEntry = DBHelper(null)
+                                val userEmail = dbEntry.getCurrentUser()
 
-                    val dbEntry = DBHelper(null)
-                    val userEmail = dbEntry.getCurrentUser()
-                    dbEntry.getUser(userEmail) { document ->
-                        Log.i("CurrentOrder", document["userPhoneNumber"] as String)
-                    }
+                                dbEntry.getUser(userEmail) { document ->
+                                    cancelRide(document["type"] as String, userEmail, viewModel.data.value.data?.id!!)
 
-                    Spacer(modifier = Modifier.height(20.dp))
+                                    Toast.makeText(applicationContext, "Ride successfully canceled.", Toast.LENGTH_SHORT).show()
 
-                    androidx.compose.material.Button(
-                        onClick = {
-                            val navigate = Intent(localContext, AvailableRides::class.java)
-                            localContext?.startActivity(navigate)
-                        },
-                        modifier = Modifier
-                            .height(50.dp)
-                            .width(140.dp)
-                            .padding(0.dp),
-                        shape = RoundedCornerShape(20.dp),
-                        colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.White)
-                    ) {
+                                    val navigate = Intent(localContext, CurrentOrder::class.java)
+                                    localContext?.startActivity(navigate)
+                                }
+
+                            },
+                            modifier = Modifier
+                                .height(50.dp)
+                                .width(170.dp)
+                                .padding(0.dp),
+                            shape = RoundedCornerShape(20.dp),
+                            colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.White)
+                        ) {
+                            Text(
+                                text = "Cancel Ride",
+                                fontSize = 20.sp,
+                                fontFamily = FontFamily.SansSerif,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color(0xFFEE5252)
+                            )
+                        }
+                    } else {
+                        Spacer(modifier = Modifier.height(50.dp))
+
                         Text(
-                            text = "Cancel",
-                            fontSize = 20.sp,
+                            "No active ride!",
+                            fontSize = 40.sp,
                             fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.ExtraBold,
-                            color = Color(0xFFEE5252)
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
                         )
                     }
+
+
                 }
             }
         )
@@ -174,6 +188,55 @@ class CurrentOrder : ComponentActivity() {
 //        },
 //
 //    )
+    }
+
+    private fun cancelRide(type : String, userEmail: String, rideID: String) {
+        val dbEntry = DBHelper()
+        if (type == "passenger") {
+            if (viewModel.data.value.data?.driver == "") {
+                when (userEmail) {
+                    viewModel.data.value.data?.passenger3 -> {
+                        dbEntry.removePassengerFromRide("passengerRequests", rideID, 3, userEmail)
+                    }
+                    viewModel.data.value.data?.passenger2 -> {
+                        dbEntry.removePassengerFromRide("passengerRequests", rideID, 2, userEmail)
+
+                    }
+                    viewModel.data.value.data?.passenger1 -> {
+                        dbEntry.removePassengerFromRide("passengerRequests", rideID, 1, userEmail)
+
+                    }
+                    else -> {
+                        Log.e("cancelRide fun", "Man, you screwed up big time. `userEmail` is not in current ride.")
+                    }
+                }
+            } else {
+                when (userEmail) {
+                    viewModel.data.value.data?.passenger3 -> {
+                        dbEntry.removePassengerFromRide("driverOffers", rideID, 3, userEmail)
+
+                    }
+                    viewModel.data.value.data?.passenger2 -> {
+                        dbEntry.removePassengerFromRide("driverOffers", rideID, 2, userEmail)
+
+                    }
+                    viewModel.data.value.data?.passenger1 -> {
+                        dbEntry.removePassengerFromRide("driverOffers", rideID, 1, userEmail)
+
+                    }
+                    else -> {
+                        Log.e("cancelRide fun", "Man, you screwed up big time. `userEmail` is not in current ride.")
+                    }
+                }
+            }
+        } else {
+            dbEntry.setCurrentOrder(userEmail = viewModel.data.value.data?.passenger3!!, rideID = "")
+            dbEntry.setCurrentOrder(userEmail = viewModel.data.value.data?.passenger2!!, rideID = "")
+            dbEntry.setCurrentOrder(userEmail = viewModel.data.value.data?.passenger1!!, rideID = "")
+            dbEntry.setCurrentOrder(userEmail = viewModel.data.value.data?.driver!!, rideID = "")
+
+            dbEntry.removeOrder("driverOffers", rideID)
+        }
     }
 
     @Composable
@@ -230,7 +293,7 @@ class CurrentOrder : ComponentActivity() {
                                 Canvas(
                                     modifier = Modifier
                                         .size(10.dp)
-                                        .offset(0.dp,7.dp),
+                                        .offset(0.dp, 7.dp),
                                     onDraw = {
                                     drawCircle(color = Color(0xFFEE5252))
                                     }
@@ -259,7 +322,7 @@ class CurrentOrder : ComponentActivity() {
                                 Canvas(
                                     modifier = Modifier
                                         .size(10.dp)
-                                        .offset(0.dp,7.dp),
+                                        .offset(0.dp, 7.dp),
                                     onDraw = {
                                     drawCircle(color = Color(0xFFEE5252))
                                     }
@@ -274,48 +337,6 @@ class CurrentOrder : ComponentActivity() {
                                 )
                             }
                         }
-
-//                        Row {
-//                            Column {
-//                                Canvas(modifier = Modifier.size(10.dp).offset(0.dp,5.dp), onDraw = {
-//                                    drawCircle(color = Color(0xFFEE5252))
-//                                })
-//                                Spacer(modifier = Modifier.height(15.dp))
-//                                androidx.compose.material.Divider(
-//                                    color = Color.Black,
-//                                    modifier = Modifier
-//                                        .fillMaxHeight(0.025f)
-//                                        .width(2.dp)
-//                                        .offset(4.dp, 0.dp)
-//                                )
-//                                Spacer(modifier = Modifier.height(10.dp))
-//                                Canvas(modifier = Modifier.size(10.dp), onDraw = {
-//                                    drawCircle(color = Color(0xFFEE5252))
-//                                })
-//                            }
-//
-//                            Column {
-//                                Text(
-//                                    text = "${info.from}",
-//                                    fontSize = 15.sp,
-//                                    fontFamily = FontFamily.SansSerif,
-//                                    fontWeight = FontWeight.Bold,
-//                                    color = Color.Black,
-//                                    modifier = Modifier
-//                                        .offset(10.dp, 0.dp)
-//                                )
-//                                Spacer(modifier = Modifier.height(10.dp))
-//                                Text(
-//                                    text = "${info.to}",
-//                                    fontSize = 15.sp,
-//                                    fontFamily = FontFamily.SansSerif,
-//                                    fontWeight = FontWeight.Bold,
-//                                    color = Color.Black,
-//                                    modifier = Modifier
-//                                        .offset(10.dp, 5.dp)
-//                                )
-//                            }
-//                        }
                     }
 
                     Spacer(modifier = Modifier.width(50.dp))
@@ -358,7 +379,7 @@ class CurrentOrder : ComponentActivity() {
 //
 //                        }
                             Text(
-                                text = "${user1.userFirstName} ${user1.userSurname}",
+                                text = "${user1.userFirstName}\n${user1.userSurname}",
                                 fontSize = 15.sp,
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.Bold,
@@ -622,11 +643,11 @@ class CurrentOrderRepository @Inject constructor(
         return allInfo
     }
 
-    private suspend fun findRide(rideID : String) = FirebaseFirestore.getInstance()
+    private suspend fun findRide(rideID : String = "") = FirebaseFirestore.getInstance()
         .collection("passengerRequests")
         .document(rideID)
 
-    private suspend fun findRide2(rideID : String) = FirebaseFirestore.getInstance()
+    private suspend fun findRide2(rideID : String = "") = FirebaseFirestore.getInstance()
         .collection("driverOffers")
         .document(rideID)
 
@@ -657,7 +678,7 @@ class CurrentOrderViewModel @Inject constructor(
         val DBEntry : DBHelper = DBHelper()
         DBEntry.getUser(DBEntry.getCurrentUser()) {
                 it ->
-            if (it["activeOrderID"] != null)
+            if (it["activeOrderID"] != "")
                 getRides(it["type"] as String, it["activeOrderID"] as String)
         }
     }
