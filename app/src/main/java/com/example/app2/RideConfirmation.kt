@@ -109,7 +109,8 @@ fun AppTopBar() {
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.Start
             ) {
-                Text("Ride Successfully",
+                Text(
+                    "Ride Successfully",
                     color = Color.Black,
                     fontSize = 25.sp,
                     fontFamily = FontFamily.SansSerif,
@@ -137,7 +138,8 @@ fun AppTopBar() {
                         .padding(20.dp, 0.dp),
                     elevation = 10.dp,
                     shape = RoundedCornerShape(20.dp)
-                ) { Text("More available rides:",
+                ) { Text(
+                    "More available rides:",
                     color = Color.Black,
                     fontSize = 20.sp,
                     fontFamily = FontFamily.SansSerif,
