@@ -47,6 +47,7 @@ data class User(
     val userFirstName: String? = "",
     val userSurname: String? = "",
     val email: String? = "",
+    val type: String? = "",
     val carModel: String? = "",
     val carNumber: String? = "",
     val userPhoneNumber: String? = "",

@@ -149,7 +149,7 @@ class AvailableRides : ComponentActivity() {
         }
     }
 
-    fun getCorrectUser(data : Infos, users : List<User>?) : User {
+    private fun getCorrectUser(data : Infos, users : List<User>?) : User {
         // its for passenger
         if (data.driver == "") {
             users?.forEach() {
@@ -177,16 +177,15 @@ class AvailableRides : ComponentActivity() {
     ) {
         val items = dataOrException.data
         val users : List<User>? = dataOrException.user
-//        var userData : List<Map<String, Any?>> = listOf()
 
-//        val dbEntry : DBHelper = DBHelper(null)
-        Log.d("Simion", users.toString())
 
         items?.let {
             LazyColumn(state = rememberLazyListState()) {
                 items(items)
                 { data ->
-                        Log.d("CardList", "HomeList: add data $data")
+                    Log.d("CardList", "HomeList: add data $data")
+                    // filter for full rides
+                    if (data.passenger3 == "") {
                         InfoRow(
                             info = data,
                             user = getCorrectUser(data, users),
@@ -195,6 +194,7 @@ class AvailableRides : ComponentActivity() {
                     }
                 }
             }
+        }
         val e = dataOrException.e
         e?.let {
             Text(
