@@ -117,15 +117,19 @@ fun AppTopBar() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(20.dp, 20.dp, 0.dp,0.dp))
-                Text("Booked!",
+                Text(
+                    "Booked!",
                     color = Color.White,
                     fontSize = 25.sp,
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(20.dp, 0.dp))
+                        .padding(20.dp, 0.dp)
+                )
+
                 CardRideDetails()
+
                 Card(
                     modifier = Modifier
                         .fillMaxWidth(0.8f)
@@ -145,7 +149,8 @@ fun AppTopBar() {
                 ) }
                 LazyColumn(
                     modifier = Modifier
-                        .fillMaxSize(),
+                        .fillMaxSize()
+                        .offset(0.dp,20.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Top
                 ) {
@@ -200,7 +205,7 @@ fun MoreAvailableRides() {
         modifier = Modifier
             .fillMaxWidth()
             .size(280.dp)
-            .padding(20.dp, 20.dp)
+            .padding(20.dp, 10.dp)
             .clickable { },
         elevation = 10.dp,
         shape = RoundedCornerShape(20.dp)
@@ -233,49 +238,63 @@ fun MoreAvailableRides() {
 
                     Spacer(modifier = Modifier.height(15.dp))
 
-                    Row {
-                        Column {
-                            Canvas(modifier = Modifier.size(10.dp), onDraw = {
-                                drawCircle(color = Color(0xFFEE5252))
-                            })
-                            Spacer(modifier = Modifier.height(15.dp))
-                            androidx.compose.material.Divider(
-                                color = Color.Black,
+                    Column {
+                        Row {
+                            Canvas(
                                 modifier = Modifier
-                                    .fillMaxHeight(0.025f)
-                                    .width(2.dp)
-                                    .offset(4.dp, 0.dp)
+                                    .size(10.dp)
+                                    .offset(0.dp,7.dp),
+                                onDraw = {
+                                    drawCircle(color = Color(0xFFEE5252))
+                                }
                             )
-                            Spacer(modifier = Modifier.height(10.dp))
-                            Canvas(modifier = Modifier.size(10.dp), onDraw = {
-                                drawCircle(color = Color(0xFFEE5252))
-                            })
-                        }
 
-                        Column {
+                            Spacer(modifier = Modifier.width(10.dp))
+
                             Text(
-                                text = "Point A",
+                                 "FROM",
+                               // text = "${info.from}",
                                 fontSize = 15.sp,
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.Bold,
-                                color = Color.Black,
-                                modifier = Modifier
-                                    .offset(10.dp, 0.dp)
+                                color = Color.Black
                             )
-                            Spacer(modifier = Modifier.height(10.dp))
+
+
+                        }
+                        androidx.compose.material.Divider(
+                            color = Color.Black,
+                            modifier = Modifier
+                                .fillMaxHeight(0.1f)
+                                .width(2.dp)
+                                .offset(4.dp, 7.dp)
+                        )
+
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        Row {
+                            Canvas(
+                                modifier = Modifier
+                                    .size(10.dp)
+                                    .offset(0.dp,7.dp),
+                                onDraw = {
+                                    drawCircle(color = Color(0xFFEE5252))
+                                }
+                            )
+                            Spacer(modifier = Modifier.width(10.dp))
                             Text(
-                                text = "Point B",
+                                "TO",
+                               // text = "${info.to}",
                                 fontSize = 15.sp,
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.Bold,
-                                color = Color.Black,
-                                modifier = Modifier
-                                    .offset(10.dp, 0.dp)
+                                color = Color.Black
                             )
                         }
                     }
                 }
-                Spacer(modifier = Modifier.width(95.dp))
+
+                Spacer(modifier = Modifier.width(50.dp))
 
                 Column {
                     Column(
