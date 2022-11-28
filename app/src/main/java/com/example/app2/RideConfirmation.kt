@@ -40,6 +40,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextDecoration
 import com.example.app2.ui.theme.Black
 import androidx.compose.material.Card
+import androidx.compose.ui.text.style.TextAlign
 
 class RideConfirmation : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -130,74 +131,43 @@ fun AppTopBar() {
                 )
 
                 CardRideDetails()
-
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth(0.8f)
-                        .size(30.dp)
-                        .padding(20.dp, 0.dp),
-                    elevation = 10.dp,
-                    shape = RoundedCornerShape(20.dp)
-                ) { Text(
-                    "More available rides:",
-                    color = Color.Black,
-                    fontSize = 20.sp,
-                    fontFamily = FontFamily.SansSerif,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(20.dp, 0.dp)
-                    ,
-                ) }
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .offset(0.dp,20.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Top
-                ) {
-                    // Add a single item
-                    item {
-                        MoreAvailableRides()
-                    }
-
-                    // Add 5 items
-                    items(5) {
-                        MoreAvailableRides()
-                    }
-
-                    item {
-                        Text(text = "No more available rides")
-                    }
-                }
             }
         }
     )
 }
+
 @Composable
 fun CardRideDetails() {
-    Card(
+    Card (
         modifier = Modifier
             .fillMaxWidth()
-            .size(180.dp)
+            .size(400.dp)
             .padding(20.dp)
             .fillMaxWidth()
             .clickable { },
         elevation = 10.dp,
-        shape = RoundedCornerShape(20.dp)
+        shape = RoundedCornerShape(20.dp),
     ) {
-        Text(
-            text = "You have booked a ride \n" +
-                    "for [Date] at [time].\n" +
-                    "[nr] seats have been reserved",
-            color = Color(0xFFEE5252),
-            fontSize = 20.sp,
-            fontFamily = FontFamily.SansSerif,
-            fontWeight = FontWeight.Bold,
+        Column (
             modifier = Modifier
-                .fillMaxSize()
-                .padding(20.dp)
-        )
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+                )
+        {
+            Text(
+                text = "You have booked a ride \n" +
+                        "for [Date] at [time].\n" +
+                        "[nr] seats have been reserved",
+                color = Color(0xFFEE5252),
+                fontSize = 30.sp,
+                fontFamily = FontFamily.SansSerif,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .padding(20.dp)
+            )
+        }
     }
 }
 
@@ -316,31 +286,6 @@ fun MoreAvailableRides() {
                                 .size(70.dp)
                                 .clip(CircleShape)
                         )
-//                        Box(
-//                            modifier = Modifier
-//                                .fillMaxWidth(0.5f)
-//                                .height(15.dp)
-//                                .background(
-//                                    brush = Brush.horizontalGradient(listOf(Color.Gray, Black)),
-//                                    shape = RoundedCornerShape(20.dp)
-//                                ),
-//                        ) {
-//                            Row(
-//                                modifier = Modifier.fillMaxWidth(),
-//                                verticalAlignment = Alignment.CenterVertically,
-//                                horizontalArrangement = Arrangement.Center,
-//                            ) {
-//                                androidx.compose.material.Icon(
-//                                    imageVector = Icons.Default.Star,
-//                                    contentDescription = "Rank"
-//                                )
-//                                Text(
-//                                    text = "Rank",
-//                                    fontSize = 10.sp
-//                                )
-//                            }
-//
-//                        }
                         Text(
                             text = "Name Surname",
                             fontSize = 15.sp,
