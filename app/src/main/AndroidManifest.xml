@@ -19,7 +19,25 @@
         android:theme="@style/Theme.App2"
         tools:targetApi="31">
         <activity
-            android:name=".ScheduleRide"
+            android:name=".rides.schedule.ScheduleRide1"
+            android:exported="false"
+            android:label="@string/title_activity_schedule_ride"
+            android:theme="@style/Theme.App2_2">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".rides.schedule.ScheduleRide2"
+            android:exported="false"
+            android:label="@string/title_activity_schedule_ride"
+            android:theme="@style/Theme.App2_2">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".rides.schedule.ScheduleRide3"
             android:exported="false"
             android:label="@string/title_activity_schedule_ride"
             android:theme="@style/Theme.App2_2">

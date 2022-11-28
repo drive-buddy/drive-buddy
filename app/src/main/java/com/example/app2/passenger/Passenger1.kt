@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import com.example.app2.*
 import com.example.app2.R
 import com.example.app2.helperfiles.CheckBoxDemo
+import com.example.app2.helperfiles.PrettyBar
 import com.example.app2.signup.Choose
 import com.example.app2.ui.theme.App2_2Theme
 

@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.app2.R
-import com.example.app2.ScheduleRide
+import com.example.app2.rides.schedule.ScheduleRide1
 import com.example.app2.drawer.DrawerLayout
 import com.example.app2.helperfiles.*
 import com.example.app2.rides.booking.DriverBookRide
@@ -47,6 +47,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.util.*
 import javax.inject.Inject
 
 
@@ -134,7 +135,7 @@ class AvailableRides : ComponentActivity() {
                         },
                         floatingActionButtonFun = {
                             Button(onClick = {
-                                val navigate = Intent(this@AvailableRides, ScheduleRide::class.java)
+                                val navigate = Intent(this@AvailableRides, ScheduleRide1::class.java)
                                 startActivity(navigate)
                             },
                                 modifier = Modifier.size(70.dp),

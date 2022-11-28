@@ -15,15 +15,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import com.example.app2.helperfiles.PrettyBar
 import java.util.*
 
 @Composable
 fun ShowTimePicker(
     messageError: String,
     errorState: Boolean
-): Long? {
+): Long {
     val Context = LocalContext.current
 
     val calendar = Calendar.getInstance()
@@ -72,10 +71,9 @@ fun ShowTimePicker(
     PrettyBar(
         modifier = Modifier
             .height(90.dp)
-            .width(110.dp)
             .padding(vertical = 0.dp),
 
-        type = "Time",
+        type = "The time of the journey",
         activeVariable = time.value,
         onVarChange = {
             time.value = it
@@ -97,6 +95,6 @@ fun ShowTimePicker(
         return (otherTimeHour.value.toLong() * 60 * 60 + otherTimeMinute.value.toLong() * 60)
     }
 
-    return null
+    return 0
 //    return time.value
 }

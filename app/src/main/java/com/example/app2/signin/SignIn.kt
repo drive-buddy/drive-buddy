@@ -26,7 +26,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import com.example.app2.PrettyBar
+import com.example.app2.helperfiles.PrettyBar
 import com.example.app2.R
 
 class SignIn : ComponentActivity() {
