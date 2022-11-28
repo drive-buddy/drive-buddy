@@ -47,6 +47,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.text.SimpleDateFormat
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -279,7 +280,7 @@ class CurrentOrder : ComponentActivity() {
                             style = TextStyle(textDecoration = TextDecoration.Underline)
                         )
                         Text(
-                            "Date/time:\n${info.date?.toDate()}",
+                            "Date/time:\n${SimpleDateFormat("E dd/MM/yyy, HH:mm z").format(info.date?.toDate())}",
                             fontSize = 10.sp,
                             fontFamily = FontFamily.SansSerif,
                             fontWeight = FontWeight.Bold,

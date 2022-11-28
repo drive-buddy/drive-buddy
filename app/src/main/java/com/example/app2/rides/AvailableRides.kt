@@ -39,6 +39,7 @@ import com.example.app2.rides.booking.DriverBookRide
 import com.example.app2.rides.booking.PassengerBookRide
 import com.example.app2.ui.theme.App2Theme
 import com.example.app2.ui.theme.Grey
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.Query
@@ -47,6 +48,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.Date
 import javax.inject.Inject
 
 
@@ -107,6 +111,8 @@ class AvailableRides : ComponentActivity() {
                                     val userEmail : String = dbEntry.getCurrentUser()
                                     Log.i("infoAR", it.toString())
                                     dbEntry.getUser(userEmail) { document ->
+                                        val date: String = SimpleDateFormat("E dd/MM/yyy, HH:mm z").format(it.date?.toDate())
+
                                         if (document["type"] == "passenger")
                                         {
                                             val navigate = Intent(this@AvailableRides, PassengerBookRide::class.java)
@@ -115,7 +121,7 @@ class AvailableRides : ComponentActivity() {
                                             navigate.putExtra("passenger1", it.passenger1)
                                             navigate.putExtra("passenger2", it.passenger2)
                                             navigate.putExtra("passenger3", it.passenger3)
-                                            navigate.putExtra("date", it.date?.toDate().toString())
+                                            navigate.putExtra("date", date.toString())
                                             navigate.putExtra("nrOfSeats", it.nrOfSeats.toString())
                                             startActivity(navigate)
                                             finish()
@@ -123,7 +129,7 @@ class AvailableRides : ComponentActivity() {
                                         else if (document["type"] == "driver") {
                                             val navigate = Intent(this@AvailableRides, DriverBookRide::class.java)
                                             navigate.putExtra("rideId", it.id)
-                                            navigate.putExtra("date", it.date?.toDate().toString())
+                                            navigate.putExtra("date", date.toString())
                                             navigate.putExtra("nrOfSeats", it.nrOfSeats.toString())
                                             startActivity(navigate)
                                             finish()

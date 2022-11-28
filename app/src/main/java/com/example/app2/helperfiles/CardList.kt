@@ -29,7 +29,7 @@ data class Infos(
     val id : String? = "",
     val from: String? = "",
     val to: String? = "",
-    val date: Timestamp? = null,
+    var date: Timestamp? = null,
     val nrOfSeats: Int? = null,
     val price: Int? = null,
     val driver: String? = "",
@@ -118,7 +118,7 @@ fun InfoRow(
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    val tmp = info.date!!.toDate()
+                    val tmp = SimpleDateFormat("E dd/MM/yyy, HH:mm z").format(info.date!!.toDate())
                     Text(
                         text = tmp.toString(),
                         modifier = Modifier.padding(3.dp),
