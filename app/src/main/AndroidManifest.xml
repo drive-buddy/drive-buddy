@@ -132,15 +132,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".No_result"
-            android:exported="false"
-            android:label="@string/title_activity_no_result"
-            android:theme="@style/Theme.App2">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".driver.Driver1"
             android:exported="false"
             android:label="@string/title_activity_driver1"

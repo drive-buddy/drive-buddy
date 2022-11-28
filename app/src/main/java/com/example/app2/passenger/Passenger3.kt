@@ -14,10 +14,12 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.app2.No_result
+import com.example.app2.rides.AvailableRides
 import com.example.app2.ui.theme.App2_2Theme
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 class Passenger3 : ComponentActivity() {
+    @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -72,7 +74,7 @@ class Passenger3 : ComponentActivity() {
                         ) {
                             Button(
                                 onClick = {
-                                    val navigate1 = Intent(this@Passenger3, No_result::class.java)
+                                    val navigate1 = Intent(this@Passenger3, AvailableRides::class.java)
                                     startActivity(navigate1)
                                 },
                                 shape = RoundedCornerShape(20.dp),

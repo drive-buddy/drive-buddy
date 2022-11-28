@@ -9,31 +9,37 @@ import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.app2.R
 import com.example.app2.Schedule_ride
 import com.example.app2.drawer.DrawerLayout
 import com.example.app2.helperfiles.*
 import com.example.app2.rides.booking.DriverBookRide
 import com.example.app2.rides.booking.PassengerBookRide
 import com.example.app2.ui.theme.App2Theme
+import com.example.app2.ui.theme.Grey
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.Query
@@ -179,7 +185,8 @@ class AvailableRides : ComponentActivity() {
         val users : List<User>? = dataOrException.user
 
 
-        items?.let {
+        Log.i("Items", items.toString())
+        if (!items.isNullOrEmpty()) {
             LazyColumn(state = rememberLazyListState()) {
                 items(items)
                 { data ->
@@ -194,6 +201,8 @@ class AvailableRides : ComponentActivity() {
                     }
                 }
             }
+        } else {
+            ShowNoResult()
         }
         val e = dataOrException.e
         e?.let {
@@ -211,6 +220,38 @@ class AvailableRides : ComponentActivity() {
             CircularProgressBar(
                 isDisplayed = viewModel.loading.value
             )
+        }
+    }
+
+    @Composable
+    fun ShowNoResult() {
+        Card(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 40.dp, vertical = 80.dp),
+            shape = RoundedCornerShape(30.dp),
+            elevation = 5.dp
+        ) {
+
+            Column(modifier = Modifier
+                .padding(horizontal = 40.dp, vertical = 145.dp)
+            ) {
+
+                Text(
+                    text = "There are no available rides..\nyet",
+                    fontFamily = FontFamily.SansSerif,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 30.sp,
+                    color = Grey
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.search),
+                    contentDescription = "image",
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(CircleShape)
+                )
+            }
         }
     }
 }
