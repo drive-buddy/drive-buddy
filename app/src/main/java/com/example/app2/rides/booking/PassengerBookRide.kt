@@ -92,43 +92,6 @@ class PassengerBookRide : ComponentActivity() {
                                         .padding(20.dp, 0.dp))
                             }
                             CardRideDetails(showError, date!!, nrOfSeats!!)
-                            Card(
-                                modifier = Modifier
-                                    .fillMaxWidth(0.8f)
-                                    .size(30.dp)
-                                    .padding(20.dp, 0.dp),
-                                elevation = 10.dp,
-                                shape = RoundedCornerShape(20.dp)
-                            ) { Text("More available rides:",
-                                color = Color.Black,
-                                fontSize = 20.sp,
-                                fontFamily = FontFamily.SansSerif,
-                                fontWeight = FontWeight.Bold,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(20.dp, 0.dp)
-                                ,
-                            ) }
-                            LazyColumn(
-                                modifier = Modifier
-                                    .fillMaxSize(),
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.Top
-                            ) {
-                                // Add a single item
-                                item {
-                                    MoreAvailableRides()
-                                }
-
-                                // Add 5 items
-                                items(5) {
-                                    MoreAvailableRides()
-                                }
-
-                                item {
-                                    Text(text = "No more available rides")
-                                }
-                            }
                         }
                     })
                 }
