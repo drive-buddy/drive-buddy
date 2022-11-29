@@ -45,21 +45,24 @@ fun ShowDatePicker(
     val date = remember { mutableStateOf("") }
     val otherDate = remember { mutableStateOf("") }
 
-    val datePickerDialog = DatePickerDialog(
+            val datePickerDialog = DatePickerDialog(
         context, { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
             if(dayOfMonth < 10 && (month+1) < 10) {
                 date.value = "0$dayOfMonth-0${month + 1}-$year"
+                otherDate.value = "$year-0${month + 1}-0$dayOfMonth"
             }
             else if(dayOfMonth < 10){
                 date.value = "0$dayOfMonth-${month + 1}-$year"
+                otherDate.value = "$year-${month + 1}-0$dayOfMonth"
             }
             else if(month < 10){
                 date.value = "$dayOfMonth-0${month + 1}-$year"
+                otherDate.value = "$year-0${month + 1}-$dayOfMonth"
             }
             else{
                 date.value = "$dayOfMonth-${month + 1}-$year"
+                otherDate.value = "$year-${month + 1}-$dayOfMonth"
             }
-            otherDate.value = "$year-${month + 1}-$dayOfMonth"
         }, year, month, day
     )
 
@@ -90,6 +93,7 @@ fun ShowDatePicker(
             onVarChange = {
                 date.value = it
             },
+            readOnlyVal = true,
             errorMessage = messageError,
             showError = !errorState
         )
@@ -103,6 +107,5 @@ fun ShowDatePicker(
         val parsedDate = LocalDate.parse(text, formatter)
         return (parsedDate.toEpochDay() * 24 * 60 * 60.toLong() - 2 * 60 * 60)
     }
-
     return 0
 }

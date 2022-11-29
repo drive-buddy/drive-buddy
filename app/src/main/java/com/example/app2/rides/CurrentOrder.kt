@@ -279,8 +279,10 @@ class CurrentOrder : ComponentActivity() {
 
                             style = TextStyle(textDecoration = TextDecoration.Underline)
                         )
+                        val tmp = info.date!!.toDate()
+                        val tmp2 = SimpleDateFormat("E dd/MM/yyy, HH:mm z").format(tmp)
                         Text(
-                            "Date/time:\n${SimpleDateFormat("E dd/MM/yyy, HH:mm z").format(info.date?.toDate())}",
+                            "Date/time:\n${tmp2}",
                             fontSize = 10.sp,
                             fontFamily = FontFamily.SansSerif,
                             fontWeight = FontWeight.Bold,

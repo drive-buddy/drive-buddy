@@ -34,6 +34,7 @@ fun PrettyBar(
     KeyboardSettings : KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text,
         imeAction = ImeAction.Next),
     keyboardTransformation : VisualTransformation = VisualTransformation.None,
+    readOnlyVal : Boolean = false,
     showError: Boolean = false,
     errorMessage: String = ""
 ){
@@ -70,6 +71,7 @@ fun PrettyBar(
                     unfocusedBorderColor = Color(0xFF888686)
                 ),
                 trailingIcon = trailingI,
+                readOnly = readOnlyVal,
                 visualTransformation = keyboardTransformation,
                 keyboardOptions = KeyboardSettings,
                 keyboardActions = KeyboardActions(

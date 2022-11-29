@@ -78,6 +78,7 @@ fun ShowTimePicker(
         onVarChange = {
             time.value = it
         },
+        readOnlyVal = true,
         errorMessage = messageError,
         showError = !errorState
     )
