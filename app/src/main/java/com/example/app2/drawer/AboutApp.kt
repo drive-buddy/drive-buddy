@@ -111,7 +111,7 @@ class AboutApp : ComponentActivity(){
                                     Column {
                                         Image(
                                             painter = painterResource(R.drawable.ic_launcher_round),
-                                            contentDescription = "Profile Picture",
+                                            contentDescription = "Mentors",
                                             colorFilter = ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) }),
                                             contentScale = ContentScale.Crop,
                                             modifier = Modifier
@@ -128,7 +128,7 @@ class AboutApp : ComponentActivity(){
                                     Column {
                                         Image(
                                             painter = painterResource(R.drawable.ic_launcher_round),
-                                            contentDescription = "Profile Picture",
+                                            contentDescription = "Mentors",
                                             colorFilter = ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) }),
                                             contentScale = ContentScale.Crop,
                                             modifier = Modifier
@@ -175,9 +175,8 @@ class AboutApp : ComponentActivity(){
                                     ) {
                                         Column {
                                             Image(
-                                                painter = painterResource(R.drawable.ic_launcher_round),
-                                                contentDescription = "Profile Picture",
-                                                colorFilter = ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) }),
+                                                painter = painterResource(R.drawable.maria_round),
+                                                contentDescription = "Masa",
                                                 contentScale = ContentScale.Crop,
                                                 modifier = Modifier
                                                     .size(80.dp)
@@ -193,9 +192,8 @@ class AboutApp : ComponentActivity(){
 
                                         Column {
                                             Image(
-                                                painter = painterResource(R.drawable.ic_launcher_round),
-                                                contentDescription = "Profile Picture",
-                                                colorFilter = ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) }),
+                                                painter = painterResource(R.drawable.dima_round),
+                                                contentDescription = "Dima",
                                                 contentScale = ContentScale.Crop,
                                                 modifier = Modifier
                                                     .size(80.dp)
@@ -212,9 +210,8 @@ class AboutApp : ComponentActivity(){
 
                                         Column {
                                             Image(
-                                                painter = painterResource(R.drawable.ic_launcher_round),
-                                                contentDescription = "Profile Picture",
-                                                colorFilter = ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) }),
+                                                painter = painterResource(R.drawable.denis_round),
+                                                contentDescription = "Denis",
                                                 contentScale = ContentScale.Crop,
                                                 modifier = Modifier
                                                     .size(80.dp)
@@ -245,9 +242,8 @@ class AboutApp : ComponentActivity(){
                                     ) {
                                         Column {
                                             Image(
-                                                painter = painterResource(R.drawable.ic_launcher_round),
-                                                contentDescription = "Profile Picture",
-                                                colorFilter = ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) }),
+                                                painter = painterResource(R.drawable.ira_round),
+                                                contentDescription = "Ira",
                                                 contentScale = ContentScale.Crop,
                                                 modifier = Modifier
                                                     .size(80.dp)
@@ -262,9 +258,8 @@ class AboutApp : ComponentActivity(){
                                         }
                                         Column {
                                             Image(
-                                                painter = painterResource(R.drawable.ic_launcher_round),
-                                                contentDescription = "Profile Picture",
-                                                colorFilter = ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) }),
+                                                painter = painterResource(R.drawable.maia_round),
+                                                contentDescription = "Maia",
                                                 contentScale = ContentScale.Crop,
                                                 modifier = Modifier
                                                     .size(80.dp)
