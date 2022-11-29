@@ -95,6 +95,7 @@ fun ConfirmationContent(){
             modifier = Modifier
                 .padding(30.dp, 0.dp)
         )
+
         CardRide()
 
         Row(
@@ -178,50 +179,62 @@ fun CardRide() {
 
                     Spacer(modifier = Modifier.height(10.dp))
 
-                    Row {
-                        Column {
-                            Canvas(modifier = Modifier.size(10.dp), onDraw = {
-                                drawCircle(color = Color(0xFFEE5252))
-                            })
-                            Spacer(modifier = Modifier.height(15.dp))
-                            Divider(
-                                color = Color.Black,
+                    Column {
+                        Row {
+                            Canvas(
                                 modifier = Modifier
-                                    .fillMaxHeight(0.025f)
-                                    .width(2.dp)
-                                    .offset(4.dp, 0.dp)
+                                    .size(10.dp)
+                                    .offset(0.dp,7.dp),
+                                onDraw = {
+                                    drawCircle(color = Color(0xFFEE5252))
+                                }
                             )
-                            Spacer(modifier = Modifier.height(10.dp))
-                            Canvas(modifier = Modifier.size(10.dp), onDraw = {
-                                drawCircle(color = Color(0xFFEE5252))
-                            })
-                        }
 
-                        Column {
+                            Spacer(modifier = Modifier.width(10.dp))
+
                             Text(
-                                text = "Point A",
+                                "FROM",
+                                // text = "${info.from}",
                                 fontSize = 15.sp,
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.Bold,
-                                color = Color.Black,
-                                modifier = Modifier
-                                    .offset(10.dp, 0.dp)
+                                color = Color.Black
                             )
-                            Spacer(modifier = Modifier.height(10.dp))
+
+                        }
+                        androidx.compose.material.Divider(
+                            color = Color.Black,
+                            modifier = Modifier
+                                .fillMaxHeight(0.025f)
+                                .width(2.dp)
+                                .offset(4.dp, 7.dp)
+                        )
+
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        Row {
+                            Canvas(
+                                modifier = Modifier
+                                    .size(10.dp)
+                                    .offset(0.dp,7.dp),
+                                onDraw = {
+                                    drawCircle(color = Color(0xFFEE5252))
+                                }
+                            )
+                            Spacer(modifier = Modifier.width(10.dp))
                             Text(
-                                text = "Point B",
+                                "TO",
+                                // text = "${info.to}",
                                 fontSize = 15.sp,
                                 fontFamily = FontFamily.SansSerif,
                                 fontWeight = FontWeight.Bold,
-                                color = Color.Black,
-                                modifier = Modifier
-                                    .offset(10.dp, 0.dp)
+                                color = Color.Black
                             )
                         }
                     }
                 }
 
-                Spacer(modifier = Modifier.width(100.dp))
+                Spacer(modifier = Modifier.width(60.dp))
 
                 Column {
                     Column(
@@ -380,38 +393,78 @@ fun CardRide() {
                 horizontalArrangement = Arrangement.SpaceAround ,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Image(
-                    painter = painterResource(R.drawable.smoking_round), // smoking_no_round | smoking_round
-                    contentDescription = "Smoking / No Smoking",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(80.dp)
-                        .background(Color.White)
-                        .clip(CircleShape) // clip to the circle shape
-                        .border(3.dp, color = Color(0xFFEE5252), CircleShape)
-                )
-
-                Image(
-                    painter = painterResource(R.drawable.pet_no_round), // pet_no_round | pet_round
-                    contentDescription = "Pet | No Pet",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(80.dp)
-                        .background(Color.White)
-                        .clip(CircleShape) // clip to the circle shape
-                        .border(3.dp, color = Color(0xFFEE5252), CircleShape)
-                )
-
-                Image(
-                    painter = painterResource(R.drawable.luggage_round), // luggage_round | luggage_no_round
-                    contentDescription = "Luggage | No Luggage",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(80.dp)
-                        .background(Color.White)
-                        .clip(CircleShape) // clip to the circle shape
-                        .border(3.dp, color = Color(0xFFEE5252), CircleShape)
-                )
+               // if (info.smoking == "true")
+                if (false) {
+                    Image(
+                        painter = painterResource(R.drawable.smoking_round), // Smoking allowed
+                        contentDescription = "Smoking / No Smoking",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(70.dp)
+                            .background(Color.White)
+                            .clip(CircleShape)
+                            .border(3.dp, color = Color(0xFFEE5252), CircleShape)
+                    )
+                } else {
+                    Image(
+                        painter = painterResource(R.drawable.smoking_no_round), // Smoking not allowed
+                        contentDescription = "Smoking / No Smoking",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(70.dp)
+                            .background(Color.White)
+                            .clip(CircleShape)
+                            .border(3.dp, color = Color(0xFFEE5252), CircleShape)
+                    )
+                }
+               // if (info.animals == "true")
+                if (true) {
+                    Image(
+                        painter = painterResource(R.drawable.pet_round), // pet_no_round | pet_round
+                        contentDescription = "Pet | No Pet",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(70.dp)
+                            .background(Color.White)
+                            .clip(CircleShape)
+                            .border(3.dp, color = Color(0xFFEE5252), CircleShape)
+                    )
+                } else {
+                    Image(
+                        painter = painterResource(R.drawable.pet_no_round),
+                        contentDescription = "Pet | No Pet",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(70.dp)
+                            .background(Color.White)
+                            .clip(CircleShape)
+                            .border(3.dp, color = Color(0xFFEE5252), CircleShape)
+                    )
+                }
+               // if (info.luggage == "true")
+                if (false) {
+                    Image(
+                        painter = painterResource(R.drawable.luggage_round), // luggage_round | luggage_no_round
+                        contentDescription = "Luggage | No Luggage",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(70.dp)
+                            .background(Color.White)
+                            .clip(CircleShape)
+                            .border(3.dp, color = Color(0xFFEE5252), CircleShape)
+                    )
+                } else {
+                    Image(
+                        painter = painterResource(R.drawable.luggage_no_round),
+                        contentDescription = "Smoking / No Smoking",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(70.dp)
+                            .background(Color.White)
+                            .clip(CircleShape)
+                            .border(3.dp, color = Color(0xFFEE5252), CircleShape)
+                    )
+                }
             }
         }
     }
