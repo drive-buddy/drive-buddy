@@ -71,6 +71,11 @@ fun DrawerLayout(
                     MenuItem(
                         id = "support",
                         title = "Support",
+                        icon = Icons.Default.MailOutline
+                    ),
+                    MenuItem(
+                        id = "about",
+                        title = "About Us",
                         icon = Icons.Default.Info
                     ),
                     MenuItem(
@@ -93,6 +98,10 @@ fun DrawerLayout(
                         }
                         "support" -> {
                             val navigate = Intent(localContext, SendEmail::class.java)
+                            localContext?.startActivity(navigate)
+                        }
+                        "about" -> {
+                            val navigate = Intent(localContext, AboutApp::class.java)
                             localContext?.startActivity(navigate)
                         }
                         "signout" -> {
