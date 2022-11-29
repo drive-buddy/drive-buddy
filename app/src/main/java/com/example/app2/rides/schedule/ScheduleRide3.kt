@@ -13,6 +13,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -36,33 +37,22 @@ class ScheduleRide3: ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    var validateDestFrom by rememberSaveable { mutableStateOf(true) }
-                    var validateDestTo by rememberSaveable { mutableStateOf(true) }
-                    val validateDate by rememberSaveable { mutableStateOf(true) }
-                    val validateTime by rememberSaveable { mutableStateOf(true) }
-                    var validateNrOfSeats by rememberSaveable { mutableStateOf(true) }
-                    var validatePrice by rememberSaveable { mutableStateOf(true) }
-
-                    val destFromError = "Please input a valid address"
-                    val destFromToError = "Please input a valid address"
-                    val dateError = "Please input a valid date"
-                    val timeError = "Please input a valid time"
-                    val nrOfSeatsError = "Please input a valid nr of seats"
-                    val priceError = "Please input a valid price"
+                    var filterHashMap = HashMap<String, String?>()
 
                     fun registerRide() {
                         val dbEntry : DBHelper = DBHelper(null)
                         val userEmail : String = dbEntry.getCurrentUser()
-//                            var dateTime : Date = Date(date)
 
-                        val result : HashMap<String, Any?> = HashMap<String, Any?>()
+                        var result : HashMap<String, Any?> = HashMap<String, Any?>()
 
                         result["from"] = intent.getStringExtra("From")
                         result["to"] = intent.getStringExtra("To")
                         result["nrOfSeats"] = intent.getStringExtra("NrOfSeats")
                         result["price"] = intent.getStringExtra("Price")
                         val tmpTime = intent.getLongExtra("Time", 0L)
-                        result["time"] = Timestamp(tmpTime, 0)
+                        result["date"] = Timestamp(tmpTime, 0)
+
+                        result = (result + filterHashMap) as HashMap<String, Any?>
 
                         dbEntry.getUser(userEmail) {
                             document ->
@@ -139,7 +129,8 @@ class ScheduleRide3: ComponentActivity() {
                                 fontWeight = FontWeight.Medium,
                                 color = Color.Black,
                             )
-                            val filterHashMap = FilterList(allFilters)
+                            Spacer(Modifier.height(15.dp))
+                            filterHashMap = FilterList(allFilters)
                         }
                     }
 

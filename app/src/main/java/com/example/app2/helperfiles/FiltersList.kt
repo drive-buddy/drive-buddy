@@ -26,7 +26,6 @@ val allFilters = listOf(
     Filters("smoking"),
     Filters("animals"),
     Filters("luggage"),
-    Filters("test"),
 )
 
 @Composable

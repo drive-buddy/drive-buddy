@@ -31,7 +31,7 @@ data class Infos(
     val to: String? = "",
     val date: Timestamp? = null,
     val nrOfSeats: String? = null,
-    val price: String? = null,
+    val price: String? = "",
     val driver: String? = "",
     val passenger1: String? = "",
     val passenger2: String? = "",
