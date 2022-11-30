@@ -62,7 +62,7 @@ class ScheduleRide2: ComponentActivity() {
                     fun validateData(time: Long,
                          nrOfSeats: String?, price: String?): Boolean{
 
-                        validateNrOfSeats = !nrOfSeats.isNullOrBlank()
+                        validateNrOfSeats = !nrOfSeats.isNullOrBlank() && (nrOfSeats.toInt() <= 3)
                         validatePrice = !price.isNullOrBlank()
 
                         validateDate = time >= Calendar.getInstance().timeInMillis / 1000
