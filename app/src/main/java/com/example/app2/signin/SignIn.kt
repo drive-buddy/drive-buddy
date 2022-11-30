@@ -56,8 +56,6 @@ class SignIn : ComponentActivity() {
                     val errorMsg : String = ""
                     val showErrorMsg : Boolean = false
 
-
-
                     var isPasswordVisible by remember {
                         mutableStateOf(false)
                     }
@@ -70,7 +68,7 @@ class SignIn : ComponentActivity() {
                     }
                     Column(
                         modifier = Modifier
-                            .fillMaxWidth()
+                            .fillMaxSize()
                             .padding(vertical = 60.dp, horizontal = 40.dp)
                     ) {
                         Column(
@@ -161,23 +159,23 @@ class SignIn : ComponentActivity() {
 
                         }
 
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            horizontalAlignment = Alignment.End
-//                                .offset(y = 480.dp, x = 230.dp)
-                        )
-                        {
-                            Text(
-                                text = "Forgot Password?",
-                                fontSize = 15.sp,
-                                fontFamily = FontFamily.SansSerif,
-                                fontWeight = FontWeight.ExtraBold,
-                                color = Color.Blue
-                            )
-                        }
+//                        Column(
+//                            modifier = Modifier
+//                                .fillMaxWidth(),
+//                            horizontalAlignment = Alignment.End
+////                                .offset(y = 480.dp, x = 230.dp)
+//                        )
+//                        {
+//                            Text(
+//                                text = "Forgot Password?",
+//                                fontSize = 15.sp,
+//                                fontFamily = FontFamily.SansSerif,
+//                                fontWeight = FontWeight.ExtraBold,
+//                                color = Color.Blue
+//                            )
+//                        }
 
-                        Spacer(Modifier.height(20.dp))
+                        Spacer(Modifier.height(40.dp))
 
                         Column(
                             modifier = Modifier,
@@ -213,75 +211,75 @@ class SignIn : ComponentActivity() {
                                 )
                             }
 
-                            Column(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-//                                .offset(y = 620.dp, x = 200.dp),
-//                        verticalArrangement = Arrangement.Center,
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                Text(
-                                    text = "or",
-                                    fontSize = 18.sp,
-                                    fontFamily = FontFamily.SansSerif,
-                                    fontWeight = FontWeight.ExtraBold,
-                                    color = Color.Black
-                                )
-                            }
-
-                            Button(
-                                onClick = {
-                                        val navigate1 = Intent(this@SignIn, SignInFacebook::class.java)
-
-                                        startActivity(navigate1)
-                                        finish()
-                                          },
-                                shape = RoundedCornerShape(20.dp),
-                                colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFF4267B2)),
-                                modifier = Modifier
-                                    .height(50.dp)
-                                    .width(350.dp)
-                            ) {
-                                Image(painter = painterResource(id = drawable.facebook),
-                                    contentDescription = "Facebook icon",
-//                            tint = Color.White,
-                                    modifier = Modifier.size(20.dp))
-
-                                Text(
-                                    text = "Sign in with Facebook",
-                                    fontSize = 19.sp,
-                                    fontFamily = FontFamily.SansSerif,
-                                    fontWeight = FontWeight.ExtraBold,
-                                    color = Color(0xFFFFFFFF)
-                                )
-                            }
-                            Button(
-                                onClick = {
-                                        val navigate1 = Intent(this@SignIn, SignInGoogle::class.java)
-
-
-                                        startActivity(navigate1)
-                                        finish()
-                                          },
-                                shape = RoundedCornerShape(20.dp),
-                                colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.White),
-                                modifier = Modifier
-                                    .height(50.dp)
-                                    .width(350.dp)
-                            ) {
-                                Image(painter = painterResource(id = drawable.google),
-                                    contentDescription = "Google icon",
-//                              tint = Color.White,
-                                    modifier = Modifier.size(30.dp))
-                                Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-                                Text(
-                                    text = "Sign in with Google",
-                                    fontFamily = FontFamily.SansSerif,
-                                    fontWeight = FontWeight.ExtraBold,
-                                    fontSize = 19.sp,
-                                    color = Color(0xFF000000)
-                                )
-                            }
+//                            Column(
+//                                modifier = Modifier
+//                                    .fillMaxWidth(),
+////                                .offset(y = 620.dp, x = 200.dp),
+////                        verticalArrangement = Arrangement.Center,
+//                                horizontalAlignment = Alignment.CenterHorizontally
+//                            ) {
+//                                Text(
+//                                    text = "or",
+//                                    fontSize = 18.sp,
+//                                    fontFamily = FontFamily.SansSerif,
+//                                    fontWeight = FontWeight.ExtraBold,
+//                                    color = Color.Black
+//                                )
+//                            }
+//
+//                            Button(
+//                                onClick = {
+//                                        val navigate1 = Intent(this@SignIn, SignInFacebook::class.java)
+//
+//                                        startActivity(navigate1)
+//                                        finish()
+//                                          },
+//                                shape = RoundedCornerShape(20.dp),
+//                                colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFF4267B2)),
+//                                modifier = Modifier
+//                                    .height(50.dp)
+//                                    .width(350.dp)
+//                            ) {
+//                                Image(painter = painterResource(id = drawable.facebook),
+//                                    contentDescription = "Facebook icon",
+////                            tint = Color.White,
+//                                    modifier = Modifier.size(20.dp))
+//
+//                                Text(
+//                                    text = "Sign in with Facebook",
+//                                    fontSize = 19.sp,
+//                                    fontFamily = FontFamily.SansSerif,
+//                                    fontWeight = FontWeight.ExtraBold,
+//                                    color = Color(0xFFFFFFFF)
+//                                )
+//                            }
+//                            Button(
+//                                onClick = {
+//                                        val navigate1 = Intent(this@SignIn, SignInGoogle::class.java)
+//
+//
+//                                        startActivity(navigate1)
+//                                        finish()
+//                                          },
+//                                shape = RoundedCornerShape(20.dp),
+//                                colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.White),
+//                                modifier = Modifier
+//                                    .height(50.dp)
+//                                    .width(350.dp)
+//                            ) {
+//                                Image(painter = painterResource(id = drawable.google),
+//                                    contentDescription = "Google icon",
+////                              tint = Color.White,
+//                                    modifier = Modifier.size(30.dp))
+//                                Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+//                                Text(
+//                                    text = "Sign in with Google",
+//                                    fontFamily = FontFamily.SansSerif,
+//                                    fontWeight = FontWeight.ExtraBold,
+//                                    fontSize = 19.sp,
+//                                    color = Color(0xFF000000)
+//                                )
+//                            }
                         }
                     }
                 }
