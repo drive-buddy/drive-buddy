@@ -681,8 +681,9 @@ class CurrentOrderViewModel @Inject constructor(
         val DBEntry : DBHelper = DBHelper()
         DBEntry.getUser(DBEntry.getCurrentUser()) {
                 it ->
-            if (it["activeOrderID"] != "")
+            if (!(it["activeOrderID"] as String?).isNullOrBlank()) {
                 getRides(it["type"] as String, it["activeOrderID"] as String)
+            }
         }
     }
 
