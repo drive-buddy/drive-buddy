@@ -65,7 +65,7 @@ class Passenger1 : ComponentActivity() {
 
                     val validateNameError = "Please input a valid name"
                     val validateEmailError = "The format of the email doesn't seem right"
-                    val validatePasswordError = "Must mix capital and non-capital letters"
+                    val validatePasswordError = "Must mix capital and non-capital letters or password length is less than 7"
                     val validatePasswordsEqualsError = "Password must be equal"
 
                     fun validateData(name: String,
@@ -76,7 +76,7 @@ class Passenger1 : ComponentActivity() {
 
                         validateName = name.isNotBlank()
                         validateEmail = Patterns.EMAIL_ADDRESS.matcher(email).matches()
-                        validatePassword = passwordRegex.matches(password)
+                        validatePassword = passwordRegex.matches(password) && password.length > 6
                         validateConfirmPassword = passwordRegex.matches(confirmPassword)
                         validatePasswordsEqual = password == confirmPassword
 

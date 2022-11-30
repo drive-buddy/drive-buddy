@@ -199,7 +199,7 @@
         </activity>
 
         <activity
-            android:name=".signin.Sign_in"
+            android:name=".signin.SignIn"
             android:exported="false"
             android:label="@string/title_activity_main2"
             android:theme="@style/Theme.App2_2">
