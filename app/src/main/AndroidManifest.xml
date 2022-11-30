@@ -182,7 +182,7 @@
             android:name=".drawer.AboutApp"
             android:exported="false"
             android:label="AboutApp"
-            android:theme="@style/Theme.App2">
+            android:theme="@style/Theme.App2_2">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

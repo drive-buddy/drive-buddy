@@ -3,6 +3,7 @@ package com.example.app2.rides.schedule
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
@@ -81,6 +82,8 @@ class ScheduleRide3: ComponentActivity() {
                                 Log.e("error", "type not defined")
                                 Log.i("info2", document.toString())
                             }
+
+                            Toast.makeText(applicationContext, "Ride successfully scheduled.", Toast.LENGTH_SHORT).show()
                         }
 
                         val navigate1 = Intent(this@ScheduleRide3, AvailableRides::class.java)

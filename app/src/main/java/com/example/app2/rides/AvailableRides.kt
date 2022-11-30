@@ -4,6 +4,7 @@ package com.example.app2.rides
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -135,8 +136,17 @@ class AvailableRides : ComponentActivity() {
                         },
                         floatingActionButtonFun = {
                             Button(onClick = {
-                                val navigate = Intent(this@AvailableRides, ScheduleRide1::class.java)
-                                startActivity(navigate)
+                                val dbEntry : DBHelper = DBHelper(null)
+                                val userEmail : String = dbEntry.getCurrentUser()
+                                dbEntry.getUser(userEmail) { document ->
+                                    if ((document["activeOrderID"] as String?).isNullOrBlank()) {
+                                        val navigate = Intent(this@AvailableRides, ScheduleRide1::class.java)
+                                        startActivity(navigate)
+                                    } else {
+                                        Toast.makeText(applicationContext, "You already have an active ride.", Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+
                             },
                                 modifier = Modifier.size(70.dp),
                                 shape = CircleShape,
