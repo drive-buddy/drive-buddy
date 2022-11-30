@@ -53,23 +53,10 @@ class SignIn : ComponentActivity() {
                     var userEmail by rememberSaveable { mutableStateOf("") }
                     var userPassword by rememberSaveable { mutableStateOf("") }
 
-                    var errorMsg : String = ""
-                    var showErrorMsg : Boolean = false
+                    val errorMsg : String = ""
+                    val showErrorMsg : Boolean = false
 
-                    if (intent.getStringExtra("signIn_error") != null)
-                    {
-                        val temp : List<String> = intent
-                            .getStringExtra("signIn_error")!!
-                            .split(": ")
-                        errorMsg = temp[1]
 
-                        showErrorMsg = true
-
-                    }
-
-                    val isPasswordValid by derivedStateOf {
-                        userPassword.length > 7
-                    }
 
                     var isPasswordVisible by remember {
                         mutableStateOf(false)
@@ -203,7 +190,7 @@ class SignIn : ComponentActivity() {
                         {
                             Button(
                                 onClick = {
-                                    val navigate1 = Intent(this@Sign_in, SignInProcess::class.java)
+                                    val navigate1 = Intent(this@SignIn, SignInProcess::class.java)
 
                                     navigate1.putExtra("email", userHashMap["email"])
                                     navigate1.putExtra("password", userHashMap["password"])
@@ -244,7 +231,7 @@ class SignIn : ComponentActivity() {
 
                             Button(
                                 onClick = {
-                                        val navigate1 = Intent(this@Sign_in, SignInFacebook::class.java)
+                                        val navigate1 = Intent(this@SignIn, SignInFacebook::class.java)
 
                                         startActivity(navigate1)
                                         finish()
@@ -270,7 +257,7 @@ class SignIn : ComponentActivity() {
                             }
                             Button(
                                 onClick = {
-                                        val navigate1 = Intent(this@Sign_in, SignInGoogle::class.java)
+                                        val navigate1 = Intent(this@SignIn, SignInGoogle::class.java)
 
 
                                         startActivity(navigate1)
