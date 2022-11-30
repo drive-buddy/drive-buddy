@@ -137,13 +137,13 @@ fun AppBar(
             }
         },
             actions = {
-            IconButton(onClick = {/* */}) {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = "Search drawer",
-                    tint = Color.White
-                )
-            }
+//            IconButton(onClick = {/* */}) {
+//                Icon(
+//                    imageVector = Icons.Default.Search,
+//                    contentDescription = "Search drawer",
+//                    tint = Color.White
+//                )
+//            }
         }
     )
 }
