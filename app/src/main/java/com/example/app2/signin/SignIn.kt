@@ -53,8 +53,20 @@ class SignIn : ComponentActivity() {
                     var userEmail by rememberSaveable { mutableStateOf("") }
                     var userPassword by rememberSaveable { mutableStateOf("") }
 
-                    val errorMsg : String = ""
-                    val showErrorMsg : Boolean = false
+                    var errorMsg : String = ""
+                    var showErrorMsg : Boolean = false
+
+                    // dima, don't delete this.
+                    if (intent.getStringExtra("signIn_error") != null)
+                    {
+                        val temp : List<String> = intent
+                            .getStringExtra("signIn_error")!!
+                            .split(": ")
+                        errorMsg = temp[1]
+
+                        showErrorMsg = true
+
+                    }
 
                     var isPasswordVisible by remember {
                         mutableStateOf(false)
@@ -68,7 +80,7 @@ class SignIn : ComponentActivity() {
                     }
                     Column(
                         modifier = Modifier
-                            .fillMaxSize()
+                            .fillMaxWidth()
                             .padding(vertical = 60.dp, horizontal = 40.dp)
                     ) {
                         Column(
@@ -76,7 +88,7 @@ class SignIn : ComponentActivity() {
                                 .fillMaxSize(),
 //                                .offset(y = 130.dp, x = 120.dp),
 ////                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
+                            horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Text(
                                 text = "Welcome",
@@ -153,7 +165,7 @@ class SignIn : ComponentActivity() {
                                     }
                                 },
                                 showError = showErrorMsg
-                                )
+                            )
 
                             userHashMap["password"] = userPassword.trim()
 
@@ -226,14 +238,14 @@ class SignIn : ComponentActivity() {
 //                                    color = Color.Black
 //                                )
 //                            }
-//
+
 //                            Button(
 //                                onClick = {
-//                                        val navigate1 = Intent(this@SignIn, SignInFacebook::class.java)
+//                                    val navigate1 = Intent(this@SignIn, SignInFacebook::class.java)
 //
-//                                        startActivity(navigate1)
-//                                        finish()
-//                                          },
+//                                    startActivity(navigate1)
+//                                    finish()
+//                                },
 //                                shape = RoundedCornerShape(20.dp),
 //                                colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color(0xFF4267B2)),
 //                                modifier = Modifier
@@ -255,12 +267,12 @@ class SignIn : ComponentActivity() {
 //                            }
 //                            Button(
 //                                onClick = {
-//                                        val navigate1 = Intent(this@SignIn, SignInGoogle::class.java)
+//                                    val navigate1 = Intent(this@SignIn, SignInGoogle::class.java)
 //
 //
-//                                        startActivity(navigate1)
-//                                        finish()
-//                                          },
+//                                    startActivity(navigate1)
+//                                    finish()
+//                                },
 //                                shape = RoundedCornerShape(20.dp),
 //                                colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.White),
 //                                modifier = Modifier
