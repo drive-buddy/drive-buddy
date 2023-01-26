@@ -122,10 +122,11 @@ fun DrawerBody(
 
 @Composable
 fun AppBar(
-    onNavigationIconClick: () -> Unit
+    onNavigationIconClick: () -> Unit,
+    textField : String = "",
 ){
     TopAppBar(
-        title = {},
+        title = {Text(textField)},
         backgroundColor = MaterialTheme.colors.background,
         contentColor = Color.White,
         navigationIcon = {

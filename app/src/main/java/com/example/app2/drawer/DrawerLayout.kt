@@ -24,7 +24,8 @@ fun DrawerLayout(
     localContext: Context? = null,
     floatingActionButtonFun: @Composable () -> Unit = {},
     contentFun: @Composable (PaddingValues) -> Unit,
-){
+    textHeaderField : String = "",
+    ){
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     Scaffold(
@@ -35,7 +36,8 @@ fun DrawerLayout(
                     scope.launch {
                         scaffoldState.drawerState.open()
                     }
-                }
+                },
+                textField = textHeaderField,
             )
         },
         floatingActionButton = floatingActionButtonFun,

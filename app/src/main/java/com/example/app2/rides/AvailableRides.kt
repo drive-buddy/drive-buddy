@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -67,12 +68,7 @@ class AvailableRides : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
-
-
 //                    val dispatcher = LocalOnBackPressedDispatcherOwner.current!!.onBackPressedDispatcher
-
-
-
                     // A surface container using the 'background' color from the theme
                     val searchAppBarState: SearchAppBarState by sharedViewModel.searchAppBarState
                     val searchTextState: String by sharedViewModel.searchTextState
@@ -81,7 +77,13 @@ class AvailableRides : ComponentActivity() {
 //                        searchAppBarState = searchAppBarState,
 //                        searchTextState = searchTextState
 //                    )
+                    Log.i("User", viewModel.data.value.user!!.toString())
                     DrawerLayout(
+                        textHeaderField = getUserType(viewModel.data.value.user!!).replaceFirstChar {
+                            if (it.isLowerCase()) it.titlecase(
+                                Locale.ROOT
+                            ) else it.toString()
+                        },
                         localContext = this,
                         contentFun = {
                             Column(modifier = Modifier
@@ -268,6 +270,18 @@ class AvailableRides : ComponentActivity() {
             }
         }
     }
+}
+
+fun getUserType(users : List<User>?) : String {
+    val dbEntry : DBHelper = DBHelper(null)
+    val userEmail : String = dbEntry.getCurrentUser()
+    users?.forEach() {
+        if (it.email == userEmail)
+        {
+            return (it.type.toString())
+        }
+    }
+    return ("error")
 }
 
 class RidesRepository @Inject constructor(
